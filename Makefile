@@ -14,7 +14,7 @@ DIR_S =	srcs/
 CREATE_DIR_O = @mkdir -p objs
 DIR_O =	objs/
 
-SRCS_LIST =	main.c
+SRCS_LIST =	main.c hook.c
 
 SRCS =		${addprefix ${DIR_S}, ${SRCS_LIST}}
 
