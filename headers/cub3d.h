@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/03/16 15:13:19 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/03/16 15:17:32 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,14 @@
 
 #define WIDTH 1024
 #define HEIGHT 512
+#define PI 3.1415926535
 
 typedef struct s_player{
 	double		px;
 	double		py;
+	double		pdx;
+	double		pdy;
+	double		pa;
 }	t_player;
 
 typedef struct s_cub{

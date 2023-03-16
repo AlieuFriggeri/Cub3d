@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/03/16 15:13:02 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/03/16 15:50:25 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ char *map[] =
 {
 	"1 1 1 1 1 1 1 1",
 	"1 0 0 0 0 0 0 1",
-	"1 0 1 0 0 0 0 1",
 	"1 0 0 0 0 0 0 1",
-	"1 0 0 0 1 0 0 1",
 	"1 0 0 0 0 0 0 1",
-	"1 0 0 1 0 0 0 1",
+	"1 0 0 0 0 0 0 1",
+	"1 0 0 0 0 0 0 1",
+	"1 0 0 0 0 0 0 1",
 	"1 1 1 1 1 1 1 1"
 };
 
@@ -87,9 +87,9 @@ void	drawsquare(int x, int y, t_cub *data, int type)
 			if (y == y2 -1)
 				my_mlx_pixel_put(data, x, y, 0x000000);
 			else if (type == 1)
-				my_mlx_pixel_put(data, x, y, 0xFF0000);
+				my_mlx_pixel_put(data, x, y, 0x00AA00);
 			else
-				my_mlx_pixel_put(data, x, y, 0xFF00FF);
+				my_mlx_pixel_put(data, x, y, 0xAA00AA);
 			if (x == x2 - 1)
 				my_mlx_pixel_put(data, x, y, 0x000000);
 			y++;
@@ -135,6 +135,18 @@ void	setplayer(t_cub *data)
 		y = data->player.py;
 		x++;
 	}
+	x = 0;
+	y = 0;
+	while (x < 10)
+	{
+		while (y < 100)
+		{
+			my_mlx_pixel_put(data,  y + data->player.px + data->player.pdx, y + data->player.py + data->player.pdy, 0xFFF000);
+			y++;
+		}
+		y = 0;
+		x++;
+	}
 	mlx_put_image_to_window(data->mlx, data->window, data->img, 0, 0);
 }
 
@@ -146,10 +158,13 @@ int main()
 	data.window = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Cub3d");
 	data.img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
 	data.addr = mlx_get_data_addr(data.img, &data.bitsperpixel, &data.sizeline, &data.endian);
-	data.player.px = 256;
-	data.player.py = 128;
+	data.player.px = 512;
+	data.player.py = 256;
 	data.mapx = 5;
 	data.mapy = 7;
+	data.player.pa = PI;
+	data.player.pdx = cos(data.player.pa) * 5;
+	data.player.pdy = sin(data.player.pa) * 5;
 	drawmap(&data);
 	setplayer(&data);
 	mlx_hook(data.window, 02, 0, &hook, &data);
