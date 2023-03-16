@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/03/16 15:01:40 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/03/16 15:13:02 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ char *map[] =
 {
 	"1 1 1 1 1 1 1 1",
 	"1 0 0 0 0 0 0 1",
+	"1 0 1 0 0 0 0 1",
 	"1 0 0 0 0 0 0 1",
+	"1 0 0 0 1 0 0 1",
 	"1 0 0 0 0 0 0 1",
-	"1 0 0 0 0 0 0 1",
-	"1 0 0 0 0 0 0 1",
-	"1 0 0 0 0 0 0 1",
+	"1 0 0 1 0 0 0 1",
 	"1 1 1 1 1 1 1 1"
 };
 
@@ -84,13 +84,36 @@ void	drawsquare(int x, int y, t_cub *data, int type)
 	{
 		while (y < y2)
 		{
-			if (type == 1)
+			if (y == y2 -1)
+				my_mlx_pixel_put(data, x, y, 0x000000);
+			else if (type == 1)
 				my_mlx_pixel_put(data, x, y, 0xFF0000);
 			else
 				my_mlx_pixel_put(data, x, y, 0xFF00FF);
+			if (x == x2 - 1)
+				my_mlx_pixel_put(data, x, y, 0x000000);
 			y++;
 		}
 		y = y2 - 64;
+		x++;
+	}
+}
+
+void	fill_all(t_cub *data)
+{
+	int x;
+	int y;
+
+	x = 0;
+	y = 0;
+	while (x < WIDTH)
+	{
+		while (y < HEIGHT)
+		{
+			my_mlx_pixel_put(data, x, y, 0x000000);
+			y++;
+		}
+		y = 0;
 		x++;
 	}
 }

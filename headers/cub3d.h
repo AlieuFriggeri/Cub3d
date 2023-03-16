@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/03/16 13:40:08 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/03/16 15:13:19 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ void	my_mlx_pixel_put(t_cub *data, int x, int y, int color);
 void	setplayer(t_cub *data);
 void	drawmap(t_cub *data);
 void	drawsquare(int x, int y, t_cub *data, int type);
+void	fill_all(t_cub *data);
 
 #endif

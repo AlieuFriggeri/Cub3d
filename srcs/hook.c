@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:23:28 by afrigger          #+#    #+#             */
-/*   Updated: 2023/03/16 13:00:34 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/03/16 15:13:51 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,22 @@ int		cub_exit(t_cub *data)
 void	move_player(int keycode ,t_cub *data)
 {
 	if (keycode == 13)
-		data->player.py -= 5;
+		data->player.py -= 8;
 	if (keycode == 0)
-		data->player.px -= 5;
+		data->player.px -= 8;
 	if (keycode == 1)
-		data->player.py += 5;
+		data->player.py += 8;
 	if (keycode == 2)
-		data->player.px += 5;
+		data->player.px += 8;
+	if (data->player.px > 1014)
+		data->player.px = 1014;
+	if (data->player.px < 0)
+		data->player.px = 0;
+	if (data->player.py > 503)
+		data->player.py = 503;
+	if (data->player.py < 0)
+		data->player.py = 0;
+	fill_all(data);
 	drawmap(data);
 	setplayer(data);
 }
