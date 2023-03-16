@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/03/16 14:51:15 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/03/16 15:01:40 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 char *map[] =
 {
 	"1 1 1 1 1 1 1 1",
+	"1 0 0 0 0 0 0 1",
+	"1 0 0 0 0 0 0 1",
+	"1 0 0 0 0 0 0 1",
 	"1 0 0 0 0 0 0 1",
 	"1 0 0 0 0 0 0 1",
 	"1 0 0 0 0 0 0 1",
@@ -30,6 +33,16 @@ void	my_mlx_pixel_put(t_cub *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+void	mapsize(t_cub *data)
+{
+	data->mapx = 0;
+	while (map[data->mapx] != NULL)
+		data->mapx++;
+	data->mapy = 0;
+	while (map[data->mapx][data->mapy])
+		data->mapy++;
+}
+
 void	drawmap(t_cub *data)
 {
 	int	x;
@@ -37,18 +50,18 @@ void	drawmap(t_cub *data)
 	int	sx;
 	int	sy;
 
-	x = 0;
-	y = 0;
 	sx = 0;
 	sy = 0;
-	while (sx < 5)
+	x = 0;
+	y = 0;
+	while (sx < 8)
 	{
 		while (sy < 16)
 		{
 			if (map[sx][sy] == '1')
-				drawsquare(x, y, data, 1);
+				drawsquare(y, x, data, 1);
 			else
-				drawsquare(x, y, data, 0);
+				drawsquare(y, x, data, 0);
 			y += 64;
 			sy +=2;
 		}
@@ -110,8 +123,8 @@ int main()
 	data.window = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Cub3d");
 	data.img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
 	data.addr = mlx_get_data_addr(data.img, &data.bitsperpixel, &data.sizeline, &data.endian);
-	data.player.px = 512;
-	data.player.py = 256;
+	data.player.px = 256;
+	data.player.py = 128;
 	data.mapx = 5;
 	data.mapy = 7;
 	drawmap(&data);
