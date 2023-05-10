@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:23:28 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/10 15:12:29 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/10 15:23:22 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ void	move_player(int keycode, t_cub *data)
 		data->player.py += 8;
 	if (keycode == 2)
 		data->player.px += 8;
-	if (data->player.px > 511)
-		data->player.px = 511;
-	if (data->player.px < 0)
+	if (data->player.px > WIDTH / 2 - 1)
+		data->player.px = WIDTH / 2 - 1;
+	else if (data->player.px < 0)
 		data->player.px = 0;
-	if (data->player.py > 511)
-		data->player.py = 511;
-	if (data->player.py < 0)
+	if (data->player.py > HEIGHT - 1)
+		data->player.py = HEIGHT - 1;
+	else if (data->player.py < 0)
 		data->player.py = 0;
 	fill_all(data);
 	draw_image(data);

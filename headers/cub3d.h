@@ -6,21 +6,21 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/10 15:24:32 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/10 15:41:19 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "../mlx_macos/mlx.h"
+# include "../libft/libft.h"
 # include <math.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
-# include "../mlx_macos/mlx.h"
-# include "../libft/libft.h"
 
 # define WIDTH 1024
 # define HEIGHT 512
@@ -72,6 +72,7 @@ void	draw_image(t_cub *data);
 
 /* ----- PLAYER ----- */
 void	setplayer(t_cub *data);
-void	raydraw(t_cub *data);
+void	draw_raycasting(t_cub *data);
+void	draw_line(t_cub *data, double angle);
 
 #endif
