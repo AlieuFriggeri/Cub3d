@@ -31,12 +31,12 @@ void	move_player(int keycode, t_cub *data)
 		data->player.py += 8;
 	if (keycode == 2)
 		data->player.px += 8;
-	if (data->player.px > 1014)
-		data->player.px = 1014;
+	if (data->player.px > 511)
+		data->player.px = 511;
 	if (data->player.px < 0)
 		data->player.px = 0;
-	if (data->player.py > 503)
-		data->player.py = 503;
+	if (data->player.py > 511)
+		data->player.py = 511;
 	if (data->player.py < 0)
 		data->player.py = 0;
 	fill_all(data);
