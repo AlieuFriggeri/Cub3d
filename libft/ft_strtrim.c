@@ -3,83 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/14 14:34:12 by afrigger          #+#    #+#             */
-/*   Updated: 2022/10/20 11:16:05 by afrigger         ###   ########.fr       */
+/*   Created: 2022/10/13 17:00:04 by vgroux            #+#    #+#             */
+/*   Updated: 2022/10/14 18:54:56 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-//#include <stdio.h>
-static int	is_sep(char c, char *str)
+
+static int	ft_getstart(const char *s1, const char *set)
 {
-	int	i;
+	size_t	i;
+	size_t	len;
 
 	i = 0;
-	while (str[i])
+	len = ft_strlen(s1);
+	while (i < len)
 	{
-		if (str[i] == c)
-			return (1);
+		if (ft_strchr(set, s1[i]) == NULL)
+			break ;
 		i++;
 	}
-	return (0);
-}
-
-static int	get_start(char *str, char *set)
-{
-	int	i;
-
-	i = 0;
-	while (is_sep(str[i], set) == 1)
-		i++;
 	return (i);
 }
 
-static int	get_end(char *str, char *set)
+static int	ft_getend(const char *s1, const char *set)
 {
-	int	i;
+	size_t	i;
 
-	i = ft_strlen(str);
-	while (is_sep(str[i - 1], set) == 1)
+	i = ft_strlen(s1);
+	while (i > 0)
+	{
+		if (ft_strchr(set, s1[i - 1]) == NULL)
+			break ;
 		i--;
+	}
 	return (i);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(const char *s1, const char *set)
 {
-	int		start;
-	int		end;
-	int		i;
-	char	*res;
+	size_t	start;
+	size_t	end;
+	size_t	i;
+	char	*str;
 
-	i = 0;
 	if (!s1)
 		return (NULL);
 	if (!set)
 		return (ft_strdup(s1));
-	if (ft_strncmp(s1, set, ft_strlen(s1)) == 0)
+	start = ft_getstart(s1, set);
+	end = ft_getend(s1, set);
+	if (start >= end)
+	{
 		return (ft_strdup(""));
-	start = get_start((char *)s1, (char *)set);
-	end = get_end((char *)s1, (char *)set);
-	if (end == 0 || start == (int)ft_strlen(s1))
-		return (ft_strdup(""));
-	res = malloc(sizeof(char) * (end - start) + 1);
-	if (!res)
+	}
+	str = (char *)malloc((end - start + 1) * sizeof(char));
+	if (!str)
 		return (NULL);
-	while (start < end)
-		res[i++] = (char)s1[start++];
-	res[i] = '\0';
-	return (res);
+	i = -1;
+	while (++i < (end - start))
+	{
+		str[i] = s1[i + start];
+	}
+	str[i] = '\0';
+	return (str);
 }
-/*
-int main()
-{
-	char str[] = "lorem ipsum dolor sit amet";
-	char set[] = "te";
-	char *res;
-	res = ft_strtrim(str, set);
-	printf("%s\n", res);
-	return 0;
-
-}*/

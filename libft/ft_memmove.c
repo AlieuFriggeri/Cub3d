@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 17:47:31 by afrigger          #+#    #+#             */
-/*   Updated: 2022/10/12 14:53:01 by afrigger         ###   ########.fr       */
+/*   Created: 2022/10/11 11:57:15 by vgroux            #+#    #+#             */
+/*   Updated: 2022/10/18 13:10:04 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,23 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char	*s;
-	unsigned char	*d;
-	size_t			i;
+	char	*temp;
+	size_t	i;
 
-	if (!dst && !src)
-		return (NULL);
-	s = (unsigned char *)src;
-	d = (unsigned char *)dst;
+	temp = (char *)src;
 	i = 0;
-	if (d > s)
-	{
+	if ((char *)dst == temp)
+		return (dst);
+	else if ((char *)dst > temp)
 		while (len-- > 0)
-		{
-			d[len] = s[len];
-		}
-	}
+			((char *)dst)[len] = temp[len];
 	else
 	{
 		while (i < len)
 		{
-			d[i] = s[i];
+			((char *)dst)[i] = temp[i];
 			i++;
 		}
 	}
 	return (dst);
 }
-
-/*
-int main()
-{
-	char dest[] = "abcdefghi";
-	char str[] = "123456789";
-	printf("%s\n", str);
-	printf("%s\n", dest);
-	ft_memmove(dest, str, 3);
-	printf("%s\n", str);
-	printf("%s\n", dest);
-	return 0;
-}*/

@@ -6,26 +6,31 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/10 15:08:46 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/10 15:54:02 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
-#define	CUB3D_H
+# define CUB3D_H
 
-#include <math.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include "../mlx_macos/mlx.h"
-#include "../libft/libft.h"
+/*	Personnal headers	*/
+# include "../mlx_macos/mlx.h"
+# include "../libft/libft.h"
+# include "map.h"
+# include "hook.h"
 
-#define WIDTH 1024
-#define HEIGHT 512
-#define PI 3.1415926535
-#define DEG 0.0174533
+/*	Official headers	*/
+# include <math.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <string.h>
+
+# define WIDTH 1024
+# define HEIGHT 512
+# define PI 3.1415926535
+# define DEG 0.0174533
 # define BLUE_COLOR 0x87CEEB
 # define GREY_COLOR 0x808080
 
@@ -56,7 +61,6 @@ typedef struct s_cub{
 	int			mapy;
 }	t_cub;
 
-
 /* ----- MAIN ----- */
 int		main(void);
 void	drawmap(t_cub *data);
@@ -73,6 +77,13 @@ void	draw_image(t_cub *data);
 
 /* ----- PLAYER ----- */
 void	setplayer(t_cub *data);
-void	rayDraw(t_cub *data);
+void	draw_raycasting(t_cub *data);
+void	draw_line(t_cub *data, double angle);
+
+/* ----- HOOK ----- */
+int		hook(int keycode, t_cub *data);
+int		cub_exit(t_cub *data);
+void	move_player(int keycode, t_cub *data);
+void	rotate_player(int keycode, t_cub *data);
 
 #endif

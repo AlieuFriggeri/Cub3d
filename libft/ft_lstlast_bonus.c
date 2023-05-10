@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 10:19:15 by afrigger          #+#    #+#             */
-/*   Updated: 2022/10/20 11:17:05 by afrigger         ###   ########.fr       */
+/*   Created: 2022/10/17 13:54:39 by vgroux            #+#    #+#             */
+/*   Updated: 2022/10/17 13:57:05 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 t_list	*ft_lstlast(t_list *lst)
-{	
-	while (lst)
-	{
-		if (!lst->next)
-			return (lst);
-		lst = lst->next;
-	}
+{
+	if (lst)
+		while (lst->next != NULL)
+			lst = lst->next;
 	return (lst);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_ftoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/14 19:53:44 by vgroux            #+#    #+#             */
-/*   Updated: 2022/10/14 21:23:26 by vgroux           ###   ########.fr       */
+/*   Created: 2022/12/24 15:35:05 by vgroux            #+#    #+#             */
+/*   Updated: 2023/01/19 18:37:51 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,40 @@ static int	ft_intlen(long n)
 	return (len);
 }
 
-char	*ft_itoa(int n)
+static int	ft_float_len(long double nb)
 {
-	char	*str;
-	long	num;
-	size_t	i;
+	int			len;
 
-	num = n;
-	i = ft_intlen(num);
-	str = (char *)malloc((i + 1) * sizeof(char));
+	len = 0;
+	if (nb == 0.0)
+		return (1);
+	while (nb != 0.0)
+	{
+		nb *= 10;
+		nb -= (int)nb;
+		len++;
+	}
+	return (len);
+}
+
+char	*ft_ftoa(long double n)
+{
+	int			nb;
+	long double	deci;
+	char		*str;
+	size_t		len;
+
+	nb = (int)n;
+	deci = n - (long double)nb;
+	len = ft_intlen(nb) + 1 + ft_float_len(deci);
+	str = ft_calloc(len, sizeof(char));
 	if (!str)
 		return (NULL);
-	if (num < 0)
+	len = 0;
+	if (n < 0)
+		str[len++] = '-';
+	while (nb != 0)
 	{
-		num *= -1;
-		str[0] = '-';
+		str[len] = nb % 10;
 	}
-	str[i--] = '\0';
-	if (num == 0)
-		str[i] = '0';
-	while (num > 0)
-	{
-		str[i--] = (num % 10) + '0';
-		num /= 10;
-	}
-	return (str);
 }

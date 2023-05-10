@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 12:54:09 by vgroux            #+#    #+#             */
-/*   Updated: 2022/10/12 14:19:51 by vgroux           ###   ########.fr       */
+/*   Created: 2023/05/10 15:47:19 by vgroux            #+#    #+#             */
+/*   Updated: 2023/05/10 15:49:25 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef MAP_H
+# define MAP_H
 
-int	ft_toupper(int c)
+typedef struct s_map
 {
-	if (c >= 'a' && c <= 'z')
-		return (c - 32);
-	else
-		return (c);
-}
+	char	**map;
+	int		color_sky;
+	int		color_floor;
+	char	*mesh_north;
+	char	*mesh_south;
+	char	*mesh_west;
+	char	*mesh_east;
+}	t_map;
+
+#endif

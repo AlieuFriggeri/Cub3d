@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 15:31:03 by afrigger          #+#    #+#             */
-/*   Updated: 2022/10/18 15:47:33 by afrigger         ###   ########.fr       */
+/*   Created: 2022/10/14 21:54:38 by vgroux            #+#    #+#             */
+/*   Updated: 2022/10/18 12:33:55 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *c)
+t_list	*ft_lstnew(void *content)
 {
 	t_list	*new;
 
-	new = malloc(sizeof(t_list));
+	new = (t_list *)malloc(sizeof(t_list));
 	if (!new)
 		return (NULL);
-	new->content = c;
+	new->content = content;
 	new->next = NULL;
 	return (new);
 }

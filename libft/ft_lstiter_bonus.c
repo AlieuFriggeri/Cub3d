@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lstiter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 12:46:20 by afrigger          #+#    #+#             */
-/*   Updated: 2022/10/20 11:16:48 by afrigger         ###   ########.fr       */
+/*   Created: 2022/10/17 15:45:57 by vgroux            #+#    #+#             */
+/*   Updated: 2022/10/17 15:52:13 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	if (lst)
+	t_list	*next;
+
+	while (lst)
 	{
-		while (lst)
-		{
-			(*f)(lst->content);
-			lst = lst->next;
-		}
+		next = lst->next;
+		(*f)(lst->content);
+		lst = next;
 	}
 }
