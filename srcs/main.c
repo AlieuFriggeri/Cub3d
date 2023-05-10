@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/03/16 15:50:25 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:17:39 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char *map[] =
 	"1 0 0 0 0 0 0 1",
 	"1 0 0 0 0 0 0 1",
 	"1 0 0 0 0 0 0 1",
-	"1 0 0 0 0 0 0 1",
+	"1 0 0 0 1 0 0 1",
 	"1 0 0 0 0 0 0 1",
 	"1 0 0 0 0 0 0 1",
 	"1 1 1 1 1 1 1 1"
@@ -72,6 +72,34 @@ void	drawmap(t_cub *data)
 	}
 	//mlx_put_image_to_window(data->mlx, data->window, data->img, 0, 0);
 }
+
+int rayCalc(t_cub *data){
+	int res;
+
+	data->player.m = tan(data->player.pa / DEG);
+	data->player.n = data->player.py - (tan(data->player.pa / DEG) * data->player.px);
+	res = data->player.m * data->player.px + data->player.n;
+	return res;
+}
+
+void rayDraw(t_cub *data){
+	int len;
+
+	len = 0;
+	data->player.startx = data->player.px;
+	data->player.starty = data->player.py;
+	while (len < 50)
+	{
+		my_mlx_pixel_put(data, data->player.startx, data->player.starty, 0x00FF0F);
+
+		len++;
+		data->player.startx += cos(data->player.pa);
+		data->player.starty+= sin(data->player.pa);
+		//my_mlx_pixel_put(data, data->player.pdx + len, data->player.pdy + len, 0xFF0000);
+	}
+	//my_mlx_pixel_put(data, data->player.pdx, data->player.pdy, 0xFF0000);
+}
+
 
 void	drawsquare(int x, int y, t_cub *data, int type)
 {
@@ -129,7 +157,7 @@ void	setplayer(t_cub *data)
 	{
 		while (y < data->player.py + 10)
 		{
-			my_mlx_pixel_put(data, x, y, 0xFFF000);
+			my_mlx_pixel_put(data, x - 5, y - 5, 0xFFF000);
 			y++;
 		}
 		y = data->player.py;
@@ -137,16 +165,17 @@ void	setplayer(t_cub *data)
 	}
 	x = 0;
 	y = 0;
-	while (x < 10)
-	{
-		while (y < 100)
-		{
-			my_mlx_pixel_put(data,  y + data->player.px + data->player.pdx, y + data->player.py + data->player.pdy, 0xFFF000);
-			y++;
-		}
-		y = 0;
-		x++;
-	}
+	// while (x < 100)
+	// {
+	// 	while (y < 50)
+	// 	{
+	// 		my_mlx_pixel_put(data, y + data->player.pdx + data->player.px, y + data->player.pdy + data->player.py, 0xFFF000);
+	// 		y++;
+	// 	}
+	// 	y = 0;
+	// 	x++;
+	// }
+	rayDraw(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->img, 0, 0);
 }
 

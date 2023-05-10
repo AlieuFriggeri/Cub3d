@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:23:28 by afrigger          #+#    #+#             */
-/*   Updated: 2023/03/16 15:50:23 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:21:50 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ void	rotate_player(int keycode, t_cub *data)
 		data->player.pdx = cos(data->player.pa) * 5;
 		data->player.pdy = sin(data->player.pa) * 5;
 	}
-	if (keycode == 125)
-		{
-			data->player.px += data->player.pdx;
-			data->player.py += data->player.pdy;
-		}
 	if (keycode == 126)
+	{
+		data->player.px += data->player.pdx;
+		data->player.py += data->player.pdy;
+	}
+	if (keycode == 125)
 	{
 		data->player.px -= data->player.pdx;
 		data->player.py -= data->player.pdy;
