@@ -15,7 +15,10 @@ CREATE_DIR_O = @mkdir -p objs
 DIR_O =	objs/
 
 SRCS_LIST =	main.c \
-			hook.c
+			hook.c \
+			draw.c \
+			image.c \
+			player.c
 
 SRCS =		${addprefix ${DIR_S}, ${SRCS_LIST}}
 
