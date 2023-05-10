@@ -14,7 +14,8 @@ DIR_S =	srcs/
 CREATE_DIR_O = @mkdir -p objs
 DIR_O =	objs/
 
-SRCS_LIST =	main.c hook.c
+SRCS_LIST =	main.c \
+			hook.c
 
 SRCS =		${addprefix ${DIR_S}, ${SRCS_LIST}}
 
@@ -45,14 +46,6 @@ ${NAME}: ${LIBFT} ${MLX} ${OBJS}
 	${CC} ${OBJS} ${LIBS} -o ${NAME}
 	@echo "$(RESET)[$(GREENGREEN)${NAME}$(RESET)]: Cub3d created !"
 
-title:
-	@echo "$(GREENGREEN) ██████╗██████╗  █████╗  ██████╗████████╗    ██████╗ ██╗$(RESET)"
-	@echo "$(GREENGREEN) ██╔════╝██╔══██╗██╔══██╗██╔════╝╚══██╔══╝   ██╔═══██╗██║$(RESET)"
-	@echo "$(GREENGREEN) █████╗  ██████╔╝███████║██║        ██║█████╗██║   ██║██║$(RESET)"
-	@echo "$(GREENGREEN) ██╔══╝  ██╔══██╗██╔══██║██║        ██║╚════╝██║   ██║██║$(RESET)"
-	@echo "$(GREENGREEN) ██║     ██║  ██║██║  ██║╚██████╗   ██║      ╚██████╔╝███████╗$(RESET)"
-	@echo "$(GREENGREEN) ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝   ╚═╝       ╚═════╝ ╚══════╝$(RESET)"
-
 ${LIBFT}:
 	@echo "[$(GREENGREEN)${NAME}$(RESET)]: Creating Libft...${GREY}"
 	${MAKE} -sC ${@D}
@@ -78,10 +71,10 @@ clean:
 	@echo "$(RED) ██║     ██║     ██╔══╝  ██╔══██║██║╚██╗██║██║██║╚██╗██║██║   ██║$(RESET)"
 	@echo "$(RED) ╚██████╗███████╗███████╗██║  ██║██║ ╚████║██║██║ ╚████║╚██████╔╝$(RESET)"
 	@echo "$(RED)  ╚═════╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═══╝ ╚═════╝ $(RESET)"
-	@echo "[$(RED)${NAME}$(RESET)]: Cleaning Cub3d Objects...${GREY}"
+	@echo "[$(RED)${NAME}$(RESET)]: Cleaning ${NAME} Objects...${GREY}"
 	${RM} ${OBJS}
 	${RM} ${DIR_O}
-	@echo "[$(RED)${NAME}$(RESET)]: Cub3d Objects were cleaned${GREY}"
+	@echo "[$(RED)${NAME}$(RESET)]: ${NAME} Objects were cleaned${GREY}"
 
 libclean:
 	@echo "${RESET}[$(RED)${NAME}$(RESET)]: Cleaning MLX...${GREY}"
@@ -92,9 +85,9 @@ libclean:
 	@echo "${RESET}[$(RED)${NAME}$(RESET)]: Libft Objects were cleaned"
 
 fclean: clean libclean
-	@echo "${RESET}[$(RED)${NAME}$(RESET)]: Cleaning Cub3d...${GREY}"
+	@echo "${RESET}[$(RED)${NAME}$(RESET)]: Cleaning ${NAME}...${GREY}"
 	${RM} ${NAME}
-	@echo "${RESET}[$(RED)${NAME}$(RESET)]: Cub3d Executable was cleaned"
+	@echo "${RESET}[$(RED)${NAME}$(RESET)]: ${NAME} Executable was cleaned"
 
 re: fclean all
 
