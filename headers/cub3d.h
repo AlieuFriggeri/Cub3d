@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/10 14:17:09 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:08:46 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 #define HEIGHT 512
 #define PI 3.1415926535
 #define DEG 0.0174533
+# define BLUE_COLOR 0x87CEEB
+# define GREY_COLOR 0x808080
 
 typedef struct s_player{
 	double		px;
@@ -42,26 +44,35 @@ typedef struct s_player{
 }	t_player;
 
 typedef struct s_cub{
-	void	*mlx;
-	void	*window;
-	void	*img;
-	char	*addr;
-	int		endian;
-	int		sizeline;
-	int		bitsperpixel;
+	void		*mlx;
+	void		*window;
+	void		*img;
+	char		*addr;
+	int			endian;
+	int			sizeline;
+	int			bpp;
 	t_player	player;
-	int		mapx;
-	int		mapy;
+	int			mapx;
+	int			mapy;
 }	t_cub;
 
 
-//main.c
-void	my_mlx_pixel_put(t_cub *data, int x, int y, int color);
-void	setplayer(t_cub *data);
+/* ----- MAIN ----- */
+int		main(void);
 void	drawmap(t_cub *data);
-void	drawsquare(int x, int y, t_cub *data, int type);
 void	fill_all(t_cub *data);
-int		rayCalc(t_cub *data);
+
+/* ----- DRAW ----- */
+void	my_mlx_pixel_put(t_cub *data, int x, int y, int color);
+void	drawsquare(int x, int y, t_cub *data, int type);
+
+/* ----- IMAGE ----- */
+void	draw_sky(t_cub *data);
+void	draw_floor(t_cub *data);
+void	draw_image(t_cub *data);
+
+/* ----- PLAYER ----- */
+void	setplayer(t_cub *data);
 void	rayDraw(t_cub *data);
 
 #endif

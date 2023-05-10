@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:23:28 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/10 14:31:59 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:12:29 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/hook.h"
+#include "hook.h"
 
-int		cub_exit(t_cub *data)
+int	cub_exit(t_cub *data)
 {
 	if (data->window && data->window)
 		mlx_destroy_window(data->mlx, data->window);
@@ -21,7 +21,7 @@ int		cub_exit(t_cub *data)
 	exit (0);
 }
 
-void	move_player(int keycode ,t_cub *data)
+void	move_player(int keycode, t_cub *data)
 {
 	if (keycode == 13)
 		data->player.py -= 8;
@@ -40,8 +40,7 @@ void	move_player(int keycode ,t_cub *data)
 	if (data->player.py < 0)
 		data->player.py = 0;
 	fill_all(data);
-	drawmap(data);
-	setplayer(data);
+	draw_image(data);
 }
 
 void	rotate_player(int keycode, t_cub *data)
@@ -81,7 +80,8 @@ int	hook(int keycode, t_cub *data)
 		cub_exit(data);
 	else if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13)
 		move_player(keycode, data);
-	else if (keycode == 123 || keycode == 124 || keycode == 125 || keycode == 126)
+	else if (keycode == 123 || keycode == 124
+		|| keycode == 125 || keycode == 126)
 		rotate_player(keycode, data);
-	return 0;
+	return (0);
 }
