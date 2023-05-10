@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/10 14:17:39 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:30:25 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,12 @@ void rayDraw(t_cub *data){
 	len = 0;
 	data->player.startx = data->player.px;
 	data->player.starty = data->player.py;
-	while (len < 50)
+	while (len < 100)
 	{
-		my_mlx_pixel_put(data, data->player.startx, data->player.starty, 0x00FF0F);
-
+		my_mlx_pixel_put(data, data->player.startx, data->player.starty, 0xF000F0);
 		len++;
 		data->player.startx += cos(data->player.pa);
-		data->player.starty+= sin(data->player.pa);
+		data->player.starty += sin(data->player.pa);
 		//my_mlx_pixel_put(data, data->player.pdx + len, data->player.pdy + len, 0xFF0000);
 	}
 	//my_mlx_pixel_put(data, data->player.pdx, data->player.pdy, 0xFF0000);
