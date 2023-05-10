@@ -3,64 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 15:53:15 by afrigger          #+#    #+#             */
-/*   Updated: 2022/10/24 10:20:31 by afrigger         ###   ########.fr       */
+/*   Created: 2022/10/10 14:34:41 by vgroux            #+#    #+#             */
+/*   Updated: 2023/01/09 16:26:10 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/**
+ * return 0 if their are equals
+*/
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{	
+{
 	size_t	i;
 
 	i = 0;
-	if (n == 0 || (ft_strlen(s1) == 0 && ft_strlen(s2) == 0))
+	if (n == 0)
 		return (0);
-	if (ft_strlen(s1) == 0)
-		return (-1);
-	if (ft_strlen(s2) == 0)
-		return (1);
-	while ((s1[i] != '\0' || s2[i] != '\0') && i < n)
-	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i] && i < n - 1)
 		i++;
-	}
-	return (0);
-}
-/*	size_t i;
-
-	i = 0;
-	if (!s1 && !s2)
-		return (0);
-	if (s1[0] == '\0' && s2[0] == '\0')
-		return (0);
-	if (s1[0] == '\0')
-		return (-1);
-	if (s2[0] == '\0')
-		return (1);
-	while(s1[i] && s2[i] && i < n)
-	{
-		if (s1[i] == s2[i])
-			i++;
-		else
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-	}
-	if (ft_strlen(s2) > ft_strlen(s1))
-		i--;
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-	}	*/
-/*
-int main()
-{
-	char s1[] = "Je test,car ca!";
-	char s2[] = "Je test";
-	int res;
-	res = ft_strncmp(s1, s2, 4);
-	printf("mine :%d\n", res);
-	printf("original :%d\n", strncmp(s1, s2, 4));
-	return 0;
-}*/
+}

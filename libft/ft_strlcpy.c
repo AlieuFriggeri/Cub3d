@@ -3,46 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 18:26:29 by afrigger          #+#    #+#             */
-/*   Updated: 2022/10/18 13:01:15 by afrigger         ###   ########.fr       */
+/*   Created: 2022/10/11 13:40:41 by vgroux            #+#    #+#             */
+/*   Updated: 2022/10/12 21:20:17 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-//#include <stdio.h>
+
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
-	size_t	len;
 
 	i = 0;
-	len = ft_strlen(src);
-	if (!dst && !src)
-		return (0);
-	if (dstsize != 0)
+	if (dstsize == 0)
+		return (ft_strlen(src));
+	while (src[i] != '\0' && i < (dstsize - 1))
 	{
-		while (i < dstsize - 1 && src[i] != '\0')
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = '\0';
+		dst[i] = src[i];
+		i++;
 	}
-	return (len);
+	dst[i] = '\0';
+	return (ft_strlen(src));
 }
-
-/*
-int main()
-{
-	char str[] = "the cake is a lie !\0I'm hidden lol\r\n";
-	char dst[0xF00];
-
-	printf("%s\n", str);
-	printf("%s\n", dst);
-	ft_strlcpy(dst, str, ft_strlen(dst));
-	printf("%s\n", str);
-	printf("%s\n", dst);
-	return 0;
-}*/

@@ -6,15 +6,20 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/10 15:41:19 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/10 15:54:02 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+/*	Personnal headers	*/
 # include "../mlx_macos/mlx.h"
 # include "../libft/libft.h"
+# include "map.h"
+# include "hook.h"
+
+/*	Official headers	*/
 # include <math.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -74,5 +79,11 @@ void	draw_image(t_cub *data);
 void	setplayer(t_cub *data);
 void	draw_raycasting(t_cub *data);
 void	draw_line(t_cub *data, double angle);
+
+/* ----- HOOK ----- */
+int		hook(int keycode, t_cub *data);
+int		cub_exit(t_cub *data);
+void	move_player(int keycode, t_cub *data);
+void	rotate_player(int keycode, t_cub *data);
 
 #endif

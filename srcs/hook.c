@@ -6,11 +6,11 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:23:28 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/10 15:23:22 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/10 15:53:16 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hook.h"
+#include "cub3d.h"
 
 int	cub_exit(t_cub *data)
 {

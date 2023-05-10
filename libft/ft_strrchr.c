@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 15:42:28 by afrigger          #+#    #+#             */
-/*   Updated: 2022/10/18 13:02:58 by afrigger         ###   ########.fr       */
+/*   Created: 2022/10/10 14:17:34 by vgroux            #+#    #+#             */
+/*   Updated: 2022/10/11 19:21:36 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,15 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	char	c2;
-	char	*s2;
-	int		i;
+	unsigned int		i;
+	char				*ptr_temp;
 
-	c2 = (char)c;
-	s2 = (char *)s;
-	i = ft_strlen(s2);
-	if (c2 == '\0')
-		return (&s2[i]);
-	while (i >= 0)
-	{
-		if (s2[i] == c2)
-			return (&s2[i]);
+	i = ft_strlen(s);
+	ptr_temp = (char *)s;
+	while (ptr_temp[i] != (char)c && i != 0)
 		i--;
-	}
-	return (NULL);
+	if (ptr_temp[i] != (char)c)
+		return (0);
+	else
+		return (&ptr_temp[i]);
 }
-/*
-int main()
-{
-	char c = '\0';
-	char str[] = "123456789";
-	char *res;
-	printf("%s\n", str);
-	res = ft_strrchr(str, c);
-	printf("%s\n", res);
-}*/

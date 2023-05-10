@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 14:20:52 by afrigger          #+#    #+#             */
-/*   Updated: 2022/10/11 11:34:16 by afrigger         ###   ########.fr       */
+/*   Created: 2022/10/10 19:02:19 by vgroux            #+#    #+#             */
+/*   Updated: 2022/10/11 12:10:23 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,8 @@ void	*ft_memset(void *b, int c, size_t len)
 	i = 0;
 	while (i < len)
 	{
-		*(unsigned char *)(b + i) = (unsigned char)c;
+		((char *)b)[i] = (unsigned char)c;
 		i++;
 	}
 	return (b);
 }
-
-/*
-int main()
-{
-	char str[] = "1234567";
-	printf("%s\n", str);
-	ft_memset(str, 'a', 3);
-	printf("%s\n", str);
-	return 0;
-}*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 11:55:36 by afrigger          #+#    #+#             */
-/*   Updated: 2022/10/11 13:57:01 by afrigger         ###   ########.fr       */
+/*   Created: 2022/09/25 12:53:27 by vgroux            #+#    #+#             */
+/*   Updated: 2022/09/25 12:53:27 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,8 @@
 
 int	ft_isalpha(int c)
 {
-	if ((c <= 'z' && c >= 'a') || (c <= 'Z' && c >= 'A'))
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return (1);
 	else
 		return (0);
 }
-
-/*
-int main()
-{
-	char c;
-	c = 'L';
-	printf("%d", ft_isalpha(c));
-	return 0;
-}*/

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 12:55:02 by afrigger          #+#    #+#             */
-/*   Updated: 2022/10/19 13:33:19 by afrigger         ###   ########.fr       */
+/*   Created: 2022/10/17 15:54:34 by vgroux            #+#    #+#             */
+/*   Updated: 2022/10/18 12:49:40 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,22 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*newlst;
-	t_list	*newcell;
+	t_list	*newlist;
+	t_list	*newnode;
 
-	if (!lst || !f)
+	if (!lst || !f || !del)
 		return (NULL);
-	newcell = ft_lstnew(f(lst->content));
-	if (!newcell)
-		return (NULL);
-	newlst = newcell;
-	lst = lst->next;
+	newlist = NULL;
 	while (lst)
 	{
-		newcell = ft_lstnew(f(lst->content));
-		if (!newcell)
+		newnode = ft_lstnew(f(lst->content));
+		if (!newnode)
 		{
-			ft_lstclear(&newlst, del);
-			ft_lstclear(&lst, del);
-			break ;
+			ft_lstclear(&newlist, del);
+			return (NULL);
 		}
+		ft_lstadd_back(&newlist, newnode);
 		lst = lst->next;
-		ft_lstadd_back(&newlst, newcell);
 	}
-	return (newlst);
+	return (newlist);
 }

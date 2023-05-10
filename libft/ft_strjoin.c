@@ -3,38 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/14 14:17:06 by afrigger          #+#    #+#             */
-/*   Updated: 2022/10/18 13:01:00 by afrigger         ###   ########.fr       */
+/*   Created: 2022/10/13 16:14:08 by vgroux            #+#    #+#             */
+/*   Updated: 2022/10/14 14:44:09 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
-	char	*res;
-	size_t	len;
-	size_t	i;
-	size_t	j;
+	size_t	total_len;
+	char	*str;
 
-	i = 0;
-	j = 0;
-	len = ft_strlen((char *)s1) + ft_strlen((char *)s2);
-	res = malloc(sizeof(char) * len + 1);
-	if (!res)
+	total_len = ft_strlen(s1) + ft_strlen(s2) + 1;
+	str = (char *)malloc(total_len * sizeof(char));
+	if (!str)
 		return (NULL);
-	while (s1[i])
-	{
-		res[i] = s1[i];
-		i++;
-	}
-	while (s2[j])
-	{
-		res[i + j] = s2[j];
-		j++;
-	}
-	res[i + j] = '\0';
-	return (res);
+	ft_strlcpy(str, (char *)s1, ft_strlen(s1) + 1);
+	ft_strlcat(str, (char *)s2, total_len);
+	return (str);
 }

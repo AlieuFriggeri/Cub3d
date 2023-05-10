@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_strtocase.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 12:54:09 by vgroux            #+#    #+#             */
-/*   Updated: 2022/10/12 14:19:51 by vgroux           ###   ########.fr       */
+/*   Created: 2022/11/02 23:55:09 by vgroux            #+#    #+#             */
+/*   Updated: 2022/11/03 00:02:58 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_toupper(int c)
+char	*ft_strtocase(char *s, int (*f)(int))
 {
-	if (c >= 'a' && c <= 'z')
-		return (c - 32);
-	else
-		return (c);
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+	{
+		s[i] = f(s[i]);
+		i++;
+	}
+	return (s);
 }

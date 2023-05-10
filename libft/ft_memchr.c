@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 16:25:47 by afrigger          #+#    #+#             */
-/*   Updated: 2022/10/18 12:58:20 by afrigger         ###   ########.fr       */
+/*   Created: 2022/10/11 12:07:55 by vgroux            #+#    #+#             */
+/*   Updated: 2022/11/02 22:44:47 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,9 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		if (*(unsigned char *)(s + i) == (unsigned char)c)
-			return ((unsigned char *)(s + i));
+		if (((unsigned char *)s)[i] == (unsigned char)c)
+			return (&((char *)s)[i]);
 		i++;
 	}
 	return (NULL);
 }
-/*
-int main()
-{
-	char str[] = "abcdefghi";
-	char c = '9';
-	char *res;
-	res = ft_memchr(str, c, 9);
-	printf("%s\n", res);
-	return 0;
-}*/
