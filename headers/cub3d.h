@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/10 15:08:46 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/10 15:18:07 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,6 @@ void	draw_image(t_cub *data);
 
 /* ----- PLAYER ----- */
 void	setplayer(t_cub *data);
-void	rayDraw(t_cub *data);
+void	raydraw(t_cub *data);
 
 #endif
