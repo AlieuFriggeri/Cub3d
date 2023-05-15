@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:23:28 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/15 15:48:09 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:18:25 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	rotate_player(int keycode, t_cub *data)
 	if (keycode == 123)
 	{
 		data->player.pa -= 0.1;
-		if (data->player.pa < 0)
+		if (data->player.pa <= 0)
 			data->player.pa += 2 * PI;
 		data->player.pdx = cos(data->player.pa) * 5;
 		data->player.pdy = sin(data->player.pa) * 5;
@@ -56,7 +56,7 @@ void	rotate_player(int keycode, t_cub *data)
 	if (keycode == 124)
 	{
 		data->player.pa += 0.1;
-		if (data->player.pa > 2 * PI)
+		if (data->player.pa >= 2 * PI)
 			data->player.pa = 0;
 		data->player.pdx = cos(data->player.pa) * 5;
 		data->player.pdy = sin(data->player.pa) * 5;

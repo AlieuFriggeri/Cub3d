@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/15 16:06:04 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:17:00 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,10 @@ int	checkHorizontalLines(t_cub *data, int flag)
 	if (flag == 0)
 		return (count_linetest(data, ra, rx, ry));
 	else
+	{
+		printf("%f | %f\n", rx, ry);
 		draw_linetest(data, ra, rx, ry);
+	}
 	return (0);
 }
 
@@ -169,7 +172,10 @@ int	checkVerticalLines(t_cub *data, int flag)
 	if (flag == 0)
 		return (count_linetest(data, ra, rx, ry));
 	else
+	{
+		printf("%f | %f\t\t%f | %f\n", rx, ry, data->player.px, data->player.py);
 		draw_linetest(data, ra, rx, ry);
+	}
 	return (0);
 }
 
@@ -183,7 +189,7 @@ void	draw_linetest(t_cub *data, double angle, float rx, float ry)
 	len = 0;
 	startx = data->player.px;
 	starty = data->player.py;
-	printf(" %f %f\n", rx, ry);
+	//printf(" %f %f\n", rx, ry);
 	len2 = sqrt(pow( rx - startx, 2) + pow( ry - starty, 2));
 	while (len < len2)
 	{
@@ -210,7 +216,7 @@ int	count_linetest(t_cub *data, double angle, float rx, float ry)
 	count = 0;
 	startx = data->player.px;
 	starty = data->player.py;
-	printf(" %f %f\n", rx, ry);
+	//printf(" %f %f\n", rx, ry);
 	len2 = sqrt(pow( rx - startx, 2) + pow( ry - starty, 2));
 	while (len < len2)
 	{
