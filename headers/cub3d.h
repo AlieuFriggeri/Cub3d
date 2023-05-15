@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/10 15:54:02 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/15 16:05:02 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define WIDTH 1024
 # define HEIGHT 512
 # define PI 3.1415926535
+# define PI2 PI / 2
+# define PI3 3 * PI2
 # define DEG 0.0174533
 # define BLUE_COLOR 0x87CEEB
 # define GREY_COLOR 0x808080
@@ -79,6 +81,10 @@ void	draw_image(t_cub *data);
 void	setplayer(t_cub *data);
 void	draw_raycasting(t_cub *data);
 void	draw_line(t_cub *data, double angle);
+int	checkHorizontalLines(t_cub *data, int flag);
+void		draw_linetest(t_cub *data, double angle, float rx, float ry);
+int	checkVerticalLines(t_cub *data, int flag);
+int		count_linetest(t_cub *data, double angle, float rx, float ry);
 
 /* ----- HOOK ----- */
 int		hook(int keycode, t_cub *data);

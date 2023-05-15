@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/10 15:49:50 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/15 15:50:34 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 char	*map[] = {
 	"1 1 1 1 1 1 1 1",
+	"1 0 1 0 0 0 0 1",
 	"1 0 0 0 0 0 0 1",
-	"1 0 0 0 0 0 0 1",
-	"1 0 0 0 0 0 0 1",
+	"1 0 0 0 0 1 0 1",
 	"1 0 0 0 1 0 0 1",
-	"1 0 0 0 0 0 0 1",
-	"1 0 0 0 0 0 0 1",
+	"1 0 0 0 0 1 0 1",
+	"1 0 1 0 0 1 0 1",
 	"1 1 1 1 1 1 1 1"
 };
 
@@ -31,7 +31,7 @@ int	main(void)
 	data.window = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Cub3d");
 	data.img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
 	data.addr = mlx_get_data_addr(data.img, &data.bpp, &data.sizeline, &data.endian);
-	data.player.px = 512;
+	data.player.px = 200;
 	data.player.py = 256;
 	data.mapx = 5;
 	data.mapy = 7;
