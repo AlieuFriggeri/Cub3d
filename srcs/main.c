@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/15 15:50:34 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:57:25 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(void)
 	data.player.pdx = cos(data.player.pa) * 5;
 	data.player.pdy = sin(data.player.pa) * 5;
 	draw_image(&data);
-	mlx_hook(data.window, 02, 0, &hook, &data);
+	mlx_key_hook(data.window, &hook, &data);
 	mlx_hook(data.window, 17, 0, &cub_exit, &data);
 	mlx_loop(data.mlx);
 	return (0);
