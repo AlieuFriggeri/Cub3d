@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/16 13:01:18 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:34:52 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,14 +234,20 @@ void	draw_line3d(t_cub *data)
 {
 	int y;
 	int x;
+	int x2;
 
 	x = data->player.r * 8 + WIDTH / 2;
-	y = 0;
+	x2 = x+8;
+	while (x < x2)
+	{
+		y = 0;
 		while (y < data->player.lineH)
 		{
 			my_mlx_pixel_put(data, x, y, 0xFF0000);
 			y++;
 		}
+		x++;
+	}
 }
 
 void	draw_linetest(t_cub *data, double angle, float rx, float ry)
