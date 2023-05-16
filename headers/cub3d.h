@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/16 12:34:44 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:58:17 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ typedef struct s_player{
 	double		starty;
 	double		endx;
 	double		endy;
+	double		disT;
+	double		lineH;
+	int			r;
 }	t_player;
 
 typedef struct s_cub{
@@ -86,6 +89,7 @@ int	checkHorizontalLines(t_cub *data, int flag);
 void		draw_linetest(t_cub *data, double angle, float rx, float ry);
 int	checkVerticalLines(t_cub *data, int flag);
 int		count_linetest(t_cub *data, double angle, float rx, float ry);
+void	draw_line3d(t_cub *data);
 
 /* ----- HOOK ----- */
 int		hook(int keycode, t_cub *data);

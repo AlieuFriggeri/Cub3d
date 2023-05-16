@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/16 12:35:31 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:01:18 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,20 @@ void	setplayer(t_cub *data)
 	y = 0;
 	//printf("in setplayer\n");
 	//draw_raycasting(data);
-	data->player.pa2 = data->player.pa;
+	data->player.pa2 = data->player.pa - DEG * 30;
 	while (r < 60)
 	{
+		data->player.r = r;
 		if (checkHorizontalLines(data, 0) < checkVerticalLines(data, 0))
+		{
+			data->player.disT = checkHorizontalLines(data, 0);
 			checkHorizontalLines(data, 1);
+		}
 		else
+		{
+			data->player.disT = checkVerticalLines(data, 0);
 			checkVerticalLines(data, 1);
+		}
 		data->player.pa2 += DEG;
 		r++;
 	}
@@ -132,6 +139,9 @@ int	checkHorizontalLines(t_cub *data, int flag)
 			}
 			//printf("%d\n", map2[mp]);
 			//printf("in horizontal 3\n");
+			data->player.lineH = (64 * HEIGHT) / data->player.disT;
+			if (data->player.lineH > HEIGHT)
+				data->player.lineH = HEIGHT;
 		}
 		if (flag == 0)
 			return (count_linetest(data, ra, rx, ry));
@@ -139,6 +149,7 @@ int	checkHorizontalLines(t_cub *data, int flag)
 		{
 			//printf("%f | %f\n", rx, ry);
 			draw_linetest(data, ra, rx, ry);
+			draw_line3d(data);
 		}
 	// 	r++;
 	// 	ra += DEG;
@@ -200,6 +211,9 @@ int	checkVerticalLines(t_cub *data, int flag)
 				dof += 1; // prochain ligne horizontale
 			}
 			//printf("%d\n", map2[mp]);
+			data->player.lineH = (64 * HEIGHT) / data->player.disT;
+			if (data->player.lineH > HEIGHT)
+				data->player.lineH = HEIGHT;
 		}
 		if (flag == 0)
 			return (count_linetest(data, ra, rx, ry));
@@ -207,12 +221,27 @@ int	checkVerticalLines(t_cub *data, int flag)
 		{
 			//printf("%f | %f\t\t%f | %f\n", rx, ry, data->player.px, data->player.py);
 			draw_linetest(data, ra, rx, ry);
+			draw_line3d(data);
 		}
 	//	r++;
 	//	ra += DEG;
 	//}
 	//printf("OUT vertical\n");
 	return (0);
+}
+
+void	draw_line3d(t_cub *data)
+{
+	int y;
+	int x;
+
+	x = data->player.r * 8 + WIDTH / 2;
+	y = 0;
+		while (y < data->player.lineH)
+		{
+			my_mlx_pixel_put(data, x, y, 0xFF0000);
+			y++;
+		}
 }
 
 void	draw_linetest(t_cub *data, double angle, float rx, float ry)
