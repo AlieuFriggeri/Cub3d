@@ -71,9 +71,9 @@ LIBS = ${FT_LNK} ${MLX_LNK}
 
 # ${NAME}: title ${LIBFT} ${MLX} ${OBJS}
 ${NAME}: ${LIBFT} ${MLX} ${OBJS}
-	@echo "$(RESET)[$(GREENGREEN)${NAME}$(RESET)]: Cub3d Objects were created${GREY}"
+	@echo "$(RESET)[$(GREENGREEN)${NAME}$(RESET)]: ${NAME} Objects were created${GREY}"
 	${CC} ${OBJS} ${LIBS} -o ${NAME}
-	@echo "$(RESET)[$(GREENGREEN)${NAME}$(RESET)]: Cub3d created !"
+	@echo "$(RESET)[$(GREENGREEN)${NAME}$(RESET)]: ${NAME} created !"
 
 ${LIBFT}:
 	@echo "[$(GREENGREEN)${NAME}$(RESET)]: Creating Libft...${GREY}"
@@ -84,7 +84,7 @@ ${MLX}:
 	@echo "[$(GREENGREEN)${NAME}$(RESET)]: Creating MLX...$(GREY)"
 	${MAKE} -sC ${@D}
 	@echo "$(RESET)[$(GREENGREEN)${NAME}$(RESET)]: MLX Objects were created"
-	@echo "${RESET}[$(GREENGREEN)${NAME}$(RESET)]: Creating Cub3d Objects...${GREY}"
+	@echo "${RESET}[$(GREENGREEN)${NAME}$(RESET)]: Creating ${NAME} Objects...${GREY}"
 
 all: ${NAME}
 
