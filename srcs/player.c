@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/16 14:42:13 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:47:08 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	checkHorizontalLines(t_cub *data, int flag)
 			xo = -yo * atan;
 			//printf("in horizontal 0\n");
 		}
-		else if (ra < PI) //regarde en bas
+		else//regarde en bas
 		{
 			ry = (((int)data->player.py>>6)<<6) + 64;
 			rx = (data->player.py - ry) * atan + data->player.px;
@@ -117,7 +117,7 @@ int	checkHorizontalLines(t_cub *data, int flag)
 			xo = -yo * atan;
 			//printf("in horizontal 1\n");
 		}
-		else if ( ra == 0 || ra == PI)
+		if ( ra == 0 || ra == PI)
 		{
 			rx = data->player.px;
 			ry = data->player.py;
@@ -182,7 +182,7 @@ int	checkVerticalLines(t_cub *data, int flag)
 			yo = -xo * ntan;
 			//printf("in vertical 0\n");
 		}
-		if (ra < PI2 || ra > PI3) //regarde a droite
+		else //regarde a droite
 		{
 			rx = (((int)data->player.px>>6)<<6) + 64;
 			ry = (data->player.px - rx) * ntan + data->player.py;
