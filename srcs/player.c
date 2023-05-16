@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/16 14:34:52 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:42:13 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ int	checkHorizontalLines(t_cub *data, int flag)
 			data->player.lineH = (64 * HEIGHT) / data->player.disT;
 			if (data->player.lineH > HEIGHT)
 				data->player.lineH = HEIGHT;
+			data->player.lineO = HEIGHT / 2 - data->player.lineH / 2;
 		}
 		if (flag == 0)
 			return (count_linetest(data, ra, rx, ry));
@@ -214,6 +215,7 @@ int	checkVerticalLines(t_cub *data, int flag)
 			data->player.lineH = (64 * HEIGHT) / data->player.disT;
 			if (data->player.lineH > HEIGHT)
 				data->player.lineH = HEIGHT;
+			data->player.lineO = HEIGHT / 2 - data->player.lineH / 2;
 		}
 		if (flag == 0)
 			return (count_linetest(data, ra, rx, ry));
@@ -243,7 +245,7 @@ void	draw_line3d(t_cub *data)
 		y = 0;
 		while (y < data->player.lineH)
 		{
-			my_mlx_pixel_put(data, x, y, 0xFF0000);
+			my_mlx_pixel_put(data, x, y + data->player.lineO, 0xFF0000);
 			y++;
 		}
 		x++;
