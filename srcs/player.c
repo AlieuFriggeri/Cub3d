@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/16 14:38:07 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/16 14:54:52 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	checkHorizontalLines(t_cub *data, int flag)
 			xo = -yo * atan;
 			//printf("in horizontal 0\n");
 		}
-		else //regarde en bas
+		else//regarde en bas
 		{
 			ry = (((int)data->player.py>>6)<<6) + 64;
 			rx = (data->player.py - ry) * atan + data->player.px;
@@ -142,6 +142,7 @@ int	checkHorizontalLines(t_cub *data, int flag)
 			data->player.lineH = (64 * HEIGHT) / data->player.disT;
 			if (data->player.lineH > HEIGHT)
 				data->player.lineH = HEIGHT;
+			data->player.lineO = HEIGHT / 2 - data->player.lineH / 2;
 		}
 		if (flag == 0)
 			return (count_linetest(data, ra, rx, ry));
@@ -214,6 +215,7 @@ int	checkVerticalLines(t_cub *data, int flag)
 			data->player.lineH = (64 * HEIGHT) / data->player.disT;
 			if (data->player.lineH > HEIGHT)
 				data->player.lineH = HEIGHT;
+			data->player.lineO = HEIGHT / 2 - data->player.lineH / 2;
 		}
 		if (flag == 0)
 			return (count_linetest(data, ra, rx, ry));
@@ -234,14 +236,20 @@ void	draw_line3d(t_cub *data)
 {
 	int y;
 	int x;
+	int x2;
 
 	x = data->player.r * 8 + WIDTH / 2;
-	y = 0;
+	x2 = x+8;
+	while (x < x2)
+	{
+		y = 0;
 		while (y < data->player.lineH)
 		{
-			my_mlx_pixel_put(data, x, y, 0xFF0000);
+			my_mlx_pixel_put(data, x, y + data->player.lineO, 0xFF0000);
 			y++;
 		}
+		x++;
+	}
 }
 
 void	draw_linetest(t_cub *data, double angle, float rx, float ry)

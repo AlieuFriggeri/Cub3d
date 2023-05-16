@@ -1,3 +1,4 @@
 *.o
 *.a
 cub3d
+mlx_linux/test/mlx-test

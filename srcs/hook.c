@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:23:28 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/16 11:46:17 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:43:10 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	rotate_player(int keycode, t_cub *data)
 {
 	if (keycode == 123) // fleche gauche
 	{
-		data->player.pa -= 0.1;
+		data->player.pa -= 0.05;
 		if (data->player.pa <= 0)
 			data->player.pa += 2 * PI;
 		data->player.pdx = cos(data->player.pa) * 5;
@@ -55,7 +55,7 @@ void	rotate_player(int keycode, t_cub *data)
 	}
 	if (keycode == 124) // fleche droite
 	{
-		data->player.pa += 0.1;
+		data->player.pa += 0.05;
 		if (data->player.pa >= 2 * PI)
 			data->player.pa -= 2 * PI;
 		data->player.pdx = cos(data->player.pa) * 5;
