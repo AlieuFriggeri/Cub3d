@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/15 16:17:00 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/16 11:47:55 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,14 @@ void	setplayer(t_cub *data)
 	}
 	x = 0;
 	y = 0;
+	//printf("in setplayer\n");
 	//draw_raycasting(data);
-	if (checkHorizontalLines(data, 0) < checkVerticalLines(data, 0))
+	if (checkHorizontalLines(data, 0) < checkVerticalLines(data, 0)) // LE SEGFAULT EST DANS UNE DES DEUX
 		checkHorizontalLines(data, 1);
 	else
 		checkVerticalLines(data, 1);
 	mlx_put_image_to_window(data->mlx, data->window, data->img, 0, 0);
+	//printf("out setplayer\n");
 }
 
 void	draw_raycasting(t_cub *data)
@@ -78,32 +80,36 @@ int	checkHorizontalLines(t_cub *data, int flag)
 	dof = 0;
 	data->mapx = 8;
 	data->mapy = 8;
+	//printf("in horizontal\n");
 	if (ra > PI) //regarde en haut
 	{
 		ry = (((int)data->player.py>>6)<<6) - 0.0001;
 		rx = (data->player.py - ry) * atan + data->player.px;
 		yo = -64;
 		xo = -yo * atan;
+		//printf("in horizontal 0\n");
 	}
-	if (ra < PI) //regarde en bas
+	else if (ra < PI) //regarde en bas
 	{
 		ry = (((int)data->player.py>>6)<<6) + 64;
 		rx = (data->player.py - ry) * atan + data->player.px;
 		yo = 64;
 		xo = -yo * atan;
+		//printf("in horizontal 1\n");
 	}
-	if ( ra == 0 || ra == PI)
+	else if ( ra == 0 || ra == PI)
 	{
 		rx = data->player.px;
 		ry = data->player.py;
 		dof = 8;
+		//printf("in horizontal 2\n");
 	}
 	while (dof < 8)
 	{
 		mx = (int)rx>>6;
 		my = (int)ry>>6;
 		mp = my * data->mapx + mx;
-		if (mp < data->mapx * data->mapy && map2[mp] == 1) // touche un mur
+		if (mp > 0 && mp < data->mapx * data->mapy && map2[mp] == 1) // touche un mur
 			dof = 8;
 		else
 		{
@@ -112,14 +118,16 @@ int	checkHorizontalLines(t_cub *data, int flag)
 			dof += 1; // prochain ligne horizontale
 		}
 		//printf("%d\n", map2[mp]);
+		//printf("in horizontal 3\n");
 	}
 	if (flag == 0)
 		return (count_linetest(data, ra, rx, ry));
 	else
 	{
-		printf("%f | %f\n", rx, ry);
+		//printf("%f | %f\n", rx, ry);
 		draw_linetest(data, ra, rx, ry);
 	}
+	//printf("OUT horizontal\n");
 	return (0);
 }
 
@@ -134,32 +142,37 @@ int	checkVerticalLines(t_cub *data, int flag)
 	dof = 0;
 	data->mapx = 8;
 	data->mapy = 8;
+	//printf("in vertical\n");
 	if (ra > PI2 && ra < PI3) //regarde a gauche
 	{
 		rx = (((int)data->player.px>>6)<<6) - 0.0001;
 		ry = (data->player.px - rx) * ntan + data->player.py;
 		xo = -64;
 		yo = -xo * ntan;
+		//printf("in vertical 0\n");
 	}
-	if (ra < PI2 || ra > PI3) //regarde en droite
+	if (ra < PI2 || ra > PI3) //regarde a droite
 	{
 		rx = (((int)data->player.px>>6)<<6) + 64;
 		ry = (data->player.px - rx) * ntan + data->player.py;
 		xo = 64;
 		yo = -xo * ntan;
+		//printf("in vertical 1\n");
 	}
 	if ( ra == 0 || ra == PI)
 	{
 		rx = data->player.px;
 		ry = data->player.py;
 		dof = 8;
+		//printf("in vertical 2\n");
 	}
 	while (dof < 8)
 	{
+		//printf("in vertical 3\n");
 		mx = (int)rx>>6;
 		my = (int)ry>>6;
 		mp = my * data->mapx + mx;
-		if (mp < data->mapx * data->mapy && map2[mp] == 1) // touche un mur
+		if (mp > 0 && mp < data->mapx * data->mapy && map2[mp] == 1) // touche un mur
 			dof = 8;
 		else
 		{
@@ -173,9 +186,10 @@ int	checkVerticalLines(t_cub *data, int flag)
 		return (count_linetest(data, ra, rx, ry));
 	else
 	{
-		printf("%f | %f\t\t%f | %f\n", rx, ry, data->player.px, data->player.py);
+		//printf("%f | %f\t\t%f | %f\n", rx, ry, data->player.px, data->player.py);
 		draw_linetest(data, ra, rx, ry);
 	}
+	//printf("OUT vertical\n");
 	return (0);
 }
 
@@ -190,7 +204,7 @@ void	draw_linetest(t_cub *data, double angle, float rx, float ry)
 	startx = data->player.px;
 	starty = data->player.py;
 	//printf(" %f %f\n", rx, ry);
-	len2 = sqrt(pow( rx - startx, 2) + pow( ry - starty, 2));
+	len2 = sqrt((pow( rx - startx, 2) + pow( ry - starty, 2)));
 	while (len < len2)
 	{
 		if (startx < WIDTH && starty < WIDTH && startx < HEIGHT && starty < HEIGHT)
