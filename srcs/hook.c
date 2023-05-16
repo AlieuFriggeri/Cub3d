@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:23:28 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/16 14:43:10 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:27:01 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	cub_exit(t_cub *data)
 
 void	move_player(int keycode, t_cub *data)
 {
-	if (keycode == 13)
+	if (keycode == KEY_W)
 		data->player.py -= 8;
-	if (keycode == 0)
+	if (keycode == KEY_A)
 		data->player.px -= 8;
-	if (keycode == 1)
+	if (keycode == KEY_S)
 		data->player.py += 8;
-	if (keycode == 2)
+	if (keycode == KEY_D)
 		data->player.px += 8;
 	if (data->player.px > WIDTH / 2 - 1)
 		data->player.px = WIDTH / 2 - 1;
@@ -45,7 +45,7 @@ void	move_player(int keycode, t_cub *data)
 
 void	rotate_player(int keycode, t_cub *data)
 {
-	if (keycode == 123) // fleche gauche
+	if (keycode == KEY_UP) // fleche gauche
 	{
 		data->player.pa -= 0.05;
 		if (data->player.pa <= 0)
@@ -53,7 +53,7 @@ void	rotate_player(int keycode, t_cub *data)
 		data->player.pdx = cos(data->player.pa) * 5;
 		data->player.pdy = sin(data->player.pa) * 5;
 	}
-	if (keycode == 124) // fleche droite
+	if (keycode == KEY_RIGHT) // fleche droite
 	{
 		data->player.pa += 0.05;
 		if (data->player.pa >= 2 * PI)
@@ -61,12 +61,12 @@ void	rotate_player(int keycode, t_cub *data)
 		data->player.pdx = cos(data->player.pa) * 5;
 		data->player.pdy = sin(data->player.pa) * 5;
 	}
-	if (keycode == 126) // fleche haut
+	if (keycode == KEY_LEFT) // fleche haut
 	{
 		data->player.px += data->player.pdx;
 		data->player.py += data->player.pdy;
 	}
-	if (keycode == 125) // fleche bas
+	if (keycode == KEY_DOWN) // fleche bas
 	{
 		data->player.px -= data->player.pdx;
 		data->player.py -= data->player.pdy;
@@ -77,12 +77,12 @@ void	rotate_player(int keycode, t_cub *data)
 
 int	hook(int keycode, t_cub *data)
 {
-	if (keycode == 53)
+	if (keycode == KEY_ESC)
 		cub_exit(data);
-	else if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13)
+	else if (keycode == KEY_W || keycode == KEY_A || keycode == KEY_S || keycode == KEY_D)
 		move_player(keycode, data);
-	else if (keycode == 123 || keycode == 124
-		|| keycode == 125 || keycode == 126)
+	else if (keycode == KEY_UP || keycode == KEY_LEFT
+		|| keycode == KEY_DOWN || keycode == KEY_RIGHT)
 		rotate_player(keycode, data);
 	return (0);
 }

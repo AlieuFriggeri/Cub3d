@@ -24,14 +24,34 @@ SRCS =		${addprefix ${DIR_S}, ${SRCS_LIST}}
 
 OBJS =		${SRCS:${DIR_S}%.c=${DIR_O}%.o}
 
-# Compile la Libft
-DIR_LIBFT = libft/
-LIBFT_INC = -I ${DIR_LIBFT}
-LIBFT =	${DIR_LIBFT}libft.a
-FT_LNK = -L ${DIR_LIBFT} -l ft
+UNAME = ${shell uname}
+
+# Define les keycode suivant l'OS
+ifeq (${UNAME}, Linux)
+	ESC = KEY_ESC=65307
+	W = KEY_W=119
+	A = KEY_A=97
+	S = KEY_S=115
+	D = KEY_D=100
+	UP = KEY_UP=65362
+	DOWN = KEY_DOWN=65364
+	LEFT = KEY_LEFT=65361
+	RIGHT = KEY_RIGHT=65363
+else
+	ESC = KEY_ESC=53
+	W = KEY_W=13
+	A = KEY_A=0
+	S = KEY_S=1
+	D = KEY_D=2
+	UP = KEY_UP=126
+	DOWN = KEY_DOWN=125
+	LEFT = KEY_LEFT=123
+	RIGHT = KEY_RIGHT=124
+endif
+KEYCODES =  -D $(ESC) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -D $(DOWN) -D $(LEFT) -D $(RIGHT)
 
 # Compile la MiniLibX suivant l'OS
-ifeq (${shell uname}, Linux)
+ifeq (${UNAME}, Linux)
 	DIR_MLX = mlx_linux/
 	MLX_LNK	= -L $(DIR_MLX) -lmlx -lXext -lX11 -lbsd -lm
 else
@@ -40,6 +60,12 @@ else
 endif
 MLX_INC = -I ${DIR_MLX}
 MLX =	${DIR_MLX}libmlx.a
+
+# Compile la Libft
+DIR_LIBFT = libft/
+LIBFT_INC = -I ${DIR_LIBFT}
+LIBFT =	${DIR_LIBFT}libft.a
+FT_LNK = -L ${DIR_LIBFT} -l ft
 
 LIBS = ${FT_LNK} ${MLX_LNK}
 
@@ -65,7 +91,7 @@ all: ${NAME}
 ${DIR_O}%.o:${DIR_S}%.c
 	@printf "\033[38;5;240m"
 	@mkdir -p ${DIR_O}
-	${CC} ${CFLAGS} ${LIBFT_INC} ${MLX_INC} -I ${DIR_H} -o $@ -c $<
+	${CC} ${CFLAGS} ${KEYCODES} ${LIBFT_INC} ${MLX_INC} -I ${DIR_H} -o $@ -c $<
 
 clean:
 	@echo "$(RED) ██████╗██╗     ███████╗ █████╗ ███╗   ██╗██╗███╗   ██╗ ██████╗$(RESET)"
