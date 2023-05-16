@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/15 16:05:02 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:34:44 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_player{
 	double		pdx;
 	double		pdy;
 	double		pa;
+	double		pa2;
 	double		m;
 	double		n;
 	double		startx;
