@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:23:28 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/17 13:47:42 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:56:59 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,20 +72,20 @@ void	rotate_player(int keycode, t_cub *data)
 		data->player.py -= data->player.pdy;
 	}
 	check_angle(data);
-	printf("ANGLE ; %f\n", data->player.pa);
+	// printf("ANGLE ; %f\n", data->player.pa);
 	move_player(keycode, data);
 }
 
 void	check_angle(t_cub *data)
 {
 	if (data->player.pa == 2 * PI)
-		data->player.pa -= 0.05;
+		data->player.pa -= 0.001;
 	else if (data->player.pa == PI * 1.5)
-		data->player.pa -= 0.05;
+		data->player.pa -= 0.001;
 	else if (data->player.pa == PI / 2)
-		data->player.pa += 0.05;
+		data->player.pa += 0.001;
 	else if (data->player.pa == PI)
-		data->player.pa += 0.05;
+		data->player.pa += 0.001;
 }
 
 int	hook(int keycode, t_cub *data)

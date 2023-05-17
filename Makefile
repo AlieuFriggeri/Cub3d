@@ -18,7 +18,8 @@ SRCS_LIST =	main.c \
 			hook.c \
 			draw.c \
 			image.c \
-			player.c
+			player.c \
+			init.c 
 
 SRCS =		${addprefix ${DIR_S}, ${SRCS_LIST}}
 
