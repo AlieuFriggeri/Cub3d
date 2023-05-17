@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/17 13:52:51 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:09:02 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,11 @@ int	main(void)
 {
 	t_cub	data;
 
-	data.mlx = mlx_init();
-	data.window = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Cub3d");
-	data.img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
-	data.addr = mlx_get_data_addr(data.img, &data.bpp, &data.sizeline, &data.endian);
-	data.player.px = 200;
-	data.player.py = 220;
-	data.mapx = 5;
-	data.mapy = 7;
-	// si au lancement pa == axe retirer 0.01
-	data.player.pa = PI;
-	data.player.pdx = cos(data.player.pa) * 5;
-	data.player.pdy = sin(data.player.pa) * 5;
+	/*
+	if (check_arg(argc, argv, env) == 0)
+		init(&data, argc, argv, env);
+	*/
+	init(&data, 0, NULL, NULL);
 	draw_image(&data);
 	mlx_hook(data.window, 2, 0, &hook, &data);
 	mlx_hook(data.window, 17, 0, &cub_exit, &data);

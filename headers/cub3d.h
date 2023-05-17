@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/17 13:45:54 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:10:23 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,7 @@ int		hook(int keycode, t_cub *data);
 int		cub_exit(t_cub *data);
 void	move_player(int keycode, t_cub *data);
 void	rotate_player(int keycode, t_cub *data);
+
+void	init(t_cub *data, int argc, char **argv, char **env);
 
 #endif
