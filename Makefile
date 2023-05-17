@@ -14,6 +14,8 @@ DIR_S =	srcs/
 CREATE_DIR_O = @mkdir -p objs
 DIR_O =	objs/
 
+UNAME = ${shell uname}
+
 SRCS_LIST =	main.c \
 			hook.c \
 			draw.c \
@@ -21,11 +23,15 @@ SRCS_LIST =	main.c \
 			player.c \
 			init.c 
 
+ifeq (${UNAME}, Linux)
+	SRCS_LIST += linux.c
+else
+	SRCS_LIST += macos.c
+endif
+
 SRCS =		${addprefix ${DIR_S}, ${SRCS_LIST}}
 
 OBJS =		${SRCS:${DIR_S}%.c=${DIR_O}%.o}
-
-UNAME = ${shell uname}
 
 # Define les keycode suivant l'OS
 ifeq (${UNAME}, Linux)

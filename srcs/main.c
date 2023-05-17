@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/17 16:09:02 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/17 16:18:28 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ int	main(void)
 	*/
 	init(&data, 0, NULL, NULL);
 	draw_image(&data);
-	mlx_hook(data.window, 2, 0, &hook, &data);
-	mlx_hook(data.window, 17, 0, &cub_exit, &data);
-	mlx_loop(data.mlx);
+	add_hook(&data);
 	return (0);
 }
 
