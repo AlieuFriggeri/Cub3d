@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/16 14:38:51 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/17 13:45:54 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void		draw_linetest(t_cub *data, double angle, float rx, float ry);
 int	checkVerticalLines(t_cub *data, int flag);
 int		count_linetest(t_cub *data, double angle, float rx, float ry);
 void	draw_line3d(t_cub *data);
+void	check_angle(t_cub *data);
 
 /* ----- HOOK ----- */
 int		hook(int keycode, t_cub *data);

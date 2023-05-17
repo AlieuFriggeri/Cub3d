@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:23:28 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/16 15:27:01 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/17 13:47:42 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	move_player(int keycode, t_cub *data)
 
 void	rotate_player(int keycode, t_cub *data)
 {
-	if (keycode == KEY_UP) // fleche gauche
+	if (keycode == KEY_LEFT) // fleche gauche
 	{
-		data->player.pa -= 0.05;
+		data->player.pa -= 0.1;
 		if (data->player.pa <= 0)
 			data->player.pa += 2 * PI;
 		data->player.pdx = cos(data->player.pa) * 5;
@@ -55,13 +55,13 @@ void	rotate_player(int keycode, t_cub *data)
 	}
 	if (keycode == KEY_RIGHT) // fleche droite
 	{
-		data->player.pa += 0.05;
+		data->player.pa += 0.1;
 		if (data->player.pa >= 2 * PI)
 			data->player.pa -= 2 * PI;
 		data->player.pdx = cos(data->player.pa) * 5;
 		data->player.pdy = sin(data->player.pa) * 5;
 	}
-	if (keycode == KEY_LEFT) // fleche haut
+	if (keycode == KEY_UP) // fleche haut
 	{
 		data->player.px += data->player.pdx;
 		data->player.py += data->player.pdy;
@@ -71,8 +71,21 @@ void	rotate_player(int keycode, t_cub *data)
 		data->player.px -= data->player.pdx;
 		data->player.py -= data->player.pdy;
 	}
-	//printf("ANGLE ; %f\n", data->player.pa);
+	check_angle(data);
+	printf("ANGLE ; %f\n", data->player.pa);
 	move_player(keycode, data);
+}
+
+void	check_angle(t_cub *data)
+{
+	if (data->player.pa == 2 * PI)
+		data->player.pa -= 0.05;
+	else if (data->player.pa == PI * 1.5)
+		data->player.pa -= 0.05;
+	else if (data->player.pa == PI / 2)
+		data->player.pa += 0.05;
+	else if (data->player.pa == PI)
+		data->player.pa += 0.05;
 }
 
 int	hook(int keycode, t_cub *data)

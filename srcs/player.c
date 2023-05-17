@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/16 14:54:52 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/17 13:49:48 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cub3d.h"
 
@@ -28,6 +29,7 @@ void	setplayer(t_cub *data)
 	int	x;
 	int	y;
 	int r = 0;
+	check_angle(data);
 	x = data->player.px;
 	y = data->player.py;
 	while (x < data->player.px + 10)
@@ -89,10 +91,10 @@ int	checkHorizontalLines(t_cub *data, int flag)
 	float rx, ry, ra, xo, yo, atan;
 	
 	ra = data->player.pa2;
-	// if (ra < 0)
-	// 	ra += 2 * PI;
-	// else if (ra > 2 * PI)
-	// 	ra -= 2 * PI;
+	if (ra < 0)
+		ra += 2 * PI;
+	else if (ra > 2 * PI)
+		ra -= 2 * PI;
 	//r = 0;
 	// while (r < 60)
 	// {
@@ -166,6 +168,10 @@ int	checkVerticalLines(t_cub *data, int flag)
 	float rx, ry, ra, xo, yo, ntan;
 	
 	ra = data->player.pa2;
+	if (ra < 0)
+		ra += 2 * PI;
+	else if (ra > 2 * PI)
+		ra -= 2 * PI;
 	//r = 0;
 	// while (r < 60)
 	// {
@@ -239,15 +245,16 @@ void	draw_line3d(t_cub *data)
 	int x2;
 
 	x = data->player.r * 8 + WIDTH / 2;
-	x2 = x+8;
+	x2 = x + 8;
+	y = 0;
 	while (x < x2)
 	{
-		y = 0;
 		while (y < data->player.lineH)
 		{
 			my_mlx_pixel_put(data, x, y + data->player.lineO, 0xFF0000);
 			y++;
 		}
+		y = 0;
 		x++;
 	}
 }
