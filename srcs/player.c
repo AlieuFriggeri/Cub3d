@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/17 17:18:26 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/17 17:23:01 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,8 +244,6 @@ void	draw_line3d(t_cub *data, float rx, float ry, int vert)
 	int x;
 	int x2;
 
-	(void)rx;
-	(void)ry;
 	x = data->player.r * 8 + WIDTH / 2;
 	x2 = x + 8;
 	y = 0;
@@ -256,7 +254,7 @@ void	draw_line3d(t_cub *data, float rx, float ry, int vert)
 			if (vert == 1) // texture verticale
 			{
 				if (data->player.px < rx)
-					my_mlx_pixel_put(data, x, y + data->player.lineO, 0x0FF000); // gauche
+					my_mlx_pixel_put(data, x, y + data->player.lineO, 0xFFFF00); // gauche
 				else
 					my_mlx_pixel_put(data, x, y + data->player.lineO, 0xFF0000); // droite
 			}
@@ -265,7 +263,7 @@ void	draw_line3d(t_cub *data, float rx, float ry, int vert)
 				if (data->player.py < ry)
 					my_mlx_pixel_put(data, x, y + data->player.lineO, 0x0000FF); // bas
 				else
-					my_mlx_pixel_put(data, x, y + data->player.lineO, 0x009FF0); // haut
+					my_mlx_pixel_put(data, x, y + data->player.lineO, 0x00FFFF); // haut
 			}
 			y++;
 		}
