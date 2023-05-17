@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/17 13:49:48 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:18:26 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ int	checkHorizontalLines(t_cub *data, int flag)
 		{
 			//printf("%f | %f\n", rx, ry);
 			draw_linetest(data, ra, rx, ry);
-			draw_line3d(data);
+			draw_line3d(data, rx, ry, 0);
 		}
 	// 	r++;
 	// 	ra += DEG;
@@ -229,7 +229,7 @@ int	checkVerticalLines(t_cub *data, int flag)
 		{
 			//printf("%f | %f\t\t%f | %f\n", rx, ry, data->player.px, data->player.py);
 			draw_linetest(data, ra, rx, ry);
-			draw_line3d(data);
+			draw_line3d(data, rx ,ry, 1);
 		}
 	//	r++;
 	//	ra += DEG;
@@ -238,12 +238,14 @@ int	checkVerticalLines(t_cub *data, int flag)
 	return (0);
 }
 
-void	draw_line3d(t_cub *data)
+void	draw_line3d(t_cub *data, float rx, float ry, int vert)
 {
 	int y;
 	int x;
 	int x2;
 
+	(void)rx;
+	(void)ry;
 	x = data->player.r * 8 + WIDTH / 2;
 	x2 = x + 8;
 	y = 0;
@@ -251,7 +253,20 @@ void	draw_line3d(t_cub *data)
 	{
 		while (y < data->player.lineH)
 		{
-			my_mlx_pixel_put(data, x, y + data->player.lineO, 0xFF0000);
+			if (vert == 1) // texture verticale
+			{
+				if (data->player.px < rx)
+					my_mlx_pixel_put(data, x, y + data->player.lineO, 0x0FF000); // gauche
+				else
+					my_mlx_pixel_put(data, x, y + data->player.lineO, 0xFF0000); // droite
+			}
+			else // texture horizontale
+			{
+				if (data->player.py < ry)
+					my_mlx_pixel_put(data, x, y + data->player.lineO, 0x0000FF); // bas
+				else
+					my_mlx_pixel_put(data, x, y + data->player.lineO, 0x009FF0); // haut
+			}
 			y++;
 		}
 		y = 0;

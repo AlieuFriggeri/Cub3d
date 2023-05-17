@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/17 16:19:52 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/17 17:13:40 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	checkHorizontalLines(t_cub *data, int flag);
 void		draw_linetest(t_cub *data, double angle, float rx, float ry);
 int	checkVerticalLines(t_cub *data, int flag);
 int		count_linetest(t_cub *data, double angle, float rx, float ry);
-void	draw_line3d(t_cub *data);
+void	draw_line3d(t_cub *data, float rx, float ry, int vert);
 void	check_angle(t_cub *data);
 
 /* ----- HOOK ----- */
