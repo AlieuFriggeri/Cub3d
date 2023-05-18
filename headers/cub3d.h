@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/17 17:13:40 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/18 12:30:28 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct s_player{
 	double		lineH;
 	double		lineO;
 	int			r;
+	int			spx;
+	int			spy;
 }	t_player;
 
 typedef struct s_cub{
@@ -72,6 +74,9 @@ typedef struct s_cub{
 int		main(void);
 void	drawmap(t_cub *data);
 void	fill_all(t_cub *data);
+void	mapsize(t_cub *data);
+void	startpos(t_cub *data);
+void	startangle(t_cub *data, char angle);
 
 /* ----- DRAW ----- */
 void	my_mlx_pixel_put(t_cub *data, int x, int y, int color);
