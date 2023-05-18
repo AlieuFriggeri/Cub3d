@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/18 12:30:28 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/18 16:21:22 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_cub{
 	t_player	player;
 	int			mapx;
 	int			mapy;
+	void		*wall; // 0 = N // 1 = S // 2 = E // 3 = W
 }	t_cub;
 
 /* ----- MAIN ----- */

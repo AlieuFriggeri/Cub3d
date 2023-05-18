@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:29:24 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/17 13:30:57 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/18 16:19:51 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,9 @@ void	draw_image(t_cub *data)
 	draw_floor(data);
 	drawmap(data);
 	setplayer(data);
+}
+
+void	pixel_from_xpm(t_cub *data, int x, int y)
+{
+	
 }
