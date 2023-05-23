@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/18 12:30:28 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:19:20 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	fill_all(t_cub *data);
 void	mapsize(t_cub *data);
 void	startpos(t_cub *data);
 void	startangle(t_cub *data, char angle);
+void	mapsizeint(t_cub *data, int posx);
 
 /* ----- DRAW ----- */
 void	my_mlx_pixel_put(t_cub *data, int x, int y, int color);

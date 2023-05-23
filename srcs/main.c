@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/18 12:32:18 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:28:23 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@
 // };
 
 char	*map[] = {
-	"11111111",
-	"10100011",
-	"10000001",
-	"10000101",
-	"10001001",
-	"100N0101",
-	"10100101",
-	"11111111",
+	"1111111111111",
+	"1010000001111",
+	"1000W000001111111111",
+	"1000010000111111",
+	"100010000011111",
+	"10000100001111",
+	"10100100001111",
+	"1111111111100",
 	NULL
 };
 
@@ -88,7 +88,9 @@ void	drawmap(t_cub *data)
 	sy = 0;
 	x = 0;
 	y = 0;
-	while (sx < 8)
+	mapsizeint(data, sx);
+	printf("%d | %d\n", data->mapx, data->mapy);
+	while (sx < data->mapx)
 	{
 		while (sy < data->mapy)
 		{
@@ -96,13 +98,14 @@ void	drawmap(t_cub *data)
 				drawsquare(y, x, data, 1);
 			else
 				drawsquare(y, x, data, 0);
-			y += 64;
-			sy ++;
+			y += 16;
+			sy++;
 		}
 		y = 0;
 		sy = 0;
 		sx++;
-		x += 64;
+		mapsizeint(data, sx);
+		x += 16;
 	}
 }
 
@@ -114,6 +117,18 @@ void	mapsize(t_cub *data)
 	data->mapy = 0;
 	while (map[0][data->mapy])
 		data->mapy++;
+}
+
+void	mapsizeint(t_cub *data, int posx)
+{
+	int i;
+
+	i = 0;
+	if (!map[posx])
+		return;
+	while(map[posx][i])
+		i++;
+	data->mapy = i;
 }
 
 void startpos(t_cub *data)

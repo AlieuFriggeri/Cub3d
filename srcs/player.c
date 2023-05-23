@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/17 17:23:01 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/23 12:07:44 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "cub3d.h"
 
 int	map2[] = {
-	1, 1, 1, 1, 1, 1, 1, 1,
-	1, 0, 1, 0, 0, 0, 0, 1,
+	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+	1, 0, 1, 0, 0, 0, 1, 1,
 	1, 0, 0, 0, 0, 0, 0, 1,
 	1, 0, 0, 0, 0, 1, 0, 1,
 	1, 0, 0, 0, 1, 0, 0, 1,
@@ -24,30 +24,55 @@ int	map2[] = {
 	1, 1, 1, 1, 1, 1, 1, 1
 };
 
+void	setmap(char **map)
+{
+	int i;
+	int j;
+	int k;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	while (map[i])
+	{
+		while (map[i][j])
+		{
+			if (map[i][j] == '1')
+				map2[k] = 1;
+			else
+				map2[k] = 0;
+			j++;
+			k++;
+		}
+		j = 0;
+		i++;
+	}
+}
+
 void	setplayer(t_cub *data)
 {
 	int	x;
 	int	y;
 	int r = 0;
 	check_angle(data);
-	x = data->player.px;
-	y = data->player.py;
-	while (x < data->player.px + 10)
-	{
-		while (y < data->player.py + 10)
-		{
-			my_mlx_pixel_put(data, x - 5, y - 5, 0xFFF000);
-			y++;
-		}
-		y = data->player.py;
-		x++;
-	}
+	// x = data->player.px;
+	// y = data->player.py;
+	// while (x < data->player.px + 4)
+	// {
+	// 	while (y < data->player.py + 4)
+	// 	{
+	// 		my_mlx_pixel_put(data, x - 2, y - 2, 0xFFF000);
+	// 		y++;
+	// 	}
+	// 	y = data->player.py;
+	// 	x++;
+	// }
 	x = 0;
 	y = 0;
 	//printf("in setplayer\n");
 	//draw_raycasting(data);
-	data->player.pa2 = data->player.pa - DEG * 30;
-	while (r < 60)
+	data->player.pa2 = data->player.pa - (DEG / 2) * 64;
+	while (r < 128)
 	{
 		data->player.r = r;
 		if (checkHorizontalLines(data, 0) < checkVerticalLines(data, 0))
@@ -60,9 +85,10 @@ void	setplayer(t_cub *data)
 			data->player.disT = checkVerticalLines(data, 0);
 			checkVerticalLines(data, 1);
 		}
-		data->player.pa2 += DEG;
+		data->player.pa2 += DEG / 2;
 		r++;
 	}
+	drawmap(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->img, 0, 0);
 	//printf("out setplayer\n");
 }
@@ -100,8 +126,8 @@ int	checkHorizontalLines(t_cub *data, int flag)
 	// {
 		atan = -1 / tan(ra);
 		dof = 0;
-		data->mapx = 8;
-		data->mapy = 8;
+		// data->mapx = 8;
+		// data->mapy = 8;
 		//printf("in horizontal\n");
 		if (ra > PI) //regarde en haut
 		{
@@ -151,7 +177,7 @@ int	checkHorizontalLines(t_cub *data, int flag)
 		else
 		{
 			//printf("%f | %f\n", rx, ry);
-			draw_linetest(data, ra, rx, ry);
+			//draw_linetest(data, ra, rx, ry);
 			draw_line3d(data, rx, ry, 0);
 		}
 	// 	r++;
@@ -177,8 +203,8 @@ int	checkVerticalLines(t_cub *data, int flag)
 	// {
 		ntan = -tan(ra);
 		dof = 0;
-		data->mapx = 8;
-		data->mapy = 8;
+		// data->mapx = 8;
+		// data->mapy = 8;
 		//printf("in vertical\n");
 		if (ra > PI2 && ra < PI3) //regarde a gauche
 		{
@@ -228,7 +254,7 @@ int	checkVerticalLines(t_cub *data, int flag)
 		else
 		{
 			//printf("%f | %f\t\t%f | %f\n", rx, ry, data->player.px, data->player.py);
-			draw_linetest(data, ra, rx, ry);
+			//draw_linetest(data, ra, rx, ry);
 			draw_line3d(data, rx ,ry, 1);
 		}
 	//	r++;
@@ -244,7 +270,7 @@ void	draw_line3d(t_cub *data, float rx, float ry, int vert)
 	int x;
 	int x2;
 
-	x = data->player.r * 8 + WIDTH / 2;
+	x = data->player.r * 8;
 	x2 = x + 8;
 	y = 0;
 	while (x < x2)
