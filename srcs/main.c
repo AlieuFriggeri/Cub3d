@@ -6,52 +6,83 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/23 12:28:23 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/24 13:39:29 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
 
 // char	*map[] = {
-// 	"1 1 1 1 1 1 1 1",
-// 	"1 0 1 0 0 0 0 1",
-// 	"1 0 0 0 0 0 0 1",
-// 	"1 0 0 0 0 1 0 1",
-// 	"1 0 0 0 1 0 0 1",
-// 	"1 0 0 0 0 1 0 1",
-// 	"1 0 1 0 0 1 0 1",
-// 	"1 1 1 1 1 1 1 1"
+// 	"11111111",
+// 	"10100001",
+// 	"100W0001",
+// 	"10000101",
+// 	"10001001",
+// 	"10000101",
+// 	"10100101",
+// 	"11111111",
+// 	NULL
 // };
 
-char	*map[] = {
-	"1111111111111",
-	"1010000001111",
-	"1000W000001111111111",
-	"1000010000111111",
-	"100010000011111",
-	"10000100001111",
-	"10100100001111",
-	"1111111111100",
-	NULL
-};
+//char	**map3;
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_cub	data;
-
+	(void)ac;
+	(void)av;
 	/*
 	if (check_arg(argc, argv, env) == 0)
 		init(&data, argc, argv, env);
 	*/
 	data.player.px = -1;
 	data.player.py = -1;
+	data.map = openmap(av[1]);
 	init(&data, 0, NULL, NULL);
 	draw_image(&data);
 	add_hook(&data);
 	return (0);
 }
 
+char	**openmap(char *path)
+{
+	int fd;
+	int i;
+	char **map1;
+	int size;
 
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		exit(1);
+	size = countmapsize(fd);
+	map1 = malloc(sizeof(char *) * size + 1);
+	i = 0;
+	while (i < size - 1)
+	{
+		map1[i] = malloc(sizeof(char ) * 64);
+		i++;
+	}
+	map1[i + 1] = NULL;
+	i = 0;
+	fd = open(path, O_RDONLY);
+	while (i < size)
+	{
+		map1[i] = get_next_line(fd);
+		//printf("[%d] %s", i, map1[i]);
+		i++;
+	}
+	return map1;
+}
+
+int	countmapsize(int fd)
+{
+	int i;
+
+	i = 0;
+	while (get_next_line(fd))
+		i++;
+	return (i);
+}
 // int	main(void)
 // {
 // 	t_cub	data;
@@ -89,13 +120,15 @@ void	drawmap(t_cub *data)
 	x = 0;
 	y = 0;
 	mapsizeint(data, sx);
-	printf("%d | %d\n", data->mapx, data->mapy);
+	//printf("\n%d | %d\n", data->mapx, data->mapy);
 	while (sx < data->mapx)
-	{
+	{//printf("\n%d | %d\n", data->mapx, data->mapy);
 		while (sy < data->mapy)
 		{
-			if (map[sx][sy] == '1')
+			if (data->map[sx][sy] == '1')
 				drawsquare(y, x, data, 1);
+			else if (data->map[sx][sy] != '0' && data->map[sx][sy] != '1')
+				drawsquare(y, x, data, 2);
 			else
 				drawsquare(y, x, data, 0);
 			y += 16;
@@ -112,10 +145,10 @@ void	drawmap(t_cub *data)
 void	mapsize(t_cub *data)
 {
 	data->mapx = 0;
-	while (map[data->mapx] != NULL)
+	while (data->map[data->mapx] != NULL)
 		data->mapx++;
 	data->mapy = 0;
-	while (map[0][data->mapy])
+	while (data->map[0][data->mapy])
 		data->mapy++;
 }
 
@@ -124,11 +157,11 @@ void	mapsizeint(t_cub *data, int posx)
 	int i;
 
 	i = 0;
-	if (!map[posx])
+	if (!data->map[posx])
 		return;
-	while(map[posx][i])
+	while(data->map[posx][i])
 		i++;
-	data->mapy = i;
+	data->mapy = i - 1;
 }
 
 void startpos(t_cub *data)
@@ -138,13 +171,14 @@ void startpos(t_cub *data)
 
 	i = 0;
 	j = 0;
-	while (map[i])
+	while (data->map[i])
 	{
-		while (map[i][j])
+		while (data->map[i][j])
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
+			//printf("i = %d | j = %d\n", i, j);
+			if (data->map[i][j] == 'N' || data->map[i][j] == 'S' || data->map[i][j] == 'W' || data->map[i][j] == 'E')
 			{
-				startangle(data, map[i][j]);
+				startangle(data, data->map[i][j]);
 				data->player.px = 64 * j + 32;
 				data->player.py = 64 * i + 32;
 			}
@@ -152,6 +186,7 @@ void startpos(t_cub *data)
 		}
 		j = 0;
 		i++;
+				//printf("salut\n");
 	}
 	if (data->player.px < 0 || data->player.py < 0)
 	{

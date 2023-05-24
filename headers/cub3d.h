@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/23 12:19:20 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/24 13:39:13 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,19 @@ typedef struct s_cub{
 	t_player	player;
 	int			mapx;
 	int			mapy;
+	char		**map;
+	int			*intmap;
 }	t_cub;
 
 /* ----- MAIN ----- */
-int		main(void);
 void	drawmap(t_cub *data);
 void	fill_all(t_cub *data);
 void	mapsize(t_cub *data);
 void	startpos(t_cub *data);
 void	startangle(t_cub *data, char angle);
 void	mapsizeint(t_cub *data, int posx);
+int		countmapsize(int fd);
+char	**openmap(char *path);
 
 /* ----- DRAW ----- */
 void	my_mlx_pixel_put(t_cub *data, int x, int y, int color);
@@ -98,6 +101,8 @@ int	checkVerticalLines(t_cub *data, int flag);
 int		count_linetest(t_cub *data, double angle, float rx, float ry);
 void	draw_line3d(t_cub *data, float rx, float ry, int vert);
 void	check_angle(t_cub *data);
+void	setmap(t_cub *data);
+void	set_intmap(t_cub *data);
 
 /* ----- HOOK ----- */
 int		hook(int keycode, t_cub *data);

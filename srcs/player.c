@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/23 12:07:44 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/24 14:05:02 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 #include "cub3d.h"
 
 int	map2[] = {
-	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+	1, 1, 1, 1, 1, 1, 1, 1,
 	1, 0, 1, 0, 0, 0, 1, 1,
 	1, 0, 0, 0, 0, 0, 0, 1,
 	1, 0, 0, 0, 0, 1, 0, 1,
 	1, 0, 0, 0, 1, 0, 0, 1,
 	1, 0, 0, 0, 0, 1, 0, 1,
 	1, 0, 1, 0, 0, 1, 0, 1,
+	1, 1, 1, 1, 1, 1, 1, 1,
 	1, 1, 1, 1, 1, 1, 1, 1
 };
 
-void	setmap(char **map)
+void	setmap(t_cub *data)
 {
 	int i;
 	int j;
@@ -33,20 +34,42 @@ void	setmap(char **map)
 	i = 0;
 	j = 0;
 	k = 0;
-	while (map[i])
+	set_intmap(data);
+	while (data->map[i])
 	{
-		while (map[i][j])
+		while (data->map[i][j])
 		{
-			if (map[i][j] == '1')
-				map2[k] = 1;
-			else
-				map2[k] = 0;
+			if (data->map[i][j] == '0' || data->map[i][j] == 'S' || data->map[i][j] == 'N' || data->map[i][j] == 'W' || data->map[i][j] == 'S')
+				data->intmap[k] = 0;
+			else if (data->map[i][j] == '1')
+				data->intmap[k] = 1;
 			j++;
 			k++;
 		}
 		j = 0;
 		i++;
 	}
+	i = 0;
+	// while (data->intmap[i])
+	// {
+	// 	printf("map :%d | %d\n", i, data->intmap[i]);
+	// 	i++;
+	// }
+}
+
+void	set_intmap(t_cub *data)
+{
+	int size;
+	int i;
+	
+	i = 0;
+	size = 0;
+	while (data->map[i])
+	{
+		size += ft_strlen(data->map[i]);
+		i++;
+	}
+	data->intmap = malloc(sizeof(int) * size);
 }
 
 void	setplayer(t_cub *data)
@@ -55,6 +78,8 @@ void	setplayer(t_cub *data)
 	int	y;
 	int r = 0;
 	check_angle(data);
+	setmap(data);
+	//data->intmap = map2;
 	// x = data->player.px;
 	// y = data->player.py;
 	// while (x < data->player.px + 4)
@@ -71,6 +96,7 @@ void	setplayer(t_cub *data)
 	y = 0;
 	//printf("in setplayer\n");
 	//draw_raycasting(data);
+	//data->intmap = map2;
 	data->player.pa2 = data->player.pa - (DEG / 2) * 64;
 	while (r < 128)
 	{
@@ -89,6 +115,7 @@ void	setplayer(t_cub *data)
 		r++;
 	}
 	drawmap(data);
+	//printf("salut2\n");
 	mlx_put_image_to_window(data->mlx, data->window, data->img, 0, 0);
 	//printf("out setplayer\n");
 }
@@ -121,6 +148,8 @@ int	checkHorizontalLines(t_cub *data, int flag)
 		ra += 2 * PI;
 	else if (ra > 2 * PI)
 		ra -= 2 * PI;
+		data->mapx = 8;
+		data->mapy = 15;
 	//r = 0;
 	// while (r < 60)
 	// {
@@ -157,7 +186,7 @@ int	checkHorizontalLines(t_cub *data, int flag)
 			mx = (int)rx>>6;
 			my = (int)ry>>6;
 			mp = my * data->mapx + mx;
-			if (mp > 0 && mp < data->mapx * data->mapy && map2[mp] == 1) // touche un mur
+			if (mp > 0 && mp < data->mapx * data->mapy && data->intmap[mp] == 1) // touche un mur
 				dof = 8;
 			else
 			{
@@ -203,8 +232,8 @@ int	checkVerticalLines(t_cub *data, int flag)
 	// {
 		ntan = -tan(ra);
 		dof = 0;
-		// data->mapx = 8;
-		// data->mapy = 8;
+		data->mapx = 8;
+		data->mapy = 15;
 		//printf("in vertical\n");
 		if (ra > PI2 && ra < PI3) //regarde a gauche
 		{
@@ -235,7 +264,7 @@ int	checkVerticalLines(t_cub *data, int flag)
 			mx = (int)rx>>6;
 			my = (int)ry>>6;
 			mp = my * data->mapx + mx;
-			if (mp > 0 && mp < data->mapx * data->mapy && map2[mp] == 1) // touche un mur
+			if (mp > 0 && mp < data->mapx * data->mapy && data->intmap[mp] == 1) // touche un mur
 				dof = 8;
 			else
 			{
