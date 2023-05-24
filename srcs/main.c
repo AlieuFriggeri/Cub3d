@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/24 16:34:12 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:24:38 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 // 	"11111111",
 // 	NULL
 // };
-
-//char	**map3;
 
 int	main(int ac, char **av)
 {
@@ -57,12 +55,6 @@ char	**openmap(char *path)
 	size = countmapsize(fd);
 	map1 = malloc(sizeof(char *) * size + 1);
 	i = 0;
-	// while (i < size - 1)
-	// {
-	// 	map1[i] = malloc(sizeof(char ) * 64);
-	// 	i++;
-	// }
-	// map1[i + 1] = NULL;
 	fd = open(path, O_RDONLY);
 	while (i <= size)
 	{
@@ -83,64 +75,9 @@ int	countmapsize(int fd)
 		i++;
 	return (i);
 }
-// int	main(void)
-// {
-// 	t_cub	data;
-
-// 	data.mlx = mlx_init();
-// 	data.window = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Cub3d");
-// 	data.img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
-// 	data.addr = mlx_get_data_addr(data.img, &data.bpp, &data.sizeline, &data.endian);
-// 	data.player.px = 200;
-// 	data.player.py = 220;
-// 	mapsize(&data);
-// 	printf("%d | %d \n", data.mapx, data.mapy);
-// 	data.mapx = 5;
-// 	data.mapy = 7;
-// 	// si au lancement pa == axe retirer 0.01
-// 	data.player.pa = PI;
-// 	data.player.pdx = cos(data.player.pa) * 5;
-// 	data.player.pdy = sin(data.player.pa) * 5;
-// 	draw_image(&data);
-// 	mlx_hook(data.window, 2, 0, &hook, &data);
-// 	mlx_hook(data.window, 17, 0, &cub_exit, &data);
-// 	mlx_loop(data.mlx);
-// 	return (0);
-// }
 
 void	drawmap(t_cub *data)
 {
-	// int	x;
-	// int	y;
-	// int	sx;
-	// int	sy;
-
-	// sx = 0;
-	// sy = 0;
-	// x = 0;
-	// y = 0;
-	// mapsizeint(data, sx);
-	// printf("\n%d | %d\n", data->mapx, data->mapy);
-	// while (sx < data->mapsize)
-	// {
-	// 	while (sy < data->mapy)
-	// 	{
-	// 		if (data->map[sx][sy] == '1')
-	// 			drawsquare(y, x, data, 1);
-	// 		else if (data->map[sx][sy] != '0' && data->map[sx][sy] != '1')
-	// 			drawsquare(y, x, data, 2);
-	// 		else
-	// 			drawsquare(y, x, data, 0);
-	// 		y += 16;
-	// 		sy++;
-	// 	}
-	// 	y = 0;
-	// 	sy = 0;
-	// 	sx++;
-	// 	mapsizeint(data, sx);
-	// 	x += 16;
-	// }
-
 	int i;
 	int j;
 	int x;
@@ -148,7 +85,6 @@ void	drawmap(t_cub *data)
 
 	i = 0;
 	y = 0;
-	mapsizeint(data, 0);
 	while (i < data->mapsize)
 	{
 		x = 0;
@@ -179,19 +115,11 @@ void	mapsize(t_cub *data)
 		data->mapy++;
 }
 
-void	mapsizeint(t_cub *data, int posx)
+void	mapsizeint(t_cub *data)
 {
-	// int i;
-
-	// i = 0;
-	// if (!data->map[posx])
-	// 	return;
-	// while(data->map[posx][i])
-	// 	i++;
-	// data->mapy = i - 1;
 	int i;
 	int max;
-	(void)posx;
+	
 	i = 0;
 	max = 0;
 	while (data->map[i])
@@ -203,7 +131,6 @@ void	mapsizeint(t_cub *data, int posx)
 	data->mapx = max;
 	data->mapy = i ;
 	data->mapsize = max * i;
-	//printf("\n%d | %d\n", data->mapx, data->mapy);
 }
 
 void startpos(t_cub *data)
@@ -217,18 +144,16 @@ void startpos(t_cub *data)
 	{
 		while (data->map[i][j])
 		{
-			//printf("i = %d | j = %d\n", i, j);
 			if (data->map[i][j] == 'N' || data->map[i][j] == 'S' || data->map[i][j] == 'W' || data->map[i][j] == 'E')
 			{
 				startangle(data, data->map[i][j]);
-				data->player.px = 64 * j + 32;
-				data->player.py = 64 * i + 32;
+				data->player.px = CUBSIZE * j + CUBSIZE / 2;
+				data->player.py = CUBSIZE * i + CUBSIZE / 2;
 			}
 			j++;
 		}
 		j = 0;
 		i++;
-				//printf("salut\n");
 	}
 	if (data->player.px < 0 || data->player.py < 0)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/24 15:34:27 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:23:45 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define DEG 0.0174533
 # define BLUE_COLOR 0x87CEEB
 # define GREY_COLOR 0x808080
+# define CUBSIZE 64
 
 typedef struct s_player{
 	double		px;
@@ -79,7 +80,7 @@ void	fill_all(t_cub *data);
 void	mapsize(t_cub *data);
 void	startpos(t_cub *data);
 void	startangle(t_cub *data, char angle);
-void	mapsizeint(t_cub *data, int posx);
+void	mapsizeint(t_cub *data);
 int		countmapsize(int fd);
 char	**openmap(char *path);
 
@@ -96,9 +97,8 @@ void	draw_image(t_cub *data);
 void	setplayer(t_cub *data);
 void	draw_raycasting(t_cub *data);
 void	draw_line(t_cub *data, double angle);
-int	checkHorizontalLines(t_cub *data, int flag);
-void		draw_linetest(t_cub *data, double angle, float rx, float ry);
-int	checkVerticalLines(t_cub *data, int flag);
+int		checkHorizontalLines(t_cub *data, int flag);
+int		checkVerticalLines(t_cub *data, int flag);
 int		count_linetest(t_cub *data, double angle, float rx, float ry);
 void	draw_line3d(t_cub *data, float rx, float ry, int vert);
 void	check_angle(t_cub *data);

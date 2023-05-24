@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:23:28 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/24 16:24:33 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:17:48 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	rotate_player(int keycode, t_cub *data)
 		data->player.py -= data->player.pdy;
 	}
 	check_angle(data);
-	// printf("ANGLE ; %f\n", data->player.pa);
 	move_player(keycode, data);
 }
 

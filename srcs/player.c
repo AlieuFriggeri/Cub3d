@@ -3,27 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/24 16:38:55 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:24:23 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "cub3d.h"
-
-int	map2[] = {
-	1, 1, 1, 1, 1, 1, 1, 1,
-	1, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 1, 0, 0, 1,
-	1, 0, 0, 0, 1, 0, 0, 1,
-	1, 0, 0, 0, 1, 0, 0, 1,
-	1, 0, 0, 0, 1, 0, 0, 1,
-	1, 1, 1, 1, 1, 1, 1, 1
-};
 
 void	setmap(t_cub *data)
 {
@@ -38,26 +26,18 @@ void	setmap(t_cub *data)
 	while (data->map[i])
 	{
 		while (data->map[i][j])
-		{	//printf("%c", data->map[i][j]);
+		{
 			if (data->map[i][j] == '0' || data->map[i][j] == 'S' || data->map[i][j] == 'N' || data->map[i][j] == 'W' || data->map[i][j] == 'S')
 				data->intmap[k] = 0;
 			else if (data->map[i][j] == '1' || data->map[i][j] == '\n')
 				data->intmap[k] = 1;
 			j++;
-		
-			//printf("%d ", data->intmap[k]);
 			k++;
 		}
-		//printf("\n");
 		j = 0;
 		i++;
 	}
-	i = 0;
-	// while (data->intmap[i])
-	// {
-	// 	printf("map :%d | %d\n", i, data->intmap[i]);
-	// 	i++;
-	// }
+	mapsizeint(data);
 }
 
 void	set_intmap(t_cub *data)
@@ -80,7 +60,7 @@ void	setplayer(t_cub *data)
 	int r = 0;
 
 	check_angle(data);
-	data->player.pa2 = data->player.pa - (DEG / 2) * 64;
+	data->player.pa2 = data->player.pa - (DEG / 2) * CUBSIZE;
 	while (r < 128)
 	{
 		data->player.r = r;
@@ -99,7 +79,6 @@ void	setplayer(t_cub *data)
 	}
 	drawmap(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->img, 0, 0);
-	//printf("out setplayer\n");
 }
 
 void	draw_raycasting(t_cub *data)
@@ -110,7 +89,7 @@ void	draw_raycasting(t_cub *data)
 
 	n_ray = 1;
 	i = 0;
-	base_angle = data->player.pa;// - (n_ray * DEG);
+	base_angle = data->player.pa;
 	while (i < n_ray)
 	{
 		draw_line(data, base_angle);
@@ -130,71 +109,50 @@ int	checkHorizontalLines(t_cub *data, int flag)
 		ra += 2 * PI;
 	else if (ra > 2 * PI)
 		ra -= 2 * PI;
-		// data->mapx = 8;
-		// data->mapy = 10;
-	//r = 0;
-	// while (r < 60)
-	// {
-		atan = -1 / tan(ra);
-		dof = 0;
-		// data->mapx = 8;
-		// data->mapy = 8;
-		//printf("in horizontal\n");
-		if (ra > PI) //regarde en haut
-		{
-			ry = (((int)data->player.py>>6)<<6) - 0.0001;
-			rx = (data->player.py - ry) * atan + data->player.px;
-			yo = -64;
-			xo = -yo * atan;
-			//printf("in horizontal 0\n");
-		}
-		else//regarde en bas
-		{
-			ry = (((int)data->player.py>>6)<<6) + 64;
-			rx = (data->player.py - ry) * atan + data->player.px;
-			yo = 64;
-			xo = -yo * atan;
-			//printf("in horizontal 1\n");
-		}
-		if ( ra == 0 || ra == PI)
-		{
-			rx = data->player.px;
-			ry = data->player.py;
+	atan = -1 / tan(ra);
+	dof = 0;
+	if (ra > PI) //regarde en haut
+	{
+		ry = (((int)data->player.py>>6)<<6) - 0.0001;
+		rx = (data->player.py - ry) * atan + data->player.px;
+		yo = -CUBSIZE;
+		xo = -yo * atan;
+	}
+	else//regarde en bas
+	{
+		ry = (((int)data->player.py>>6)<<6) + CUBSIZE;
+		rx = (data->player.py - ry) * atan + data->player.px;
+		yo = CUBSIZE;
+		xo = -yo * atan;
+	}
+	if ( ra == 0 || ra == PI)
+	{
+		rx = data->player.px;
+		ry = data->player.py;
+		dof = 8;
+	}
+	while (dof < 8)
+	{
+		mx = (int)rx>>6;
+		my = (int)ry>>6;
+		mp = my * data->mapx + mx;
+		if (mp > 0 && mp < data->mapx * data->mapy && data->intmap[mp] == 1) // touche un mur
 			dof = 8;
-			//printf("in horizontal 2\n");
-		}
-		while (dof < 8)
-		{
-			mx = (int)rx>>6;
-			my = (int)ry>>6;
-			mp = my * data->mapx + mx;
-			if (mp > 0 && mp < data->mapx * data->mapy && data->intmap[mp] == 1) // touche un mur
-				dof = 8;
-			else
-			{
-				rx += xo;
-				ry += yo;
-				dof += 1; // prochain ligne horizontale
-			}
-			//printf("%d\n", map2[mp]);
-			//printf("in horizontal 3\n");
-			data->player.lineH = (64 * HEIGHT) / data->player.disT;
-			if (data->player.lineH > HEIGHT)
-				data->player.lineH = HEIGHT;
-			data->player.lineO = HEIGHT / 2 - data->player.lineH / 2;
-		}
-		if (flag == 0)
-			return (count_linetest(data, ra, rx, ry));
 		else
 		{
-			//printf("%f | %f\n", rx, ry);
-			//draw_linetest(data, ra, rx, ry);
-			draw_line3d(data, rx, ry, 0);
+			rx += xo;
+			ry += yo;
+			dof += 1; // prochain ligne horizontale
 		}
-	// 	r++;
-	// 	ra += DEG;
-	// }
-	//printf("OUT horizontal\n");
+		data->player.lineH = (CUBSIZE * HEIGHT) / data->player.disT;
+		if (data->player.lineH > HEIGHT)
+			data->player.lineH = HEIGHT;
+		data->player.lineO = HEIGHT / 2 - data->player.lineH / 2;
+	}
+	if (flag == 0)
+		return (count_linetest(data, ra, rx, ry));
+	else
+		draw_line3d(data, rx, ry, 0);
 	return (0);
 }
 
@@ -209,70 +167,50 @@ int	checkVerticalLines(t_cub *data, int flag)
 		ra += 2 * PI;
 	else if (ra > 2 * PI)
 		ra -= 2 * PI;
-	//r = 0;
-	// while (r < 60)
-	// {
-		ntan = -tan(ra);
-		dof = 0;
-		// data->mapx = 8;
-		// data->mapy = 10;
-		//printf("in vertical\n");
-		if (ra > PI2 && ra < PI3) //regarde a gauche
-		{
-			rx = (((int)data->player.px>>6)<<6) - 0.0001;
-			ry = (data->player.px - rx) * ntan + data->player.py;
-			xo = -64;
-			yo = -xo * ntan;
-			//printf("in vertical 0\n");
-		}
-		else //regarde a droite
-		{
-			rx = (((int)data->player.px>>6)<<6) + 64;
-			ry = (data->player.px - rx) * ntan + data->player.py;
-			xo = 64;
-			yo = -xo * ntan;
-			//printf("in vertical 1\n");
-		}
-		if ( ra == 0 || ra == PI)
-		{
-			rx = data->player.px;
-			ry = data->player.py;
+	ntan = -tan(ra);
+	dof = 0;
+	if (ra > PI2 && ra < PI3) //regarde a gauche
+	{
+		rx = (((int)data->player.px>>6)<<6) - 0.0001;
+		ry = (data->player.px - rx) * ntan + data->player.py;
+		xo = -CUBSIZE;
+		yo = -xo * ntan;
+	}
+	else //regarde a droite
+	{
+		rx = (((int)data->player.px>>6)<<6) + 64;
+		ry = (data->player.px - rx) * ntan + data->player.py;
+		xo = CUBSIZE;
+		yo = -xo * ntan;
+	}
+	if ( ra == 0 || ra == PI)
+	{
+		rx = data->player.px;
+		ry = data->player.py;
+		dof = 8;
+	}
+	while (dof < 8)
+	{
+		mx = (int)rx>>6;
+		my = (int)ry>>6;
+		mp = my * data->mapx + mx;
+		if (mp > 0 && mp < data->mapx * data->mapy && data->intmap[mp] == 1) // touche un mur
 			dof = 8;
-			//printf("in vertical 2\n");
-		}
-		while (dof < 8)
-		{
-			//printf("in vertical 3\n");
-			mx = (int)rx>>6;
-			my = (int)ry>>6;
-			printf("mapx\t%d\n", data->mapx);
-			mp = my * data->mapx + mx;
-			if (mp > 0 && mp < data->mapx * data->mapy && data->intmap[mp] == 1) // touche un mur
-				dof = 8;
-			else
-			{
-				rx += xo;
-				ry += yo;
-				dof += 1; // prochain ligne horizontale
-			}
-			//printf("%d\n", map2[mp]);
-			data->player.lineH = (64 * HEIGHT) / data->player.disT;
-			if (data->player.lineH > HEIGHT)
-				data->player.lineH = HEIGHT;
-			data->player.lineO = HEIGHT / 2 - data->player.lineH / 2;
-		}
-		if (flag == 0)
-			return (count_linetest(data, ra, rx, ry));
 		else
 		{
-			//printf("%f | %f\t\t%f | %f\n", rx, ry, data->player.px, data->player.py);
-			//draw_linetest(data, ra, rx, ry);
-			draw_line3d(data, rx ,ry, 1);
+			rx += xo;
+			ry += yo;
+			dof += 1; // prochain ligne horizontale
 		}
-	//	r++;
-	//	ra += DEG;
-	//}
-	//printf("OUT vertical\n");
+		data->player.lineH = (CUBSIZE * HEIGHT) / data->player.disT;
+		if (data->player.lineH > HEIGHT)
+			data->player.lineH = HEIGHT;
+		data->player.lineO = HEIGHT / 2 - data->player.lineH / 2;
+	}
+	if (flag == 0)
+		return (count_linetest(data, ra, rx, ry));
+	else
+		draw_line3d(data, rx ,ry, 1);
 	return (0);
 }
 
@@ -310,34 +248,6 @@ void	draw_line3d(t_cub *data, float rx, float ry, int vert)
 	}
 }
 
-void	draw_linetest(t_cub *data, double angle, float rx, float ry)
-{
-	int		len;
-	int		len2;
-	double	startx;
-	double	starty;
-	// int i;
-	// int nb_ray;
-	// i = 0;
-	// nb_ray = 1;
-		len = 0;
-		startx = data->player.px;
-		starty = data->player.py;
-		//printf(" %f %f\n", rx, ry);
-		len2 = sqrt((pow( rx - startx, 2) + pow( ry - starty, 2)));
-		while (len < len2)
-		{
-			if (startx < WIDTH && starty < WIDTH && startx < HEIGHT && starty < HEIGHT)
-			{
-				my_mlx_pixel_put(data, startx, starty, 0xFFFFFF);
-			}
-			startx += cos(angle);
-			starty += sin(angle);
-			len++;
-		}
-	//my_mlx_pixel_put(data, rx, ry, 0x0000FF);
-}
-
 int	count_linetest(t_cub *data, double angle, float rx, float ry)
 {
 	int		len;
@@ -350,20 +260,15 @@ int	count_linetest(t_cub *data, double angle, float rx, float ry)
 	count = 0;
 	startx = data->player.px;
 	starty = data->player.py;
-	//printf(" %f %f\n", rx, ry);
 	len2 = sqrt(pow( rx - startx, 2) + pow( ry - starty, 2));
 	while (len < len2)
 	{
 		if (startx < WIDTH && starty < WIDTH && startx < HEIGHT && starty < HEIGHT)
-		{
-			//my_mlx_pixel_put(data, startx, starty, 0xFFFFFF);
 			count++;
-		}
 		startx += cos(angle);
 		starty += sin(angle);
 		len++;
 	}
-	//my_mlx_pixel_put(data, rx, ry, 0x0000FF);
 	return count;
 }
 
