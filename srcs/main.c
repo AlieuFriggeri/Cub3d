@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/24 13:39:29 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:34:12 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,18 @@ char	**openmap(char *path)
 	size = countmapsize(fd);
 	map1 = malloc(sizeof(char *) * size + 1);
 	i = 0;
-	while (i < size - 1)
-	{
-		map1[i] = malloc(sizeof(char ) * 64);
-		i++;
-	}
-	map1[i + 1] = NULL;
-	i = 0;
+	// while (i < size - 1)
+	// {
+	// 	map1[i] = malloc(sizeof(char ) * 64);
+	// 	i++;
+	// }
+	// map1[i + 1] = NULL;
 	fd = open(path, O_RDONLY);
-	while (i < size)
+	while (i <= size)
 	{
 		map1[i] = get_next_line(fd);
-		//printf("[%d] %s", i, map1[i]);
+		if (map1[i] == NULL)
+			break ;
 		i++;
 	}
 	return map1;
@@ -110,35 +110,62 @@ int	countmapsize(int fd)
 
 void	drawmap(t_cub *data)
 {
-	int	x;
-	int	y;
-	int	sx;
-	int	sy;
+	// int	x;
+	// int	y;
+	// int	sx;
+	// int	sy;
 
-	sx = 0;
-	sy = 0;
-	x = 0;
+	// sx = 0;
+	// sy = 0;
+	// x = 0;
+	// y = 0;
+	// mapsizeint(data, sx);
+	// printf("\n%d | %d\n", data->mapx, data->mapy);
+	// while (sx < data->mapsize)
+	// {
+	// 	while (sy < data->mapy)
+	// 	{
+	// 		if (data->map[sx][sy] == '1')
+	// 			drawsquare(y, x, data, 1);
+	// 		else if (data->map[sx][sy] != '0' && data->map[sx][sy] != '1')
+	// 			drawsquare(y, x, data, 2);
+	// 		else
+	// 			drawsquare(y, x, data, 0);
+	// 		y += 16;
+	// 		sy++;
+	// 	}
+	// 	y = 0;
+	// 	sy = 0;
+	// 	sx++;
+	// 	mapsizeint(data, sx);
+	// 	x += 16;
+	// }
+
+	int i;
+	int j;
+	int x;
+	int y;
+
+	i = 0;
 	y = 0;
-	mapsizeint(data, sx);
-	//printf("\n%d | %d\n", data->mapx, data->mapy);
-	while (sx < data->mapx)
-	{//printf("\n%d | %d\n", data->mapx, data->mapy);
-		while (sy < data->mapy)
+	mapsizeint(data, 0);
+	while (i < data->mapsize)
+	{
+		x = 0;
+		j = 0;
+		while (j < data->mapx)
 		{
-			if (data->map[sx][sy] == '1')
-				drawsquare(y, x, data, 1);
-			else if (data->map[sx][sy] != '0' && data->map[sx][sy] != '1')
-				drawsquare(y, x, data, 2);
-			else
-				drawsquare(y, x, data, 0);
-			y += 16;
-			sy++;
+			if (data->intmap[i] == 1)
+				drawsquare(x, y, data, 1);
+			else if (data->intmap[i] == 0)
+				drawsquare(x, y, data, 0);
+			else 
+				drawsquare(x, y, data, 2);
+			j++;
+			i++;
+			x += 16;
 		}
-		y = 0;
-		sy = 0;
-		sx++;
-		mapsizeint(data, sx);
-		x += 16;
+		y += 16;
 	}
 }
 
@@ -154,14 +181,29 @@ void	mapsize(t_cub *data)
 
 void	mapsizeint(t_cub *data, int posx)
 {
-	int i;
+	// int i;
 
+	// i = 0;
+	// if (!data->map[posx])
+	// 	return;
+	// while(data->map[posx][i])
+	// 	i++;
+	// data->mapy = i - 1;
+	int i;
+	int max;
+	(void)posx;
 	i = 0;
-	if (!data->map[posx])
-		return;
-	while(data->map[posx][i])
+	max = 0;
+	while (data->map[i])
+	{
+		if ((int)ft_strlen(data->map[i]) > max)
+			max = ft_strlen(data->map[i]);
 		i++;
-	data->mapy = i - 1;
+	}
+	data->mapx = max;
+	data->mapy = i ;
+	data->mapsize = max * i;
+	//printf("\n%d | %d\n", data->mapx, data->mapy);
 }
 
 void startpos(t_cub *data)

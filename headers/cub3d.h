@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/24 13:39:13 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/24 15:34:27 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_cub{
 	int			mapy;
 	char		**map;
 	int			*intmap;
+	int			mapsize;
 }	t_cub;
 
 /* ----- MAIN ----- */

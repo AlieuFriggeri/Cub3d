@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/24 14:05:02 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:38:55 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 int	map2[] = {
 	1, 1, 1, 1, 1, 1, 1, 1,
-	1, 0, 1, 0, 0, 0, 1, 1,
 	1, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 1, 0, 1,
+	1, 0, 0, 0, 0, 0, 0, 1,
+	1, 0, 0, 0, 0, 0, 0, 1,
 	1, 0, 0, 0, 1, 0, 0, 1,
-	1, 0, 0, 0, 0, 1, 0, 1,
-	1, 0, 1, 0, 0, 1, 0, 1,
-	1, 1, 1, 1, 1, 1, 1, 1,
+	1, 0, 0, 0, 1, 0, 0, 1,
+	1, 0, 0, 0, 1, 0, 0, 1,
+	1, 0, 0, 0, 1, 0, 0, 1,
 	1, 1, 1, 1, 1, 1, 1, 1
 };
 
@@ -38,14 +38,17 @@ void	setmap(t_cub *data)
 	while (data->map[i])
 	{
 		while (data->map[i][j])
-		{
+		{	//printf("%c", data->map[i][j]);
 			if (data->map[i][j] == '0' || data->map[i][j] == 'S' || data->map[i][j] == 'N' || data->map[i][j] == 'W' || data->map[i][j] == 'S')
 				data->intmap[k] = 0;
-			else if (data->map[i][j] == '1')
+			else if (data->map[i][j] == '1' || data->map[i][j] == '\n')
 				data->intmap[k] = 1;
 			j++;
+		
+			//printf("%d ", data->intmap[k]);
 			k++;
 		}
+		//printf("\n");
 		j = 0;
 		i++;
 	}
@@ -74,29 +77,9 @@ void	set_intmap(t_cub *data)
 
 void	setplayer(t_cub *data)
 {
-	int	x;
-	int	y;
 	int r = 0;
+
 	check_angle(data);
-	setmap(data);
-	//data->intmap = map2;
-	// x = data->player.px;
-	// y = data->player.py;
-	// while (x < data->player.px + 4)
-	// {
-	// 	while (y < data->player.py + 4)
-	// 	{
-	// 		my_mlx_pixel_put(data, x - 2, y - 2, 0xFFF000);
-	// 		y++;
-	// 	}
-	// 	y = data->player.py;
-	// 	x++;
-	// }
-	x = 0;
-	y = 0;
-	//printf("in setplayer\n");
-	//draw_raycasting(data);
-	//data->intmap = map2;
 	data->player.pa2 = data->player.pa - (DEG / 2) * 64;
 	while (r < 128)
 	{
@@ -115,7 +98,6 @@ void	setplayer(t_cub *data)
 		r++;
 	}
 	drawmap(data);
-	//printf("salut2\n");
 	mlx_put_image_to_window(data->mlx, data->window, data->img, 0, 0);
 	//printf("out setplayer\n");
 }
@@ -148,8 +130,8 @@ int	checkHorizontalLines(t_cub *data, int flag)
 		ra += 2 * PI;
 	else if (ra > 2 * PI)
 		ra -= 2 * PI;
-		data->mapx = 8;
-		data->mapy = 15;
+		// data->mapx = 8;
+		// data->mapy = 10;
 	//r = 0;
 	// while (r < 60)
 	// {
@@ -232,8 +214,8 @@ int	checkVerticalLines(t_cub *data, int flag)
 	// {
 		ntan = -tan(ra);
 		dof = 0;
-		data->mapx = 8;
-		data->mapy = 15;
+		// data->mapx = 8;
+		// data->mapy = 10;
 		//printf("in vertical\n");
 		if (ra > PI2 && ra < PI3) //regarde a gauche
 		{
@@ -263,6 +245,7 @@ int	checkVerticalLines(t_cub *data, int flag)
 			//printf("in vertical 3\n");
 			mx = (int)rx>>6;
 			my = (int)ry>>6;
+			printf("mapx\t%d\n", data->mapx);
 			mp = my * data->mapx + mx;
 			if (mp > 0 && mp < data->mapx * data->mapy && data->intmap[mp] == 1) // touche un mur
 				dof = 8;
