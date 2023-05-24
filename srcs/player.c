@@ -6,54 +6,12 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/24 17:24:23 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/24 18:04:03 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "cub3d.h"
-
-void	setmap(t_cub *data)
-{
-	int i;
-	int j;
-	int k;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	set_intmap(data);
-	while (data->map[i])
-	{
-		while (data->map[i][j])
-		{
-			if (data->map[i][j] == '0' || data->map[i][j] == 'S' || data->map[i][j] == 'N' || data->map[i][j] == 'W' || data->map[i][j] == 'S')
-				data->intmap[k] = 0;
-			else if (data->map[i][j] == '1' || data->map[i][j] == '\n')
-				data->intmap[k] = 1;
-			j++;
-			k++;
-		}
-		j = 0;
-		i++;
-	}
-	mapsizeint(data);
-}
-
-void	set_intmap(t_cub *data)
-{
-	int size;
-	int i;
-	
-	i = 0;
-	size = 0;
-	while (data->map[i])
-	{
-		size += ft_strlen(data->map[i]);
-		i++;
-	}
-	data->intmap = malloc(sizeof(int) * size);
-}
+#define NBCARRE 8
 
 void	setplayer(t_cub *data)
 {
@@ -129,15 +87,15 @@ int	checkHorizontalLines(t_cub *data, int flag)
 	{
 		rx = data->player.px;
 		ry = data->player.py;
-		dof = 8;
+		dof = NBCARRE;
 	}
-	while (dof < 8)
+	while (dof < NBCARRE)
 	{
 		mx = (int)rx>>6;
 		my = (int)ry>>6;
 		mp = my * data->mapx + mx;
 		if (mp > 0 && mp < data->mapx * data->mapy && data->intmap[mp] == 1) // touche un mur
-			dof = 8;
+			dof = NBCARRE;
 		else
 		{
 			rx += xo;
@@ -178,7 +136,7 @@ int	checkVerticalLines(t_cub *data, int flag)
 	}
 	else //regarde a droite
 	{
-		rx = (((int)data->player.px>>6)<<6) + 64;
+		rx = (((int)data->player.px>>6)<<6) + CUBSIZE;
 		ry = (data->player.px - rx) * ntan + data->player.py;
 		xo = CUBSIZE;
 		yo = -xo * ntan;
@@ -187,15 +145,15 @@ int	checkVerticalLines(t_cub *data, int flag)
 	{
 		rx = data->player.px;
 		ry = data->player.py;
-		dof = 8;
+		dof = NBCARRE;
 	}
-	while (dof < 8)
+	while (dof < NBCARRE)
 	{
 		mx = (int)rx>>6;
 		my = (int)ry>>6;
 		mp = my * data->mapx + mx;
 		if (mp > 0 && mp < data->mapx * data->mapy && data->intmap[mp] == 1) // touche un mur
-			dof = 8;
+			dof = NBCARRE;
 		else
 		{
 			rx += xo;
