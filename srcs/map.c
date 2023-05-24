@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:31:11 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/24 17:32:35 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/24 18:26:38 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ void	setmap(t_cub *data)
 	i = 0;
 	j = 0;
 	k = 0;
-	set_intmap(data);
+	alloc_intmap(data);
 	while (data->map[i])
 	{
 		while (data->map[i][j])
 		{
 			if (data->map[i][j] == '0' || data->map[i][j] == 'S' || data->map[i][j] == 'N' || data->map[i][j] == 'W' || data->map[i][j] == 'S')
 				data->intmap[k] = 0;
-			else if (data->map[i][j] == '1' || data->map[i][j] == '\n')
+			else //if (data->map[i][j] == '1')
 				data->intmap[k] = 1;
 			j++;
 			k++;
@@ -63,7 +63,7 @@ void	setmap(t_cub *data)
 	mapsizeint(data);
 }
 
-void	set_intmap(t_cub *data)
+void	alloc_intmap(t_cub *data)
 {
 	int size;
 	int i;
@@ -85,17 +85,8 @@ int	countmapsize(int fd)
 	i = 0;
 	while (get_next_line(fd))
 		i++;
+	close(fd);
 	return (i);
-}
-
-void	mapsize(t_cub *data)
-{
-	data->mapx = 0;
-	while (data->map[data->mapx] != NULL)
-		data->mapx++;
-	data->mapy = 0;
-	while (data->map[0][data->mapy])
-		data->mapy++;
 }
 
 void	mapsizeint(t_cub *data)
@@ -112,6 +103,6 @@ void	mapsizeint(t_cub *data)
 		i++;
 	}
 	data->mapx = max;
-	data->mapy = i ;
+	data->mapy = i;
 	data->mapsize = max * i;
 }

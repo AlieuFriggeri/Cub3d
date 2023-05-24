@@ -6,12 +6,11 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/24 18:04:03 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/24 18:27:39 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#define NBCARRE 8
 
 void	setplayer(t_cub *data)
 {

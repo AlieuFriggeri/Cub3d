@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/24 17:23:45 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/24 18:31:03 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@
 # define DEG 0.0174533
 # define BLUE_COLOR 0x87CEEB
 # define GREY_COLOR 0x808080
-# define CUBSIZE 64
+
+# define NBCARRE 8
+# define CUBSIZE (HEIGHT / NBCARRE)
 
 typedef struct s_player{
 	double		px;
@@ -77,7 +79,6 @@ typedef struct s_cub{
 /* ----- MAIN ----- */
 void	drawmap(t_cub *data);
 void	fill_all(t_cub *data);
-void	mapsize(t_cub *data);
 void	startpos(t_cub *data);
 void	startangle(t_cub *data, char angle);
 void	mapsizeint(t_cub *data);
@@ -103,7 +104,7 @@ int		count_linetest(t_cub *data, double angle, float rx, float ry);
 void	draw_line3d(t_cub *data, float rx, float ry, int vert);
 void	check_angle(t_cub *data);
 void	setmap(t_cub *data);
-void	set_intmap(t_cub *data);
+void	alloc_intmap(t_cub *data);
 
 /* ----- HOOK ----- */
 int		hook(int keycode, t_cub *data);
