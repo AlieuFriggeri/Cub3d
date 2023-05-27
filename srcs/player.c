@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/24 18:27:39 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/27 12:14:29 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,9 +179,9 @@ void	draw_line3d(t_cub *data, float rx, float ry, int vert)
 
 	x = data->player.r * 8;
 	x2 = x + 8;
-	y = 0;
 	while (x < x2)
 	{
+		y = 0;
 		while (y < data->player.lineH)
 		{
 			if (vert == 1) // texture verticale
@@ -200,7 +200,6 @@ void	draw_line3d(t_cub *data, float rx, float ry, int vert)
 			}
 			y++;
 		}
-		y = 0;
 		x++;
 	}
 }
