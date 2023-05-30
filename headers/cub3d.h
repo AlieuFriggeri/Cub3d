@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/30 15:15:14 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/30 16:00:18 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	draw_raycasting(t_cub *data);
 void	draw_line(t_cub *data, double angle);
 int		checkHorizontalLines(t_cub *data, int flag);
 int		checkVerticalLines(t_cub *data, int flag);
-int		count_linetest(t_cub *data, double angle, float rx, float ry);
+int		dist_wallhit(t_cub *data, double angle, float rx, float ry, int vert);
 void	draw_line3d(t_cub *data, float rx, float ry, int vert);
 void	check_angle(t_cub *data);
 void	setmap(t_cub *data);

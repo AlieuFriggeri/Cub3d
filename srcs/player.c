@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/27 12:14:29 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/30 16:01:25 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	checkHorizontalLines(t_cub *data, int flag)
 		data->player.lineO = HEIGHT / 2 - data->player.lineH / 2;
 	}
 	if (flag == 0)
-		return (count_linetest(data, ra, rx, ry));
+		return (dist_wallhit(data, ra, rx, ry, 0));
 	else
 		draw_line3d(data, rx, ry, 0);
 	return (0);
@@ -165,7 +165,7 @@ int	checkVerticalLines(t_cub *data, int flag)
 		data->player.lineO = HEIGHT / 2 - data->player.lineH / 2;
 	}
 	if (flag == 0)
-		return (count_linetest(data, ra, rx, ry));
+		return (dist_wallhit(data, ra, rx, ry, 1));
 	else
 		draw_line3d(data, rx ,ry, 1);
 	return (0);
@@ -204,7 +204,7 @@ void	draw_line3d(t_cub *data, float rx, float ry, int vert)
 	}
 }
 
-int	count_linetest(t_cub *data, double angle, float rx, float ry)
+int	dist_wallhit(t_cub *data, double angle, float rx, float ry, int vert)
 {
 	int		len;
 	int		len2;
@@ -212,14 +212,20 @@ int	count_linetest(t_cub *data, double angle, float rx, float ry)
 	double	startx;
 	double	starty;
 
+	(void)vert;
 	len = 0;
 	count = 0;
 	startx = data->player.px;
 	starty = data->player.py;
 	len2 = sqrt(pow( rx - startx, 2) + pow( ry - starty, 2));
+	// if (vert == 1) // vertical
+	// 	len2 *= sin(angle);
+	// else
+	// 	len2 *= cos(angle);
+	return len2;
 	while (len < len2)
 	{
-		if (startx < WIDTH && starty < WIDTH && startx < HEIGHT && starty < HEIGHT)
+		//if (startx < WIDTH && /*starty < WIDTH && startx < HEIGHT &&*/ starty < HEIGHT)
 			count++;
 		startx += cos(angle);
 		starty += sin(angle);
