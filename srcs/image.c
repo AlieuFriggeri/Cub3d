@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:29:24 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/18 16:19:51 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/30 15:15:28 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,4 @@ void	draw_image(t_cub *data)
 	draw_floor(data);
 	drawmap(data);
 	setplayer(data);
-}
-
-void	pixel_from_xpm(t_cub *data, int x, int y)
-{
-	
 }

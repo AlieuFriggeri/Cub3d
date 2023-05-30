@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/18 16:21:22 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/30 15:15:14 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@
 # define DEG 0.0174533
 # define BLUE_COLOR 0x87CEEB
 # define GREY_COLOR 0x808080
+
+# define NBCARRE 8
+# define CUBSIZE (HEIGHT / NBCARRE)
 
 typedef struct s_player{
 	double		px;
@@ -69,15 +72,19 @@ typedef struct s_cub{
 	int			mapx;
 	int			mapy;
 	void		*wall; // 0 = N // 1 = S // 2 = E // 3 = W
+	char		**map;
+	int			*intmap;
+	int			mapsize;
 }	t_cub;
 
 /* ----- MAIN ----- */
-int		main(void);
 void	drawmap(t_cub *data);
 void	fill_all(t_cub *data);
-void	mapsize(t_cub *data);
 void	startpos(t_cub *data);
 void	startangle(t_cub *data, char angle);
+void	mapsizeint(t_cub *data);
+int		countmapsize(int fd);
+char	**openmap(char *path);
 
 /* ----- DRAW ----- */
 void	my_mlx_pixel_put(t_cub *data, int x, int y, int color);
@@ -92,12 +99,13 @@ void	draw_image(t_cub *data);
 void	setplayer(t_cub *data);
 void	draw_raycasting(t_cub *data);
 void	draw_line(t_cub *data, double angle);
-int	checkHorizontalLines(t_cub *data, int flag);
-void		draw_linetest(t_cub *data, double angle, float rx, float ry);
-int	checkVerticalLines(t_cub *data, int flag);
+int		checkHorizontalLines(t_cub *data, int flag);
+int		checkVerticalLines(t_cub *data, int flag);
 int		count_linetest(t_cub *data, double angle, float rx, float ry);
 void	draw_line3d(t_cub *data, float rx, float ry, int vert);
 void	check_angle(t_cub *data);
+void	setmap(t_cub *data);
+void	alloc_intmap(t_cub *data);
 
 /* ----- HOOK ----- */
 int		hook(int keycode, t_cub *data);

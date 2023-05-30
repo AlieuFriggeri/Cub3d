@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:23:28 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/17 15:56:59 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/24 17:17:48 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	move_player(int keycode, t_cub *data)
 		data->player.py += 8;
 	if (keycode == KEY_D)
 		data->player.px += 8;
-	if (data->player.px > WIDTH / 2 - 1)
-		data->player.px = WIDTH / 2 - 1;
+	if (data->player.px > WIDTH - 1)
+		data->player.px = WIDTH - 1;
 	else if (data->player.px < 0)
 		data->player.px = 0;
 	if (data->player.py > HEIGHT - 1)
@@ -72,7 +72,6 @@ void	rotate_player(int keycode, t_cub *data)
 		data->player.py -= data->player.pdy;
 	}
 	check_angle(data);
-	// printf("ANGLE ; %f\n", data->player.pa);
 	move_player(keycode, data);
 }
 

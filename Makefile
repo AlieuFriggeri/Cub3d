@@ -21,7 +21,8 @@ SRCS_LIST =	main.c \
 			draw.c \
 			image.c \
 			player.c \
-			init.c 
+			init.c \
+			map.c
 
 ifeq (${UNAME}, Linux)
 	SRCS_LIST += linux.c

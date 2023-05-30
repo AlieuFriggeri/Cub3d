@@ -3,117 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/18 12:32:18 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:39:52 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
 
 // char	*map[] = {
-// 	"1 1 1 1 1 1 1 1",
-// 	"1 0 1 0 0 0 0 1",
-// 	"1 0 0 0 0 0 0 1",
-// 	"1 0 0 0 0 1 0 1",
-// 	"1 0 0 0 1 0 0 1",
-// 	"1 0 0 0 0 1 0 1",
-// 	"1 0 1 0 0 1 0 1",
-// 	"1 1 1 1 1 1 1 1"
+// 	"11111111",
+// 	"10100001",
+// 	"100W0001",
+// 	"10000101",
+// 	"10001001",
+// 	"10000101",
+// 	"10100101",
+// 	"11111111",
+// 	NULL
 // };
 
-char	*map[] = {
-	"11111111",
-	"10100011",
-	"10000001",
-	"10000101",
-	"10001001",
-	"100N0101",
-	"10100101",
-	"11111111",
-	NULL
-};
-
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_cub	data;
-
+	(void)ac;
+	(void)av;
 	/*
 	if (check_arg(argc, argv, env) == 0)
 		init(&data, argc, argv, env);
 	*/
 	data.player.px = -1;
 	data.player.py = -1;
+	data.map = openmap(av[1]);
 	init(&data, 0, NULL, NULL);
 	draw_image(&data);
 	add_hook(&data);
 	return (0);
 }
 
-
-// int	main(void)
-// {
-// 	t_cub	data;
-
-// 	data.mlx = mlx_init();
-// 	data.window = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Cub3d");
-// 	data.img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
-// 	data.addr = mlx_get_data_addr(data.img, &data.bpp, &data.sizeline, &data.endian);
-// 	data.player.px = 200;
-// 	data.player.py = 220;
-// 	mapsize(&data);
-// 	printf("%d | %d \n", data.mapx, data.mapy);
-// 	data.mapx = 5;
-// 	data.mapy = 7;
-// 	// si au lancement pa == axe retirer 0.01
-// 	data.player.pa = PI;
-// 	data.player.pdx = cos(data.player.pa) * 5;
-// 	data.player.pdy = sin(data.player.pa) * 5;
-// 	draw_image(&data);
-// 	mlx_hook(data.window, 2, 0, &hook, &data);
-// 	mlx_hook(data.window, 17, 0, &cub_exit, &data);
-// 	mlx_loop(data.mlx);
-// 	return (0);
-// }
-
 void	drawmap(t_cub *data)
 {
-	int	x;
-	int	y;
-	int	sx;
-	int	sy;
+	int i;
+	int j;
+	int x;
+	int y;
 
-	sx = 0;
-	sy = 0;
-	x = 0;
+	i = 0;
 	y = 0;
-	while (sx < 8)
+	while (i < data->mapsize)
 	{
-		while (sy < data->mapy)
+		x = 0;
+		j = 0;
+		while (j < data->mapx)
 		{
-			if (map[sx][sy] == '1')
-				drawsquare(y, x, data, 1);
-			else
-				drawsquare(y, x, data, 0);
-			y += 64;
-			sy ++;
+			if (data->intmap[i] == 1)
+				drawsquare(x, y, data, 1);
+			else if (data->intmap[i] == 0)
+				drawsquare(x, y, data, 0);
+			else 
+				drawsquare(x, y, data, 2);
+			j++;
+			i++;
+			x += 16;
 		}
-		y = 0;
-		sy = 0;
-		sx++;
-		x += 64;
+		y += 16;
 	}
-}
-
-void	mapsize(t_cub *data)
-{
-	data->mapx = 0;
-	while (map[data->mapx] != NULL)
-		data->mapx++;
-	data->mapy = 0;
-	while (map[0][data->mapy])
-		data->mapy++;
 }
 
 void startpos(t_cub *data)
@@ -123,15 +78,15 @@ void startpos(t_cub *data)
 
 	i = 0;
 	j = 0;
-	while (map[i])
+	while (data->map[i])
 	{
-		while (map[i][j])
+		while (data->map[i][j])
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
+			if (data->map[i][j] == 'N' || data->map[i][j] == 'S' || data->map[i][j] == 'W' || data->map[i][j] == 'E')
 			{
-				startangle(data, map[i][j]);
-				data->player.px = 64 * j + 32;
-				data->player.py = 64 * i + 32;
+				startangle(data, data->map[i][j]);
+				data->player.px = CUBSIZE * j + CUBSIZE / 2;
+				data->player.py = CUBSIZE * i + CUBSIZE / 2;
 			}
 			j++;
 		}
