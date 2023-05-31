@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/31 12:51:12 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/31 13:11:09 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	setplayer(t_cub *data)
 	int r = 0;
 
 	check_angle(data);
-	data->player.pa2 = data->player.pa - (DEG / 4) * CUBSIZE;
-	while (r < 512)
+	data->player.pa2 = data->player.pa - (DEG / 4) * (NBRAY / 2);
+	while (r < NBRAY)
 	{
 		data->player.r = r;
 		if (checkHorizontalLines(data, 0) < checkVerticalLines(data, 0))
@@ -35,6 +35,7 @@ void	setplayer(t_cub *data)
 		r++;
 	}
 	drawmap(data);
+	printf("%d | %d\n", data->mapx, data->mapy);
 	mlx_put_image_to_window(data->mlx, data->window, data->img, 0, 0);
 }
 
@@ -86,15 +87,15 @@ int	checkHorizontalLines(t_cub *data, int flag)
 	{
 		rx = data->player.px;
 		ry = data->player.py;
-		dof = NBCARRE;
+		dof = data->mapx;
 	}
-	while (dof < NBCARRE)
+	while (dof < data->mapx)
 	{
 		mx = (int)rx>>6;
 		my = (int)ry>>6;
 		mp = my * data->mapx + mx;
 		if (mp > 0 && mp < data->mapx * data->mapy && data->intmap[mp] == 1) // touche un mur
-			dof = NBCARRE;
+			dof = data->mapx;
 		else
 		{
 			rx += xo;
@@ -144,15 +145,15 @@ int	checkVerticalLines(t_cub *data, int flag)
 	{
 		rx = data->player.px;
 		ry = data->player.py;
-		dof = NBCARRE;
+		dof = data->mapy;
 	}
-	while (dof < NBCARRE)
+	while (dof < data->mapy)
 	{
 		mx = (int)rx>>6;
 		my = (int)ry>>6;
 		mp = my * data->mapx + mx;
 		if (mp > 0 && mp < data->mapx * data->mapy && data->intmap[mp] == 1) // touche un mur
-			dof = NBCARRE;
+			dof = data->mapy;
 		else
 		{
 			rx += xo;
@@ -177,8 +178,8 @@ void	draw_line3d(t_cub *data, float rx, float ry, int vert)
 	int x;
 	int x2;
 
-	x = data->player.r * 2;
-	x2 = x + 2;
+	x = data->player.r * (NBRAY / (NBRAY / 2));
+	x2 = x + (NBRAY / (NBRAY / 2));
 	while (x < x2)
 	{
 		y = 0;

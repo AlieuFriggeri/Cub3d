@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/31 12:52:26 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/31 13:04:13 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define DEG 0.0174533
 # define BLUE_COLOR 0x87CEEB
 # define GREY_COLOR 0x808080
+# define NBRAY 512
 
 # define NBCARRE 8
 # define CUBSIZE (HEIGHT / NBCARRE)
