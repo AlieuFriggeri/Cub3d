@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/31 14:20:43 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/07 13:04:55 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int ac, char **av)
 	data.player.py = -1;
 	data.map = openmap(av[1]);
 	init(&data, 0, NULL, NULL);
+	get_texture(&data, "xpm/test.xpm", 0);
 	draw_image(&data);
 	add_hook(&data);
 	return (0);
