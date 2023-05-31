@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:25:35 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/24 12:29:25 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/31 13:14:40 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	my_mlx_pixel_put(t_cub *data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->sizeline + x * (data->bpp / 8));
+	dst = data->addr + (y * data->sl + x * (data->bpp / 8));
 	*(unsigned int *)dst = color;
 }
 

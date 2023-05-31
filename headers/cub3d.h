@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/31 12:50:09 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/31 15:12:19 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,29 @@ typedef struct s_player{
 	int			spy;
 }	t_player;
 
+typedef struct s_img
+{
+	void		*img;
+	char		*addr;
+	int			ed;
+	int			sl;
+	int			bpp;
+	int			width;
+	int			height;
+}	t_img;
+
 typedef struct s_cub{
 	void		*mlx;
 	void		*window;
 	void		*img;
 	char		*addr;
-	int			endian;
-	int			sizeline;
+	int			ed;
+	int			sl;
 	int			bpp;
 	t_player	player;
 	int			mapx;
 	int			mapy;
-	void		*wall; // 0 = N // 1 = S // 2 = E // 3 = W
+	t_img		wall[4]; // 0 = N // 1 = S // 2 = E // 3 = W
 	char		**map;
 	int			*intmap;
 	int			mapsize;
@@ -119,5 +130,8 @@ void	add_hook(t_cub *data);
 
 /* ----- INIT ----- */
 void	init(t_cub *data, int argc, char **argv, char **env);
+
+void	print_texture(t_cub *data, double ratiox, int x, int y, int wall);
+int		get_texture(t_cub *data, char *path, int wall);
 
 #endif
