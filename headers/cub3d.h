@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/30 16:00:18 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/31 12:50:09 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,11 @@ void	setmap(t_cub *data);
 void	alloc_intmap(t_cub *data);
 
 /* ----- HOOK ----- */
-int		hook(int keycode, t_cub *data);
 int		cub_exit(t_cub *data);
-void	move_player(int keycode, t_cub *data);
+void	check_angle(t_cub *data);
 void	rotate_player(int keycode, t_cub *data);
+void	move_player(int keycode, t_cub *data);
+int		hook(int keycode, t_cub *data);
 
 /* ----- SPECIAL OS ----- */
 void	add_hook(t_cub *data);
