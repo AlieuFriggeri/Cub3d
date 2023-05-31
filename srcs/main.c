@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/24 17:39:52 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/31 11:21:41 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void	drawmap(t_cub *data)
 				drawsquare(x, y, data, 2);
 			j++;
 			i++;
-			x += 16;
+			x += 8;
 		}
-		y += 16;
+		y += 8;
 	}
 }
 

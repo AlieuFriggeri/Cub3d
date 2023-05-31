@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/30 16:01:25 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/05/31 12:51:12 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	setplayer(t_cub *data)
 	int r = 0;
 
 	check_angle(data);
-	data->player.pa2 = data->player.pa - (DEG / 2) * CUBSIZE;
-	while (r < 128)
+	data->player.pa2 = data->player.pa - (DEG / 4) * CUBSIZE;
+	while (r < 512)
 	{
 		data->player.r = r;
 		if (checkHorizontalLines(data, 0) < checkVerticalLines(data, 0))
@@ -31,7 +31,7 @@ void	setplayer(t_cub *data)
 			data->player.disT = checkVerticalLines(data, 0);
 			checkVerticalLines(data, 1);
 		}
-		data->player.pa2 += DEG / 2;
+		data->player.pa2 += DEG / 4;
 		r++;
 	}
 	drawmap(data);
@@ -177,8 +177,8 @@ void	draw_line3d(t_cub *data, float rx, float ry, int vert)
 	int x;
 	int x2;
 
-	x = data->player.r * 8;
-	x2 = x + 8;
+	x = data->player.r * 2;
+	x2 = x + 2;
 	while (x < x2)
 	{
 		y = 0;
