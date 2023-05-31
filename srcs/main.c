@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/31 11:21:41 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/31 14:20:43 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,11 @@ void	drawmap(t_cub *data)
 		x = 0;
 		j = 0;
 		while (j < data->mapx)
-		{
+		{ 	if (j == data->mapx - 1)
+			{
+				i++;
+				break;
+			}
 			if (data->intmap[i] == 1)
 				drawsquare(x, y, data, 1);
 			else if (data->intmap[i] == 0)
@@ -69,6 +73,7 @@ void	drawmap(t_cub *data)
 		}
 		y += 8;
 	}
+	printf("%d | %d\n", i, data->mapsize);
 }
 
 void startpos(t_cub *data)

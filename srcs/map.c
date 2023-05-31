@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:31:11 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/31 13:09:39 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/05/31 13:49:40 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	alloc_intmap(t_cub *data)
 		size += ft_strlen(data->map[i]);
 		i++;
 	}
-	data->intmap = malloc(sizeof(int) * size);
+	data->intmap = malloc(sizeof(int) * (size - i));
 }
 
 int	countmapsize(int fd)
@@ -105,4 +105,5 @@ void	mapsizeint(t_cub *data)
 	data->mapx = max;
 	data->mapy = i;
 	data->mapsize = max * i;
+	printf("%d | %d\n", max, i);
 }
