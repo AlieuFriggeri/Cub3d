@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/07 13:04:55 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/07 13:06:39 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ int	main(int ac, char **av)
 	data.player.py = -1;
 	data.map = openmap(av[1]);
 	init(&data, 0, NULL, NULL);
+	printf("fin init\n");
 	get_texture(&data, "xpm/test.xpm", 0);
+	printf("fin get texture\n");
 	draw_image(&data);
 	add_hook(&data);
 	return (0);
