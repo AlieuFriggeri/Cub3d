@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/02 13:54:33 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/02 14:14:00 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,7 @@ void	draw_line3d(t_cub *data, float rx, float ry, int vert)
 				if (data->player.px < rx)
 				{
 					// printf("%f\n", ry);
-					print_texture(data, rx / CUBSIZE, x, y, 0);
+					print_texture(data, rx, x, y, 0);
 				}
 					// my_mlx_pixel_put(data, x, y + data->player.lineO, 0xFFFF00); // gauche
 				else
