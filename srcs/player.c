@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/31 15:12:06 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/02 14:14:00 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	setplayer(t_cub *data)
 	int r = 0;
 
 	check_angle(data);
-	data->player.pa2 = data->player.pa - (DEG / 2) * CUBSIZE;
-	while (r < 128)
+	data->player.pa2 = data->player.pa - (DEG / 4) * (NBRAY / 2);
+	while (r < NBRAY)
 	{
 		data->player.r = r;
 		if (checkHorizontalLines(data, 0) < checkVerticalLines(data, 0))
@@ -31,10 +31,11 @@ void	setplayer(t_cub *data)
 			data->player.disT = checkVerticalLines(data, 0);
 			checkVerticalLines(data, 1);
 		}
-		data->player.pa2 += DEG / 2;
+		data->player.pa2 += DEG / 4;
 		r++;
 	}
 	drawmap(data);
+	printf("%d | %d\n", data->mapx, data->mapy);
 	mlx_put_image_to_window(data->mlx, data->window, data->img, 0, 0);
 }
 
@@ -86,15 +87,15 @@ int	checkHorizontalLines(t_cub *data, int flag)
 	{
 		rx = data->player.px;
 		ry = data->player.py;
-		dof = NBCARRE;
+		dof = data->mapx;
 	}
-	while (dof < NBCARRE)
+	while (dof < data->mapx)
 	{
 		mx = (int)rx>>6;
 		my = (int)ry>>6;
 		mp = my * data->mapx + mx;
 		if (mp > 0 && mp < data->mapx * data->mapy && data->intmap[mp] == 1) // touche un mur
-			dof = NBCARRE;
+			dof = data->mapx;
 		else
 		{
 			rx += xo;
@@ -144,15 +145,15 @@ int	checkVerticalLines(t_cub *data, int flag)
 	{
 		rx = data->player.px;
 		ry = data->player.py;
-		dof = NBCARRE;
+		dof = data->mapy;
 	}
-	while (dof < NBCARRE)
+	while (dof < data->mapy)
 	{
 		mx = (int)rx>>6;
 		my = (int)ry>>6;
 		mp = my * data->mapx + mx;
 		if (mp > 0 && mp < data->mapx * data->mapy && data->intmap[mp] == 1) // touche un mur
-			dof = NBCARRE;
+			dof = data->mapy;
 		else
 		{
 			rx += xo;
@@ -177,8 +178,9 @@ void	draw_line3d(t_cub *data, float rx, float ry, int vert)
 	int x;
 	int x2;
 
-	x = data->player.r * 8;
-	x2 = x + 8;
+	
+	x = data->player.r * (NBRAY / (NBRAY / 2));
+	x2 = x + (NBRAY / (NBRAY / 2));
 	while (x < x2)
 	{
 		y = 0;
@@ -187,7 +189,10 @@ void	draw_line3d(t_cub *data, float rx, float ry, int vert)
 			if (vert == 1) // texture verticale
 			{
 				if (data->player.px < rx)
-					print_texture(data, rx / CUBSIZE, x, y, 0);
+				{
+					// printf("%f\n", ry);
+					print_texture(data, rx, x, y, 0);
+				}
 					// my_mlx_pixel_put(data, x, y + data->player.lineO, 0xFFFF00); // gauche
 				else
 					my_mlx_pixel_put(data, x, y + data->player.lineO, 0xFF0000); // droite
