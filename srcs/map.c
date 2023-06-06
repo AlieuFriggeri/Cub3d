@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:31:11 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/02 14:26:23 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/06 14:08:39 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	setmap(t_cub *data)
 		{
 			if (data->map[i][j] == '0' || data->map[i][j] == 'S' || data->map[i][j] == 'N' || data->map[i][j] == 'W' || data->map[i][j] == 'S')
 				data->intmap[k] = 0;
-			else //if (data->map[i][j] == '1')
+			else
 				data->intmap[k] = 1;
 			j++;
 			k++;
@@ -105,5 +105,5 @@ void	mapsizeint(t_cub *data)
 	data->mapx = max;
 	data->mapy = i;
 	data->mapsize = max * i;
-	printf("%d | %d\n", max, i);
+	// printf("%d | %d\n", max, i);
 }
