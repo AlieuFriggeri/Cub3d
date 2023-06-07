@@ -6,11 +6,11 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/07 16:44:43 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/07 18:16:49 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../headers/cub3d.h"
 
 int	main(int ac, char **av)
 {
@@ -23,7 +23,9 @@ int	main(int ac, char **av)
 	data.map = openmap(av[1]);
 	init(&data, 0, NULL, NULL);
 	get_texture(&data, "xpm/test.xpm", 0);
-	get_texture(&data, "xpm/test_gros.xpm", 1);
+	get_texture(&data, "xpm/door.xpm", 1);
+	get_texture(&data, "xpm/stone.xpm", 2);
+	get_texture(&data, "xpm/corona.xpm", 3);
 	draw_image(&data);
 	add_hook(&data);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:29:24 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/31 11:11:43 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/07 17:51:49 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	draw_image(t_cub *data)
 {
 	draw_sky(data);
 	draw_floor(data);
-	drawmap(data);
 	setplayer(data);
+	drawmap(data);
+	mlx_put_image_to_window(data->mlx, data->window, data->img, 0, 0);
 }

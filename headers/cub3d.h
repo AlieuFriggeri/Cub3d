@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/07 17:34:30 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/07 18:13:37 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ void	check_angle(t_cub *data);
 void	setmap(t_cub *data);
 void	alloc_intmap(t_cub *data);
 
-
 /* ----- HOOK ----- */
 int		cub_exit(t_cub *data);
 void	check_angle(t_cub *data);
@@ -153,5 +152,6 @@ void	init(t_cub *data, int argc, char **argv, char **env);
 int		get_texture(t_cub *data, char *path, int wall);
 int		get_color_from_texture(t_cub *data, int x, int y, int wall);
 void	print_texture(t_cub *data, double ratiox, int x, int y, int wall);
+void	select_texture(t_cub *data, float rx, float ry, int x, int y, int vert);
 
 #endif

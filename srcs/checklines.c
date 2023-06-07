@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 17:36:01 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/07 17:36:27 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/07 17:50:08 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@ float	check_horizontal_lines(t_cub *data, int flag)
 	float	atan;
 
 	ra = data->player.pa2;
-	if (ra < 0)
-		ra += 2 * PI;
-	else if (ra > 2 * PI)
-		ra -= 2 * PI;
 	atan = -1 / tan(ra);
 	dof = 0;
 	if (ra > PI)
@@ -57,32 +53,6 @@ float	check_horizontal_lines(t_cub *data, int flag)
 	return (0);
 }
 
-void	get_intersection(t_cub *data, int dof, float xo, float yo, float *rx, float *ry)
-{
-	int		mx;
-	int		my;
-	int		mp;
-
-	while (dof < data->mapx)
-	{
-		mx = (int)*rx >> 6;
-		my = (int)*ry >> 6;
-		mp = my * data->mapx + mx;
-		if (mp > 0 && mp < data->mapx * data->mapy && data->intmap[mp] == 1)
-			dof = data->mapx;
-		else
-		{
-			*rx += xo;
-			*ry += yo;
-			dof += 1;
-		}
-		data->player.lineH = (CUBSIZE * HEIGHT) / data->player.disT;
-		if (data->player.lineH > HEIGHT)
-			data->player.lineH = HEIGHT;
-		data->player.lineO = HEIGHT / 2 - data->player.lineH / 2;
-	}
-}
-
 float	check_vertical_lines(t_cub *data, int flag)
 {
 	int		dof;
@@ -94,10 +64,6 @@ float	check_vertical_lines(t_cub *data, int flag)
 	float	ntan;
 
 	ra = data->player.pa2;
-	if (ra < 0)
-		ra += 2 * PI;
-	else if (ra > 2 * PI)
-		ra -= 2 * PI;
 	ntan = -tan(ra);
 	dof = 0;
 	if (ra > PI2 && ra < PI3)
@@ -126,4 +92,30 @@ float	check_vertical_lines(t_cub *data, int flag)
 	else
 		draw_line3d(data, rx, ry, 1);
 	return (0);
+}
+
+void	get_intersection(t_cub *data, int dof, float xo, float yo, float *rx, float *ry)
+{
+	int		mx;
+	int		my;
+	int		mp;
+
+	while (dof < data->mapx)
+	{
+		mx = (int)*rx >> 6;
+		my = (int)*ry >> 6;
+		mp = my * data->mapx + mx;
+		if (mp > 0 && mp < data->mapx * data->mapy && data->intmap[mp] == 1)
+			dof = data->mapx;
+		else
+		{
+			*rx += xo;
+			*ry += yo;
+			dof += 1;
+		}
+		data->player.lineH = (CUBSIZE * HEIGHT) / data->player.disT;
+		if (data->player.lineH > HEIGHT)
+			data->player.lineH = HEIGHT;
+		data->player.lineO = HEIGHT / 2 - data->player.lineH / 2;
+	}
 }

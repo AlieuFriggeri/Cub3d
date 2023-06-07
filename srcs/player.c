@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/07 17:36:31 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/07 18:14:25 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ void	setplayer(t_cub *data)
 	data->player.pa2 = data->player.pa - (DEG / 4) * (NBRAY / 2);
 	while (r < NBRAY)
 	{
+		if (data->player.pa2 < 0)
+			data->player.pa2 += 2 * PI;
+		else if (data->player.pa2 > 2 * PI)
+			data->player.pa2 -= 2 * PI;
 		data->player.r = r;
 		if (check_horizontal_lines(data, 0) < check_vertical_lines(data, 0))
 		{
@@ -35,8 +39,6 @@ void	setplayer(t_cub *data)
 		data->player.pa2 += DEG / 4;
 		r++;
 	}
-	drawmap(data);
-	mlx_put_image_to_window(data->mlx, data->window, data->img, 0, 0);
 }
 
 void	draw_line3d(t_cub *data, float rx, float ry, int vert)
@@ -52,23 +54,28 @@ void	draw_line3d(t_cub *data, float rx, float ry, int vert)
 		y = 0;
 		while (y < data->player.lineH)
 		{
-			if (vert == 1)
-			{
-				if (data->player.px < rx) // WEST
-					print_texture(data, ry, x, y, 0);
-				else // EAST
-					my_mlx_pixel_put(data, x, y + data->player.lineO, 0xFF0000);
-			}
-			else
-			{
-				if (data->player.py < ry) // SOUTH
-					print_texture(data, rx, x, y, 1);
-				else // NORTH
-					my_mlx_pixel_put(data, x, y + data->player.lineO, 0x00FFFF);
-			}
+			select_texture(data, rx, ry, x, y, vert);
 			y++;
 		}
 		x++;
+	}
+}
+
+void	select_texture(t_cub *data, float rx, float ry, int x, int y, int vert)
+{
+	if (vert == 1)
+	{
+		if (data->player.px < rx) // WEST
+			print_texture(data, ry, x, y, 3);
+		else // EAST
+			print_texture(data, ry, x, y, 2);
+	}
+	else
+	{
+		if (data->player.py < ry) // SOUTH
+			print_texture(data, rx, x, y, 1);
+		else // NORTH
+			print_texture(data, rx, x, y, 0);
 	}
 }
 
