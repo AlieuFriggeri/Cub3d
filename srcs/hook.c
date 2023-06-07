@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:23:28 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/31 12:49:14 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/07 13:22:49 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,49 @@ void	rotate_player(int keycode, t_cub *data)
 	check_angle(data);
 }
 
+void	check_collision(t_cub *data)
+{
+	int r = 0;
+	int dist;
+	data->player.pa2 = data->player.pa - (DEG * 180);
+	while (r < 4)
+	{
+		if (checkHorizontalLines(data, 0) < checkVerticalLines(data, 0))
+			dist = checkHorizontalLines(data, 0);
+		else
+			dist = checkVerticalLines(data, 0);
+		if (r == 0)
+			data->player.dwall_s = dist;
+		if (r == 1)
+			data->player.dwall_w = dist;
+		if (r == 2)
+			data->player.dwall_n = dist;
+		if (r == 3)
+			data->player.dwall_e = dist;
+		data->player.pa2 += DEG * 90;
+		r++;
+	}
+}
+
 void	move_player(int keycode, t_cub *data)
 {
-	if (keycode == KEY_W)
-	{
+	check_collision(data);
+	if (keycode == KEY_W && data->player.dwall_n > 15)
+	{	
 		data->player.px += data->player.pdx;
 		data->player.py += data->player.pdy;
 	}
-	if (keycode == KEY_S)
+	if (keycode == KEY_S && data->player.dwall_s > 15)
 	{
 		data->player.px -= data->player.pdx;
 		data->player.py -= data->player.pdy;
 	}
-	if (keycode == KEY_A)
+	if (keycode == KEY_A && data->player.dwall_w > 15)
 	{
 		data->player.px += data->player.pdy;
 		data->player.py -= data->player.pdx;
 	}
-	if (keycode == KEY_D)
+	if (keycode == KEY_D && data->player.dwall_e > 15)
 	{
 		data->player.px -= data->player.pdy;
 		data->player.py += data->player.pdx;

@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/05/31 13:29:45 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/07 13:21:27 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	setplayer(t_cub *data)
 		r++;
 	}
 	drawmap(data);
-	printf("%d | %d\n", data->mapx, data->mapy);
+	//printf("%d | %d\n", data->mapx, data->mapy);
 	mlx_put_image_to_window(data->mlx, data->window, data->img, 0, 0);
 }
 
@@ -56,7 +56,7 @@ void	draw_raycasting(t_cub *data)
 	}
 }
 
-int	checkHorizontalLines(t_cub *data, int flag)
+float	checkHorizontalLines(t_cub *data, int flag)
 {
 	//int r;
 	int mx, my, mp, dof;
@@ -114,7 +114,7 @@ int	checkHorizontalLines(t_cub *data, int flag)
 	return (0);
 }
 
-int	checkVerticalLines(t_cub *data, int flag)
+float	checkVerticalLines(t_cub *data, int flag)
 {
 	//int r;
 	int mx, my, mp, dof;
@@ -205,11 +205,11 @@ void	draw_line3d(t_cub *data, float rx, float ry, int vert)
 	}
 }
 
-int	dist_wallhit(t_cub *data, double angle, float rx, float ry, int vert)
+float	dist_wallhit(t_cub *data, double angle, float rx, float ry, int vert)
 {
 	int		len;
-	int		len2;
-	int		count;
+	float		len2;
+	float		count;
 	double	startx;
 	double	starty;
 

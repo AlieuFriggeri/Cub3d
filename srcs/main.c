@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/31 14:20:43 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/07 12:22:03 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int ac, char **av)
 	*/
 	data.player.px = -1;
 	data.player.py = -1;
+	data.player.wall_dist = 100000;
 	data.map = openmap(av[1]);
 	init(&data, 0, NULL, NULL);
 	draw_image(&data);
@@ -73,7 +74,7 @@ void	drawmap(t_cub *data)
 		}
 		y += 8;
 	}
-	printf("%d | %d\n", i, data->mapsize);
+	//printf("%d | %d\n", i, data->mapsize);
 }
 
 void startpos(t_cub *data)

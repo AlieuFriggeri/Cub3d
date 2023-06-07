@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/05/31 13:29:49 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/07 13:23:07 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,20 @@ typedef struct s_player{
 	int			r;
 	int			spx;
 	int			spy;
+	int			ipx;
+	int			ipx_add_xo;
+	int			ipx_sub_xo;
+	int			ipy;
+	int			ipy_add_yo;
+	int			ipy_sub_yo;
+	float		last_rx;
+	float		last_ra;
+	float		last_ry;
+	int			wall_dist;
+	int			dwall_n;
+	int			dwall_s;
+	int			dwall_e;
+	int			dwall_w;
 }	t_player;
 
 typedef struct s_cub{
@@ -100,9 +114,9 @@ void	draw_image(t_cub *data);
 void	setplayer(t_cub *data);
 void	draw_raycasting(t_cub *data);
 void	draw_line(t_cub *data, double angle);
-int		checkHorizontalLines(t_cub *data, int flag);
-int		checkVerticalLines(t_cub *data, int flag);
-int		dist_wallhit(t_cub *data, double angle, float rx, float ry, int vert);
+float	checkHorizontalLines(t_cub *data, int flag);
+float	checkVerticalLines(t_cub *data, int flag);
+float	dist_wallhit(t_cub *data, double angle, float rx, float ry, int vert);
 void	draw_line3d(t_cub *data, float rx, float ry, int vert);
 void	check_angle(t_cub *data);
 void	setmap(t_cub *data);
@@ -114,6 +128,7 @@ void	check_angle(t_cub *data);
 void	rotate_player(int keycode, t_cub *data);
 void	move_player(int keycode, t_cub *data);
 int		hook(int keycode, t_cub *data);
+void	check_collision(t_cub *data);
 
 /* ----- SPECIAL OS ----- */
 void	add_hook(t_cub *data);
