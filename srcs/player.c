@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/02 14:14:00 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/07 12:17:08 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	setplayer(t_cub *data)
 		r++;
 	}
 	drawmap(data);
-	printf("%d | %d\n", data->mapx, data->mapy);
 	mlx_put_image_to_window(data->mlx, data->window, data->img, 0, 0);
 }
 
@@ -191,7 +190,7 @@ void	draw_line3d(t_cub *data, float rx, float ry, int vert)
 				if (data->player.px < rx)
 				{
 					// printf("%f\n", ry);
-					print_texture(data, rx, x, y, 0);
+					print_texture(data, ry, x, y, 0);
 				}
 					// my_mlx_pixel_put(data, x, y + data->player.lineO, 0xFFFF00); // gauche
 				else
@@ -200,7 +199,7 @@ void	draw_line3d(t_cub *data, float rx, float ry, int vert)
 			else // texture horizontale
 			{
 				if (data->player.py < ry)
-					my_mlx_pixel_put(data, x, y + data->player.lineO, 0x0000FF); // bas
+					print_texture(data, rx, x, y, 1); // bas
 				else
 					my_mlx_pixel_put(data, x, y + data->player.lineO, 0x00FFFF); // haut
 			}

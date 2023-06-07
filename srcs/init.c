@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:07:45 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/06 14:06:12 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/07 12:49:31 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	init(t_cub *data, int argc, char **argv, char **env)
 	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->sl, &data->ed);
 	startpos(data);
 	setmap(data);
-	printf("apres setmap()\n");
 	data->player.pdx = cos(data->player.pa) * 5;
 	data->player.pdy = sin(data->player.pa) * 5;
 }

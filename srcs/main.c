@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/06 14:09:19 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/07 12:11:39 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,9 @@ int	main(int ac, char **av)
 	data.player.px = -1;
 	data.player.py = -1;
 	data.map = openmap(av[1]);
-	printf("debut init()\n");
 	init(&data, 0, NULL, NULL);
-	printf("debut get_texture()\n");
 	get_texture(&data, "xpm/test.xpm", 0);
-	printf("debut draw_image()\n");
+	get_texture(&data, "xpm/test_gros.xpm", 1);
 	draw_image(&data);
 	add_hook(&data);
 	return (0);
@@ -77,7 +75,6 @@ void	drawmap(t_cub *data)
 		}
 		y += 8;
 	}
-	printf("%d | %d\n", i, data->mapsize);
 }
 
 void startpos(t_cub *data)
