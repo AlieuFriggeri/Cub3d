@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:31:11 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/06 14:08:39 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/07 12:05:16 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,4 @@ void	mapsizeint(t_cub *data)
 	data->mapx = max;
 	data->mapy = i;
 	data->mapsize = max * i;
-	// printf("%d | %d\n", max, i);
 }
