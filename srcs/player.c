@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/07 12:17:08 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/07 13:13:31 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,6 @@ void	draw_line3d(t_cub *data, float rx, float ry, int vert)
 	int y;
 	int x;
 	int x2;
-
 	
 	x = data->player.r * (NBRAY / (NBRAY / 2));
 	x2 = x + (NBRAY / (NBRAY / 2));
