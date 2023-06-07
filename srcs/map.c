@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:31:11 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/07 12:05:16 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/07 16:47:43 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	**openmap(char *path)
 {
-	int fd;
-	int i;
-	char **map1;
-	int size;
+	int		fd;
+	int		i;
+	char	**map1;
+	int		size;
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
@@ -34,14 +34,14 @@ char	**openmap(char *path)
 		i++;
 	}
 	close(fd);
-	return map1;
+	return (map1);
 }
 
 void	setmap(t_cub *data)
 {
-	int i;
-	int j;
-	int k;
+	int	i;
+	int	j;
+	int	k;
 
 	i = 0;
 	k = 0;
@@ -51,7 +51,9 @@ void	setmap(t_cub *data)
 		j = 0;
 		while (data->map[i][j])
 		{
-			if (data->map[i][j] == '0' || data->map[i][j] == 'S' || data->map[i][j] == 'N' || data->map[i][j] == 'W' || data->map[i][j] == 'S')
+			if (data->map[i][j] == '0' || data->map[i][j] == 'S'
+					|| data->map[i][j] == 'N' || data->map[i][j] == 'W'
+					|| data->map[i][j] == 'S')
 				data->intmap[k] = 0;
 			else
 				data->intmap[k] = 1;
@@ -65,9 +67,9 @@ void	setmap(t_cub *data)
 
 void	alloc_intmap(t_cub *data)
 {
-	int size;
-	int i;
-	
+	int	size;
+	int	i;
+
 	i = 0;
 	size = 0;
 	while (data->map[i])
@@ -80,7 +82,7 @@ void	alloc_intmap(t_cub *data)
 
 int	countmapsize(int fd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (get_next_line(fd))
@@ -91,9 +93,9 @@ int	countmapsize(int fd)
 
 void	mapsizeint(t_cub *data)
 {
-	int i;
-	int max;
-	
+	int	i;
+	int	max;
+
 	i = 0;
 	max = 0;
 	while (data->map[i])

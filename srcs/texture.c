@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 12:52:12 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/07 12:04:54 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/07 17:21:22 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,14 @@ int	get_color_from_texture(t_cub *data, int x, int y, int wall)
 
 void	print_texture(t_cub *data, double rx, int x, int y, int wall)
 {
-	float		imgx;
-	float		offset;
+	float	imgx;
+	float	offset;
 	int		color;
 
-	imgx = (float)((int)rx % CUBSIZE) / (float)CUBSIZE * (float)data->wall[wall].width;
+	imgx = (float)((int)rx % CUBSIZE);
+	imgx = imgx / (float)CUBSIZE * (float)data->wall[wall].width;
 	offset = (float)data->wall[wall].height / (float)data->player.lineH;
-	// printf("%f\tx: %d\t|\ty: %d\n", rx, (int)imgx, y * offset);make
-	color = get_color_from_texture(data, (int)imgx, (int)((float)y * (float)offset), wall);
+	offset *= (float)y;
+	color = get_color_from_texture(data, (int)imgx, (int)offset, wall);
 	my_mlx_pixel_put(data, x, y + data->player.lineO, color);
 }

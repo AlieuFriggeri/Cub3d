@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/07 13:27:08 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/07 17:34:30 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,8 @@ typedef struct s_cub{
 }	t_cub;
 
 /* ----- MAIN ----- */
-void	drawmap(t_cub *data);
-void	fill_all(t_cub *data);
 void	startpos(t_cub *data);
-void	startangle(t_cub *data, char angle);
+void	startangle(t_cub *data, char angle, int i, int j);
 void	mapsizeint(t_cub *data);
 int		countmapsize(int fd);
 char	**openmap(char *path);
@@ -115,6 +113,9 @@ char	**openmap(char *path);
 /* ----- DRAW ----- */
 void	my_mlx_pixel_put(t_cub *data, int x, int y, int color);
 void	drawsquare(int x, int y, t_cub *data, int type);
+void	drawmap(t_cub *data);
+void	render_square(t_cub *data, int x, int y, int i);
+void	draw_line(t_cub *data, double angle);
 
 /* ----- IMAGE ----- */
 void	draw_sky(t_cub *data);
@@ -124,14 +125,15 @@ void	draw_image(t_cub *data);
 /* ----- PLAYER ----- */
 void	setplayer(t_cub *data);
 void	draw_raycasting(t_cub *data);
-void	draw_line(t_cub *data, double angle);
-float	checkHorizontalLines(t_cub *data, int flag);
-float	checkVerticalLines(t_cub *data, int flag);
-float	dist_wallhit(t_cub *data, double angle, float rx, float ry, int vert);
+float	check_horizontal_lines(t_cub *data, int flag);
+void	get_intersection(t_cub *data, int dof, float xo, float yo, float *rx, float *ry);
+float	check_vertical_lines(t_cub *data, int flag);
+float	dist_wallhit(t_cub *data, float rx, float ry);
 void	draw_line3d(t_cub *data, float rx, float ry, int vert);
 void	check_angle(t_cub *data);
 void	setmap(t_cub *data);
 void	alloc_intmap(t_cub *data);
+
 
 /* ----- HOOK ----- */
 int		cub_exit(t_cub *data);
@@ -147,7 +149,9 @@ void	add_hook(t_cub *data);
 /* ----- INIT ----- */
 void	init(t_cub *data, int argc, char **argv, char **env);
 
-void	print_texture(t_cub *data, double ratiox, int x, int y, int wall);
+/* ----- TEXTURE ----- */
 int		get_texture(t_cub *data, char *path, int wall);
+int		get_color_from_texture(t_cub *data, int x, int y, int wall);
+void	print_texture(t_cub *data, double ratiox, int x, int y, int wall);
 
 #endif

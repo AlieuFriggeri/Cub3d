@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:23:28 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/07 13:26:50 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/07 16:38:09 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,30 +60,6 @@ void	rotate_player(int keycode, t_cub *data)
 		data->player.pdy = sin(data->player.pa) * 5;
 	}
 	check_angle(data);
-}
-
-void	check_collision(t_cub *data)
-{
-	int r = 0;
-	int dist;
-	data->player.pa2 = data->player.pa - (DEG * 180);
-	while (r < 4)
-	{
-		if (checkHorizontalLines(data, 0) < checkVerticalLines(data, 0))
-			dist = checkHorizontalLines(data, 0);
-		else
-			dist = checkVerticalLines(data, 0);
-		if (r == 0)
-			data->player.dwall_s = dist;
-		if (r == 1)
-			data->player.dwall_w = dist;
-		if (r == 2)
-			data->player.dwall_n = dist;
-		if (r == 3)
-			data->player.dwall_e = dist;
-		data->player.pa2 += DEG * 90;
-		r++;
-	}
 }
 
 void	move_player(int keycode, t_cub *data)
