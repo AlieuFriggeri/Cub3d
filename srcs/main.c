@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/07 12:22:03 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/07 13:28:14 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	main(int ac, char **av)
 	data.player.wall_dist = 100000;
 	data.map = openmap(av[1]);
 	init(&data, 0, NULL, NULL);
+	get_texture(&data, "xpm/test.xpm", 0);
+	get_texture(&data, "xpm/test_gros.xpm", 1);
 	draw_image(&data);
 	add_hook(&data);
 	return (0);
@@ -74,7 +76,6 @@ void	drawmap(t_cub *data)
 		}
 		y += 8;
 	}
-	//printf("%d | %d\n", i, data->mapsize);
 }
 
 void startpos(t_cub *data)
