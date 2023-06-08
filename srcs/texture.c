@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 12:52:12 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/08 17:21:14 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/08 17:49:57 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	get_texture(t_cub *data, char *path, int wall)
 {
 	data->wall[wall].img = mlx_xpm_file_to_image(data->mlx, path,
 			&data->wall[wall].width, &data->wall[wall].height);
+	if (data->wall[wall].img == NULL)
+		printerror(data, "Texture not good (maybe the file doesn't exist or it isn't a .xpm file)");
 	data->wall[wall].addr = mlx_get_data_addr(data->wall[wall].img,
 			&data->wall[wall].bpp, &data->wall[wall].sl, &data->wall[wall].ed);
 	return (0);
@@ -68,7 +70,7 @@ int	encode_rgb(int r, int g, int b)
 void	texture(t_cub *data, char *av)
 {
 	(void)av;
-	get_texture(data, "xpm/flat.xpm", NORTH);
+	get_texture(data, "xpm/flat.xp", NORTH);
 	get_texture(data, "xpm/door.xpm", SOUTH);
 	get_texture(data, "xpm/stone.xpm", EAST);
 	get_texture(data, "xpm/pipewall.xpm", WEST);
