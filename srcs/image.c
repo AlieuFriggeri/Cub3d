@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:29:24 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/07 17:51:49 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/08 16:34:59 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	draw_floor(t_cub *data)
 	{
 		while (x < WIDTH)
 		{
-			my_mlx_pixel_put(data, x, y, GREY_COLOR);
+			my_mlx_pixel_put(data, x, y, data->floor);
 			x++;
 		}
 		y++;
@@ -42,7 +42,7 @@ void	draw_sky(t_cub *data)
 	{
 		while (x < WIDTH)
 		{
-			my_mlx_pixel_put(data, x, y, BLUE_COLOR);
+			my_mlx_pixel_put(data, x, y, data->sky);
 			x++;
 		}
 		y++;

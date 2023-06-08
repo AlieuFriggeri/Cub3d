@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 12:52:12 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/07 17:21:22 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/08 17:21:14 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,26 @@ void	print_texture(t_cub *data, double rx, int x, int y, int wall)
 	offset *= (float)y;
 	color = get_color_from_texture(data, (int)imgx, (int)offset, wall);
 	my_mlx_pixel_put(data, x, y + data->player.lineO, color);
+}
+
+int	encode_rgb(int r, int g, int b)
+{
+	int	color;
+
+	color = 0;
+	color += r << 16;
+	color += g << 8;
+	color += b;
+	return (color);
+}
+
+void	texture(t_cub *data, char *av)
+{
+	(void)av;
+	get_texture(data, "xpm/flat.xpm", NORTH);
+	get_texture(data, "xpm/door.xpm", SOUTH);
+	get_texture(data, "xpm/stone.xpm", EAST);
+	get_texture(data, "xpm/pipewall.xpm", WEST);
+	data->sky = encode_rgb(255, 0, 255);
+	data->floor = encode_rgb(0, 255, 0);
 }
