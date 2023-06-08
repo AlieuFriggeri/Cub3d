@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/07 18:16:49 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/08 11:51:28 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	main(int ac, char **av)
 	data.player.px = -1;
 	data.player.py = -1;
 	data.player.wall_dist = 100000;
-	data.map = openmap(av[1]);
+	data.mapstart = 0;
+	data.map = openmap(av[1], &data);
 	init(&data, 0, NULL, NULL);
 	get_texture(&data, "xpm/test.xpm", 0);
 	get_texture(&data, "xpm/door.xpm", 1);

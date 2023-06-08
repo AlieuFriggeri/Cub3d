@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/07 18:13:37 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/08 11:51:28 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,14 +101,15 @@ typedef struct s_cub{
 	char		**map;
 	int			*intmap;
 	int			mapsize;
+	int			mapstart;
 }	t_cub;
 
 /* ----- MAIN ----- */
 void	startpos(t_cub *data);
 void	startangle(t_cub *data, char angle, int i, int j);
 void	mapsizeint(t_cub *data);
-int		countmapsize(int fd);
-char	**openmap(char *path);
+int		countmapsize(int fd, t_cub *data);
+char	**openmap(char *path, t_cub *data);
 
 /* ----- DRAW ----- */
 void	my_mlx_pixel_put(t_cub *data, int x, int y, int color);
