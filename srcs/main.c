@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/08 11:51:28 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/08 17:10:32 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ int	main(int ac, char **av)
 	data.player.wall_dist = 100000;
 	data.mapstart = 0;
 	data.map = openmap(av[1], &data);
+	if (check_map(&data) != 0)
+		exit(123);
+	printf("d'autre soucis\n");
 	init(&data, 0, NULL, NULL);
 	get_texture(&data, "xpm/test.xpm", 0);
 	get_texture(&data, "xpm/door.xpm", 1);
