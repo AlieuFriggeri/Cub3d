@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/08 17:04:44 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/09 12:31:45 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@
 # define PI2 PI / 2
 # define PI3 3 * PI2
 # define DEG 0.0174533
-# define BLUE_COLOR 0x87CEEB
-# define GREY_COLOR 0x808080
+# define NORTH 0
+# define SOUTH 1
+# define EAST 2
+# define WEST 3
 # define NBRAY 512
 
 # define NBCARRE 8
@@ -98,6 +100,8 @@ typedef struct s_cub{
 	int			mapx;
 	int			mapy;
 	t_img		wall[4]; // 0 = N // 1 = S // 2 = E // 3 = W
+	int			sky;
+	int			floor;
 	char		**map;
 	int			*intmap;
 	int			mapsize;
@@ -110,6 +114,7 @@ void	startangle(t_cub *data, char angle, int i, int j);
 void	mapsizeint(t_cub *data);
 int		countmapsize(int fd, t_cub *data);
 char	**openmap(char *path, t_cub *data);
+void	printerror(t_cub *data, char *str);
 
 /* ----- DRAW ----- */
 void	my_mlx_pixel_put(t_cub *data, int x, int y, int color);
@@ -147,7 +152,7 @@ void	check_collision(t_cub *data);
 void	add_hook(t_cub *data);
 
 /* ----- INIT ----- */
-void	init(t_cub *data, int argc, char **argv, char **env);
+void	init(t_cub *data, char *av );
 
 /* ----- TEXTURE ----- */
 int		get_texture(t_cub *data, char *path, int wall);

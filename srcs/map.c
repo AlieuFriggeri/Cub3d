@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:31:11 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/08 11:52:53 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/09 12:36:00 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,13 @@ int	countmapsize(int fd, t_cub *data)
 			data->mapstart++;
 		}
 	}
-	while (get_next_line(fd))
+	res = get_next_line(fd);
+	while (res)
+	{
+		free(res);
+		res = get_next_line(fd);
 		i++;
+	}
 	close(fd);
 	printf("%d\n", i);
 	return (i);

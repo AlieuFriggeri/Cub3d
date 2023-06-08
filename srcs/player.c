@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/07 18:14:25 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/08 15:09:45 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,17 @@ void	select_texture(t_cub *data, float rx, float ry, int x, int y, int vert)
 {
 	if (vert == 1)
 	{
-		if (data->player.px < rx) // WEST
-			print_texture(data, ry, x, y, 3);
-		else // EAST
-			print_texture(data, ry, x, y, 2);
+		if (data->player.px < rx)
+			print_texture(data, ry, x, y, WEST);
+		else
+			print_texture(data, ry, x, y, EAST);
 	}
 	else
 	{
-		if (data->player.py < ry) // SOUTH
-			print_texture(data, rx, x, y, 1);
-		else // NORTH
-			print_texture(data, rx, x, y, 0);
+		if (data->player.py < ry)
+			print_texture(data, rx, x, y, SOUTH);
+		else
+			print_texture(data, rx, x, y, NORTH);
 	}
 }
 
