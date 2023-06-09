@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 12:52:12 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/09 13:17:48 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/09 14:03:30 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void	texture(t_cub *data, char *av)
 
 	if (av && av[0] != '\n')
 	{
-		printf("%s\n", av);
 		arg = ft_split(av, ' ');
 		if (!arg)
 			printerror(data, "malloc error");

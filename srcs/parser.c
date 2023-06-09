@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:43:18 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/08 17:42:34 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:04:09 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	check_map_space(t_cub *data, int i, int j)
 {	
 	while (ft_isspace(data->map[i][j]) == 1)
 	{
-		printf("space\n");
+		// printf("space\n");
 		if (data->map[i - 1][j] == '0' || data->map[i + 1][j] == '0')
 			return(123);
 		if ((data->map[i][j + 1] == '0' && data->map[i][j] != '1') || (data->map[i][j - 1] == '0' && j != 0))
@@ -52,7 +52,8 @@ int	check_map_space(t_cub *data, int i, int j)
 }
 
 int	check_map_first(t_cub *data, int i, int j)
-{printf("first\n");
+{
+	// printf("first\n");
 	while(ft_isspace(data->map[i][j] == 1))
 		j++;
 	if (data->map[i][j] == '0')
@@ -61,7 +62,8 @@ int	check_map_first(t_cub *data, int i, int j)
 }
 
 int check_map_last(t_cub *data, int i, int j)
-{printf("last\n");
+{
+	// printf("last\n");
 	j = ft_strlen(data->map[i]);
 	while (ft_isspace(data->map[i][j]) == 1)
 	{
@@ -75,7 +77,8 @@ int check_map_last(t_cub *data, int i, int j)
 }
 
 int check_first_line(t_cub *data)
-{printf("firstline\n");
+{
+	// printf("firstline\n");
 	int i;
 	int j;
 

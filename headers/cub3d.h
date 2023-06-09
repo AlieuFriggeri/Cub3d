@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/09 13:04:02 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/09 13:29:17 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@
 # define PI2 PI / 2
 # define PI3 3 * PI2
 # define DEG 0.0174533
+# define NORTH 0
+# define SOUTH 1
+# define EAST 2
+# define WEST 3
 # define NORTH 0
 # define SOUTH 1
 # define EAST 2
@@ -163,10 +167,10 @@ void	texture(t_cub *data, char *av);
 void	get_color(t_cub *data, int *p, char *str);
 
 /*------ PARSER -------*/
-int	check_map(t_cub *data);
-int	check_map_space(t_cub *data, int i, int j);
-int	check_map_first(t_cub *data, int i, int j);
-int check_map_last(t_cub *data, int i, int j);
-int check_first_line(t_cub *data);
+int		check_map(t_cub *data);
+int		check_map_space(t_cub *data, int i, int j);
+int		check_map_first(t_cub *data, int i, int j);
+int		check_map_last(t_cub *data, int i, int j);
+int		check_first_line(t_cub *data);
 
 #endif

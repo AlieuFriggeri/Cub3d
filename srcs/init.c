@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:07:45 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/09 13:16:39 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/09 14:04:37 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init(t_cub *data, char *av)
 	data->map = openmap(av, data);
 	if (check_map(data))
 		printerror(data, "Map not good");
+	printf("map ok\n");
 	startpos(data);
 	setmap(data);
 	data->player.pdx = cos(data->player.pa) * 5;

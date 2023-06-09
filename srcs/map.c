@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:31:11 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/09 13:23:46 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/09 14:03:22 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char	**openmap(char *path, t_cub *data)
 	int		i;
 	char	**map1;
 	int		size;
-	char	*tmp;
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
@@ -27,18 +26,20 @@ char	**openmap(char *path, t_cub *data)
 	map1 = malloc(sizeof(char *) * size + 1);
 	i = 0;
 	fd = open(path, O_RDONLY);
-	printf("mapstart:\t%d\n", data->mapstart);
 	while (i <= size)
 	{
-		while (data->mapstart > 0)
+		if (data->mapstart > 0)
 		{
 			texture(data, get_next_line(fd));
 			data->mapstart--;
 		}
-		map1[i] = get_next_line(fd);
-		if (map1[i] == NULL)
-			break ;
-		i++;
+		else
+		{
+			map1[i] = get_next_line(fd);
+			if (map1[i] == NULL)
+				break ;
+			i++;
+		}
 	}
 	close(fd);
 	return (map1);
