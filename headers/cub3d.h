@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/09 12:31:45 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/09 13:04:02 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,8 @@ int		get_texture(t_cub *data, char *path, int wall);
 int		get_color_from_texture(t_cub *data, int x, int y, int wall);
 void	print_texture(t_cub *data, double ratiox, int x, int y, int wall);
 void	select_texture(t_cub *data, float rx, float ry, int x, int y, int vert);
+void	texture(t_cub *data, char *av);
+void	get_color(t_cub *data, int *p, char *str);
 
 /*------ PARSER -------*/
 int	check_map(t_cub *data);
