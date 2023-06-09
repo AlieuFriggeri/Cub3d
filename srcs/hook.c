@@ -6,7 +6,11 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:23:28 by afrigger          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/06/09 12:37:12 by vgroux           ###   ########.fr       */
+=======
+/*   Updated: 2023/06/09 12:28:19 by vgroux           ###   ########.fr       */
+>>>>>>>  texture ok no leaks + erreur  chargement texture
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +18,11 @@
 
 int	cub_exit(t_cub *data)
 {
+<<<<<<< HEAD
 	if (data->mlx && data->img)
+=======
+	if (data->mlx && data->img != NULL)
+>>>>>>>  texture ok no leaks + erreur  chargement texture
 		mlx_destroy_image(data->mlx, data->img);
 	if (data->mlx && data->window != NULL)
 		mlx_destroy_window(data->mlx, data->window);

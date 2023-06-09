@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 12:52:12 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/08 17:49:57 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/09 12:28:09 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	encode_rgb(int r, int g, int b)
 void	texture(t_cub *data, char *av)
 {
 	(void)av;
-	get_texture(data, "xpm/flat.xp", NORTH);
+	get_texture(data, "xpm/flat.xpm", NORTH);
 	get_texture(data, "xpm/door.xpm", SOUTH);
 	get_texture(data, "xpm/stone.xpm", EAST);
 	get_texture(data, "xpm/pipewall.xpm", WEST);
