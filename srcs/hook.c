@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:23:28 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/08 17:52:05 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/09 12:28:19 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,6 @@
 
 int	cub_exit(t_cub *data)
 {
-	if (data->mlx && data->wall[3].img == NULL)
-		mlx_destroy_image(data->mlx, data->wall[3].img);
-	if (data->mlx && data->wall[2].img == NULL)
-		mlx_destroy_image(data->mlx, data->wall[2].img);
-	if (data->mlx && data->wall[1].img == NULL)
-		mlx_destroy_image(data->mlx, data->wall[1].img);
-	if (data->mlx && data->wall[0].img == NULL)
-		mlx_destroy_image(data->mlx, data->wall[0].img);
 	if (data->mlx && data->img != NULL)
 		mlx_destroy_image(data->mlx, data->img);
 	if (data->mlx && data->window != NULL)
