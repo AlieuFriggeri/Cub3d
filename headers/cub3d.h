@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/12 12:47:06 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 12:58:20 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,9 @@ void	check_collision(t_cub *data);
 void	add_hook(t_cub *data);
 
 /* ----- INIT ----- */
-void	init(t_cub *data, char *av );
+void	init(t_cub *data, char *av);
+void	init_null(t_cub *data);
+void	check_color(t_cub *data);
 
 /* ----- TEXTURE ----- */
 int		get_texture(t_cub *data, char *path, int wall);
