@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:43:18 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 18:04:51 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:37:33 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,34 @@ void	setmapnum(t_cub *data)
 		data->mapnum[i] = malloc(sizeof(int) * data->mapx);
 		i++;
 	}
-	i = 0;
+	setmap_scandale(data, i, j);
+}
+
+int	extra_map_check(t_cub *data)
+{
+	int	h;
+	int	w;
+
+	h = 1;
+	w = 1;
+	while (h < data->mapy - 1)
+	{
+		w = 1;
+		while (w < data->mapx - 1)
+		{
+			if (data->mapnum[h][w] == 0 && (data->mapnum[h - 1][w] == 3
+				|| data->mapnum[h + 1][w] == 3 || data->mapnum[h]
+					[w - 1] == 3 || data->mapnum[h][w + 1] == 3))
+				return (0);
+			w++;
+		}
+		h++;
+	}
+	return (1);
+}
+
+void	setmap_scandale(t_cub *data, int i, int j)
+{
 	while (data->map[i])
 	{
 		while (data->map[i][j])
@@ -94,35 +121,8 @@ void	setmapnum(t_cub *data)
 			}
 			j++;
 		}
-		while (j < data->mapx)
-		{
-			data->mapnum[i][j] = 3;
-			j++;
-		}
+		setmap_scandale2(data, i, j);
 		j = 0;
 		i++;
 	}
-}
-
-int	extra_map_check(t_cub *data)
-{
-	int	h;
-	int	w;
-
-	h = 1;
-	w = 1;
-	while (h < data->mapy - 1)
-	{
-		w = 1;
-		while (w < data->mapx - 1)
-		{
-			if (data->mapnum[h][w] == 0 && (data->mapnum[h - 1][w] == 3
-				|| data->mapnum[h + 1][w] == 3 ||data->mapnum[h]
-					[w - 1] == 3 || data->mapnum[h][w + 1] == 3))
-				return (0);
-			w++;
-		}
-		h++;
-	}
-	return (1);
 }

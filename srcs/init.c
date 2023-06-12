@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:07:45 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 18:32:47 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:37:48 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,13 @@ int	countmap_scandale(int fd, char *res, int x)
 	}
 	close(fd);
 	return (i);
+}
+
+void	setmap_scandale2(t_cub *data, int i, int j)
+{
+	while (j < data->mapx)
+	{
+		data->mapnum[i][j] = 3;
+		j++;
+	}
 }
