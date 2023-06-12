@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:43:18 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 12:29:09 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 12:32:53 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	check_map(t_cub *data)
 {
 	if (check_col(data) == 0 || check_line(data) == 0)
-		return (1);
-	else
 		return (0);
+	else
+		return (1);
 }
 
 int	check_map_space(t_cub *data, int i, int j)
@@ -127,7 +127,7 @@ int	check_map_longline(t_cub *data)
 	}
 	return (0);
 }
-
+/*
 int	check_col(t_cub *data)
 	{
 	int	i;
@@ -146,6 +146,55 @@ int	check_col(t_cub *data)
 		while (j > 0 && !data->map[i][j])
 			j--;
 		if (!data->map[i][j] || data->map[i][j] != '1')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	check_line(t_cub *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < data->mapy)
+	{
+		j = 0;
+		while (j < data->mapx - 1 && !data->map[i][j])
+			j++;
+		if (data->map[i][j] != '1')
+			return (0);
+		j = data->mapx - 1;
+		while (j > 0 && !data->map[i][j])
+			j--;
+		if (data->map[i][j] != '1')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+*/
+/* ----------------------------------------- */
+int	check_col(t_cub *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < data->mapx - 1)
+	{
+		j = 0;
+		while (j < data->mapy - 1 && !data->map[i][j])
+			j++;
+		if (data->map[i][j] != '1')
+			return (0);
+		j = data->mapy - 1;
+		while (j > 0 && !data->map[i][j])
+			j--;
+		if (data->map[i][j] != '1')
 			return (0);
 		i++;
 	}
