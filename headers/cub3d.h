@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/12 13:30:34 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 13:53:07 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,16 @@
 # define NBCARRE 8
 # define CUBSIZE (HEIGHT / NBCARRE)
 
+typedef struct s_var
+{
+	int		dof;
+	float	rx;
+	float	ry;
+	float	ra;
+	float	xo;
+	float	yo;
+	float	atan;
+}	t_var;
 typedef struct s_player{
 	double		px;
 	double		py;
@@ -138,13 +148,15 @@ void	draw_image(t_cub *data);
 void	setplayer(t_cub *data);
 void	draw_raycasting(t_cub *data);
 float	check_horizontal_lines(t_cub *data, int flag);
-void	get_intersection(t_cub *data, int dof, float xo, float yo, float *rx, float *ry);
+void	get_intersection(t_cub *data, t_var *var);
 float	check_vertical_lines(t_cub *data, int flag);
 float	dist_wallhit(t_cub *data, float rx, float ry);
 void	draw_line3d(t_cub *data, float rx, float ry);
 void	check_angle(t_cub *data);
 void	setmap(t_cub *data);
 void	alloc_intmap(t_cub *data);
+void	ra_equal_pi(t_cub *data, t_var *var);
+int		ft_scandale(t_cub *data, t_var *var, int flag, int flag2);
 
 /* ----- HOOK ----- */
 int		cub_exit(t_cub *data);
@@ -173,12 +185,12 @@ int		encode_rgb(int r, int g, int b);
 void	texture_scandal(t_cub *data, char **arg);
 
 /*------ PARSER -------*/
-int	check_map(t_cub *data);
-int	check_map_space(t_cub *data, int i, int j);
-int	check_map_first(t_cub *data, int i, int j);
-int check_map_last(t_cub *data, int i, int j);
-int check_first_line(t_cub *data);
-int	check_col(t_cub *data);
-int	check_line(t_cub *data);
+int		check_map(t_cub *data);
+int		check_map_space(t_cub *data, int i, int j);
+int		check_map_first(t_cub *data, int i, int j);
+int 	check_map_last(t_cub *data, int i, int j);
+int 	check_first_line(t_cub *data);
+int		check_col(t_cub *data);
+int		check_line(t_cub *data);
 
 #endif
