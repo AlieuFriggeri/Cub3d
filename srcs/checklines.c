@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 17:36:01 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 13:52:53 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 14:54:35 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ void	get_intersection(t_cub *data, t_var *var)
 			var->ry += var->yo;
 			var->dof += 1;
 		}
-		data->player.lineH = (CUBSIZE * HEIGHT) / data->player.disT;
-		if (data->player.lineH > HEIGHT)
-			data->player.lineH = HEIGHT;
-		data->player.lineO = HEIGHT / 2 - data->player.lineH / 2;
+		data->player.lineh = (CUBSIZE * HEIGHT) / data->player.dist;
+		if (data->player.lineh > HEIGHT)
+			data->player.lineh = HEIGHT;
+		data->player.lineo = HEIGHT / 2 - data->player.lineh / 2;
 	}
 }

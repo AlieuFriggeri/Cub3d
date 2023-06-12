@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 13:28:48 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 14:55:12 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	setplayer(t_cub *data)
 		data->player.r = r;
 		if (check_horizontal_lines(data, 0) < check_vertical_lines(data, 0))
 		{
-			data->player.disT = check_horizontal_lines(data, 0);
+			data->player.dist = check_horizontal_lines(data, 0);
 			check_horizontal_lines(data, 1);
 		}
 		else
 		{
-			data->player.disT = check_vertical_lines(data, 0);
+			data->player.dist = check_vertical_lines(data, 0);
 			check_vertical_lines(data, 1);
 		}
 		data->player.pa2 += DEG / 4;
@@ -51,7 +51,7 @@ void	draw_line3d(t_cub *data, float rx, float ry)
 	while (data->ax < x2)
 	{
 		y = 0;
-		while (y < data->player.lineH)
+		while (y < data->player.lineh)
 		{
 			select_texture(data, rx, ry, y);
 			y++;

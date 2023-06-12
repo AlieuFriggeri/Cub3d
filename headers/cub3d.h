@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/12 13:53:07 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 14:54:38 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "../mlx_macos/mlx.h"
 # include "../libft/libft.h"
 # include "map.h"
-# include "hook.h"
 
 /*	Official headers	*/
 # include <math.h>
@@ -30,8 +29,8 @@
 # define WIDTH 1024
 # define HEIGHT 512
 # define PI 3.1415926535
-# define PI2 PI / 2
-# define PI3 3 * PI2
+# define PI2 1.57079632679
+# define PI3 4.71238898038
 # define DEG 0.0174533
 # define NORTH 0
 # define SOUTH 1
@@ -56,6 +55,7 @@ typedef struct s_var
 	float	yo;
 	float	atan;
 }	t_var;
+
 typedef struct s_player{
 	double		px;
 	double		py;
@@ -69,9 +69,9 @@ typedef struct s_player{
 	double		starty;
 	double		endx;
 	double		endy;
-	double		disT;
-	double		lineH;
-	double		lineO;
+	double		dist;
+	double		lineh;
+	double		lineo;
 	int			r;
 	int			spx;
 	int			spy;
@@ -114,7 +114,7 @@ typedef struct s_cub{
 	t_player	player;
 	int			mapx;
 	int			mapy;
-	t_img		wall[4]; // 0 = N // 1 = S // 2 = E // 3 = W
+	t_img		wall[4];
 	int			sky;
 	int			floor;
 	char		**map;
@@ -188,8 +188,8 @@ void	texture_scandal(t_cub *data, char **arg);
 int		check_map(t_cub *data);
 int		check_map_space(t_cub *data, int i, int j);
 int		check_map_first(t_cub *data, int i, int j);
-int 	check_map_last(t_cub *data, int i, int j);
-int 	check_first_line(t_cub *data);
+int		check_map_last(t_cub *data, int i, int j);
+int		check_first_line(t_cub *data);
 int		check_col(t_cub *data);
 int		check_line(t_cub *data);
 
