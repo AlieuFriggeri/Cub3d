@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:31:11 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/08 11:52:53 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/09 13:26:04 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	setmap(t_cub *data)
 
 	i = 0;
 	k = 0;
+	mapsizeint(data);
 	alloc_intmap(data);
 	while (data->map[i])
 	{
@@ -65,9 +66,13 @@ void	setmap(t_cub *data)
 			j++;
 			k++;
 		}
+		while (k < data->mapx)
+		{
+			data->intmap[k] = 1;
+			k++;
+		}
 		i++;
 	}
-	mapsizeint(data);
 }
 
 void	alloc_intmap(t_cub *data)
@@ -79,10 +84,11 @@ void	alloc_intmap(t_cub *data)
 	size = 0;
 	while (data->map[i])
 	{
-		size += ft_strlen(data->map[i]);
+		if ((int)ft_strlen(data->map[i] )> size)
+			size = ft_strlen(data->map[i]);
 		i++;
 	}
-	data->intmap = malloc(sizeof(int) * (size - i) + 1);
+	data->intmap = malloc(sizeof(int) * (size * data->mapy) + 1);
 }
 
 int	countmapsize(int fd, t_cub *data)
@@ -112,7 +118,6 @@ int	countmapsize(int fd, t_cub *data)
 	while (get_next_line(fd))
 		i++;
 	close(fd);
-	printf("%d\n", i);
 	return (i);
 }
 
