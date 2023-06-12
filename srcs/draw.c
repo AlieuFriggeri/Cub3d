@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:25:35 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/07 17:18:53 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:14:52 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	drawmap(t_cub *data)
 
 	i = 0;
 	y = 0;
-	while (i < data->mapsize)
+	//printf("%d\n", data->mapsize);
+	while (i < data->mapy)
 	{
 		x = 0;
 		j = 0;
@@ -65,23 +66,22 @@ void	drawmap(t_cub *data)
 		{
 			if (j == data->mapx - 1)
 			{
-				i++;
 				break ;
 			}
-			render_square(data, x, y, i);
-			j++;
-			i++;
+			render_square(data, x, y, data->mapnum[i][j]);
 			x += 8;
+			j++;
 		}
+		i++;
 		y += 8;
 	}
 }
 
 void	render_square(t_cub *data, int x, int y, int i)
 {
-	if (data->intmap[i] == 1)
+	if (i == 1 || i == 3)
 		drawsquare(x, y, data, 1);
-	else if (data->intmap[i] == 0)
+	else if (i == 0)
 		drawsquare(x, y, data, 0);
 	else
 		drawsquare(x, y, data, 2);
