@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:43:18 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 17:49:52 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:59:21 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ int	check_line(t_cub *data)
 	return (1);
 }
 
-
-void	setmapnum(t_cub * data)
+void	setmapnum(t_cub *data)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
+
 	i = 0;
 	j = 0;
 	alloc_intmap(data);
@@ -94,11 +94,11 @@ void	setmapnum(t_cub * data)
 			}
 			j++;
 		}
-			while (j < data->mapx)
-			{
-				data->mapnum[i][j] = 3;
-				j++;
-			}
+		while (j < data->mapx)
+		{
+			data->mapnum[i][j] = 3;
+			j++;
+		}
 		j = 0;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:25:35 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 17:55:05 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:58:22 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ void	drawsquare(int x, int y, t_cub *data, int type)
 		{
 			while (y < y2)
 			{
-				if (y == y2 - 1)
-					my_mlx_pixel_put(data, x, y, 0x000000);
-				else if (x == x2 - 1)
+				if (y == y2 - 1 || x == x2 - 1)
 					my_mlx_pixel_put(data, x, y, 0x000000);
 				else if (type == 1)
 					my_mlx_pixel_put(data, x, y, 0x339900);
