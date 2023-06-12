@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:43:18 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 17:00:37 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:35:53 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,8 @@ void	setmapnum(t_cub * data)
 	int j;
 	i = 0;
 	j = 0;
-	//printf("%d\n", data->mapy);
+	alloc_intmap(data);
+	mapsizeint(data);
 	data->mapnum = malloc(sizeof(int *) * data->mapy);
 	while (i < data->mapy)
 	{
@@ -193,7 +194,7 @@ void	setmapnum(t_cub * data)
 	while (data->map[i])
 	{
 		while (data->map[i][j])
-		{//printf("%d\t%d\t\n", i, j);
+		{
 			if (data->map[i][j] == '1')
 				data->mapnum[i][j] = 1;
 			else if (data->map[i][j] == '0')
@@ -216,6 +217,5 @@ void	setmapnum(t_cub * data)
 			}
 		j = 0;
 		i++;
-		//printf("salut\n");
 	}
 }

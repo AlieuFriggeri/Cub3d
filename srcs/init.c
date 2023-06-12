@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:07:45 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 17:01:38 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:36:30 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ void	init(t_cub *data, char *av)
 	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->sl, &data->ed);
 	init_null(data);
 	data->map = openmap(av, data);
-	check_color(data);
-	setmap(data);
 	setmapnum(data);
+	setmap(data);
+	check_color(data);
 	if (!check_col(data) || !check_line(data))
-			printf("NOT OK\n");
-	else
-		printf("YES OK\n");
+	{
+		perror("map not ok\n");
+		exit(123);
+	}
 	startpos(data);
 	data->player.pdx = cos(data->player.pa) * 5;
 	data->player.pdy = sin(data->player.pa) * 5;
