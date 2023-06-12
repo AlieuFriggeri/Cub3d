@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kistod <kistod@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:43:18 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/08 17:42:34 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/12 12:44:26 by kistod           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	check_map(t_cub *data)
 
 	i = 1;
 	j = 0;
+	// if (check_map_longline(data) != 0)
+	// 	return (123);
 	while (data->map[i])
 	{
 		if (check_first_line(data) != 0)
@@ -29,7 +31,7 @@ int	check_map(t_cub *data)
 				return (123);
 		if (check_map_first(data, i, j) != 0)
 			return (123);
-		if (check_map_last(data, i ,j))
+		if (check_map_last(data, i ,j) != 0)
 			return (123);
 		i++;
 		j = 0;
@@ -48,6 +50,16 @@ int	check_map_space(t_cub *data, int i, int j)
 			return (123);
 		j++;
 	}
+	j = ft_strlen(data->map[i]);
+	while (ft_isspace(data->map[i][j]) == 1)
+	{
+		printf("space\n");
+		if (data->map[i - 1][j] == '0' || data->map[i + 1][j] == '0')
+			return(123);
+		if ((data->map[i][j + 1] == '0' && data->map[i][j] != '1') || (data->map[i][j - 1] == '0' && j != 0))
+			return (123);
+		j--;
+	}
 	return(0);
 }
 
@@ -62,10 +74,15 @@ int	check_map_first(t_cub *data, int i, int j)
 
 int check_map_last(t_cub *data, int i, int j)
 {printf("last\n");
-	j = ft_strlen(data->map[i]);
-	while (ft_isspace(data->map[i][j]) == 1)
+	j = ft_strlen(data->map[i]) - 1;
+	//printf("%c\n", data->map[i][j]);
+	while (data->map[i][j] != '1')
 	{
-		if (data->map[i - 1][j] == '0' || data->map[i + 1][j] == '0')
+		if (data->map[i - 1])
+			if (data->map[i - 1][j] == '0')
+				return (123);
+		if (data->map[i + 1])
+			if (data->map[i + 1][j] == '0')
 			return (123);
 		j--;
 	}
