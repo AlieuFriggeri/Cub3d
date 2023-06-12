@@ -26,7 +26,8 @@ SRCS_LIST =	main.c \
 			texture.c \
 			collision.c \
 			checklines.c \
-			parser.c
+			parser.c \
+			texture2.c \
 
 ifeq (${UNAME}, Linux)
 	SRCS_LIST += linux.c

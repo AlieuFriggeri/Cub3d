@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 17:36:01 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 13:05:33 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 14:54:35 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,114 +14,98 @@
 
 float	check_horizontal_lines(t_cub *data, int flag)
 {
-	int		dof;
-	float	rx;
-	float	ry;
-	float	ra;
-	float	xo;
-	float	yo;
-	float	atan;
+	t_var	var;
 
-	ra = data->player.pa2;
-	atan = -1 / tan(ra);
-	dof = 0;
-	if (ra > PI)
+	var.ra = data->player.pa2;
+	var.atan = -1 / tan(var.ra);
+	var.dof = 0;
+	if (var.ra > PI)
 	{
-		ry = (((int)data->player.py >> 6) << 6) - 0.0001;
-		rx = (data->player.py - ry) * atan + data->player.px;
-		yo = -CUBSIZE;
-		xo = -yo * atan;
+		var.ry = (((int)data->player.py >> 6) << 6) - 0.0001;
+		var.rx = (data->player.py - var.ry) * var.atan + data->player.px;
+		var.yo = -CUBSIZE;
+		var.xo = -var.yo * var.atan;
 	}
 	else
 	{
-		ry = (((int)data->player.py >> 6) << 6) + CUBSIZE;
-		rx = (data->player.py - ry) * atan + data->player.px;
-		yo = CUBSIZE;
-		xo = -yo * atan;
+		var.ry = (((int)data->player.py >> 6) << 6) + CUBSIZE;
+		var.rx = (data->player.py - var.ry) * var.atan + data->player.px;
+		var.yo = CUBSIZE;
+		var.xo = -var.yo * var.atan;
 	}
-	if (ra == 0 || ra == PI)
-	{
-		rx = data->player.px;
-		ry = data->player.py;
-		dof = data->mapx;
-	}
-	get_intersection(data, dof, xo, yo, &rx, &ry);
+	return (ft_scandale(data, &var, flag, 0));
+}
+
+int	ft_scandale(t_cub *data, t_var *var, int flag, int flag2)
+{
+	ra_equal_pi(data, var);
+	get_intersection(data, var);
 	if (flag == 0)
-		return (dist_wallhit(data, rx, ry));
+		return (dist_wallhit(data, var->rx, var->ry));
 	else
 	{
-		data->player.flag = 0;
-		draw_line3d(data, rx, ry);
+		data->player.flag = flag2;
+		draw_line3d(data, var->rx, var->ry);
 	}
 	return (0);
 }
 
 float	check_vertical_lines(t_cub *data, int flag)
 {
-	int		dof;
-	float	rx;
-	float	ry;
-	float	ra;
-	float	xo;
-	float	yo;
-	float	ntan;
+	t_var	var;
 
-	ra = data->player.pa2;
-	ntan = -tan(ra);
-	dof = 0;
-	if (ra > PI2 && ra < PI3)
+	var.ra = data->player.pa2;
+	var.atan = -tan(var.ra);
+	var.dof = 0;
+	if (var.ra > PI2 && var.ra < PI3)
 	{
-		rx = (((int)data->player.px >> 6) << 6) - 0.0001;
-		ry = (data->player.px - rx) * ntan + data->player.py;
-		xo = -CUBSIZE;
-		yo = -xo * ntan;
+		var.rx = (((int)data->player.px >> 6) << 6) - 0.0001;
+		var.ry = (data->player.px - var.rx) * var.atan + data->player.py;
+		var.xo = -CUBSIZE;
+		var.yo = -var.xo * var.atan;
 	}
 	else
 	{
-		rx = (((int)data->player.px >> 6) << 6) + CUBSIZE;
-		ry = (data->player.px - rx) * ntan + data->player.py;
-		xo = CUBSIZE;
-		yo = -xo * ntan;
+		var.rx = (((int)data->player.px >> 6) << 6) + CUBSIZE;
+		var.ry = (data->player.px - var.rx) * var.atan + data->player.py;
+		var.xo = CUBSIZE;
+		var.yo = -var.xo * var.atan;
 	}
-	if (ra == 0 || ra == PI)
-	{
-		rx = data->player.px;
-		ry = data->player.py;
-		dof = data->mapy;
-	}
-	get_intersection(data, dof, xo, yo, &rx, &ry);
-	if (flag == 0)
-		return (dist_wallhit(data, rx, ry));
-	else
-	{
-		data->player.flag = 1;
-		draw_line3d(data, rx, ry);
-	}
-	return (0);
+	return (ft_scandale(data, &var, flag, 1));
 }
 
-void	get_intersection(t_cub *data, int dof, float xo, float yo, float *rx, float *ry)
+void	ra_equal_pi(t_cub *data, t_var *var)
+{
+	if (var->ra == 0 || var->ra == PI)
+	{
+		var->rx = data->player.px;
+		var->ry = data->player.py;
+		var->dof = data->mapy;
+	}
+}
+
+void	get_intersection(t_cub *data, t_var *var)
 {
 	int		mx;
 	int		my;
 	int		mp;
 
-	while (dof < data->mapx)
+	while (var->dof < data->mapx)
 	{
-		mx = (int)*rx >> 6;
-		my = (int)*ry >> 6;
+		mx = (int)var->rx >> 6;
+		my = (int)var->ry >> 6;
 		mp = my * data->mapx + mx;
 		if (mp > 0 && mp < data->mapx * data->mapy && data->intmap[mp] == 1)
-			dof = data->mapx;
+			var->dof = data->mapx;
 		else
 		{
-			*rx += xo;
-			*ry += yo;
-			dof += 1;
+			var->rx += var->xo;
+			var->ry += var->yo;
+			var->dof += 1;
 		}
-		data->player.lineH = (CUBSIZE * HEIGHT) / data->player.disT;
-		if (data->player.lineH > HEIGHT)
-			data->player.lineH = HEIGHT;
-		data->player.lineO = HEIGHT / 2 - data->player.lineH / 2;
+		data->player.lineh = (CUBSIZE * HEIGHT) / data->player.dist;
+		if (data->player.lineh > HEIGHT)
+			data->player.lineh = HEIGHT;
+		data->player.lineo = HEIGHT / 2 - data->player.lineh / 2;
 	}
 }

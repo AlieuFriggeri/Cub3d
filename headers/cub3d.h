@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/12 15:46:55 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:02:52 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "../mlx_macos/mlx.h"
 # include "../libft/libft.h"
 # include "map.h"
-# include "hook.h"
 
 /*	Official headers	*/
 # include <math.h>
@@ -30,8 +29,8 @@
 # define WIDTH 1024
 # define HEIGHT 512
 # define PI 3.1415926535
-# define PI2 PI / 2
-# define PI3 3 * PI2
+# define PI2 1.57079632679
+# define PI3 4.71238898038
 # define DEG 0.0174533
 # define NORTH 0
 # define SOUTH 1
@@ -46,6 +45,17 @@
 # define NBCARRE 8
 # define CUBSIZE (HEIGHT / NBCARRE)
 
+typedef struct s_var
+{
+	int		dof;
+	float	rx;
+	float	ry;
+	float	ra;
+	float	xo;
+	float	yo;
+	float	atan;
+}	t_var;
+
 typedef struct s_player{
 	double		px;
 	double		py;
@@ -59,9 +69,9 @@ typedef struct s_player{
 	double		starty;
 	double		endx;
 	double		endy;
-	double		disT;
-	double		lineH;
-	double		lineO;
+	double		dist;
+	double		lineh;
+	double		lineo;
 	int			r;
 	int			spx;
 	int			spy;
@@ -104,7 +114,7 @@ typedef struct s_cub{
 	t_player	player;
 	int			mapx;
 	int			mapy;
-	t_img		wall[4]; // 0 = N // 1 = S // 2 = E // 3 = W
+	t_img		wall[4];
 	int			sky;
 	int			floor;
 	char		**map;
@@ -112,6 +122,7 @@ typedef struct s_cub{
 	int			**mapnum;
 	int			mapsize;
 	int			mapstart;
+	int			ax;
 }	t_cub;
 
 /* ----- MAIN ----- */
@@ -138,13 +149,15 @@ void	draw_image(t_cub *data);
 void	setplayer(t_cub *data);
 void	draw_raycasting(t_cub *data);
 float	check_horizontal_lines(t_cub *data, int flag);
-void	get_intersection(t_cub *data, int dof, float xo, float yo, float *rx, float *ry);
+void	get_intersection(t_cub *data, t_var *var);
 float	check_vertical_lines(t_cub *data, int flag);
 float	dist_wallhit(t_cub *data, float rx, float ry);
 void	draw_line3d(t_cub *data, float rx, float ry);
 void	check_angle(t_cub *data);
 void	setmap(t_cub *data);
 void	alloc_intmap(t_cub *data);
+void	ra_equal_pi(t_cub *data, t_var *var);
+int		ft_scandale(t_cub *data, t_var *var, int flag, int flag2);
 
 /* ----- HOOK ----- */
 int		cub_exit(t_cub *data);
@@ -165,10 +178,12 @@ void	check_color(t_cub *data);
 /* ----- TEXTURE ----- */
 int		get_texture(t_cub *data, char *path, int wall);
 int		get_color_from_texture(t_cub *data, int x, int y, int wall);
-void	print_texture(t_cub *data, double ratiox, int x, int y, int wall);
-void	select_texture(t_cub *data, float rx, float ry, int x, int y);
+void	print_texture(t_cub *data, double ratiox, int y, int wall);
+void	select_texture(t_cub *data, float rx, float ry, int y);
 void	texture(t_cub *data, char *av);
 void	get_color(t_cub *data, int *p, char *str);
+int		encode_rgb(int r, int g, int b);
+void	texture_scandal(t_cub *data, char **arg);
 
 /*------ PARSER -------*/
 int	check_map(t_cub *data);
