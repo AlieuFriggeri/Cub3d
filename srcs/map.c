@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:31:11 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 14:57:09 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:33:08 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	setmap(t_cub *data)
 			j++;
 			k++;
 		}
-		while (k < data->mapx)
+		while (k % data->mapx != 0)
 		{
 			data->intmap[k] = 2;
 			k++;
@@ -93,8 +93,8 @@ void	alloc_intmap(t_cub *data)
 			size = ft_strlen(data->map[i]);
 		i++;
 	}
-	data->intmap = malloc(sizeof(int) * (size * data->mapy) + 1);
-	printf("%d\n", size * data->mapy);
+	data->mapx = size - 1;
+	data->intmap = malloc(sizeof(int) * ((size - 1) * data->mapy) + 1);
 }
 
 int	countmapsize(int fd, t_cub *data)
@@ -148,5 +148,5 @@ void	mapsizeint(t_cub *data)
 	}
 	data->mapx = max;
 	data->mapy = i;
-	data->mapsize = max * i;
+	data->mapsize = max * (i - 1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:43:18 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 17:00:37 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:32:36 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,26 @@ int	check_first_line(t_cub *data)
 	return (0);
 }
 
+void	printmap(t_cub *data)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	printf("mapx: %d\t\tmapy: %d\tmapsize: %d\n\n", data->mapx, data->mapy, data->mapsize);
+	while (y < data->mapy)
+	{
+		x = 0;
+		while (x < data->mapx)
+		{
+			printf("%d", data->intmap[y * data->mapy + x]);
+			x++;
+		}
+		printf("\n");
+		y++;		
+	}
+}
 /* int	check_spawn(t_cub *data)
 {
 	int	i;
@@ -129,12 +149,12 @@ int	check_first_line(t_cub *data)
 
 int	check_col(t_cub *data)
 {
-	int	i;
-	int	j;
+	int	x;
+	int	y;
 
-	i = 0;
-	j = 0;
-	while (i < data->mapx - 1)
+	y = 0;
+	printmap(data);
+	while (y < data->mapy)
 	{
 		j = 0;
 		while (j < data->mapy - 1 && data->mapnum[j][i] == 3)
@@ -148,8 +168,26 @@ int	check_col(t_cub *data)
 			return (0);
 		i++;
 	}
-	return (1);
-}
+	// int	i;
+	// int	j;
+
+	// i = 0;
+	// j = 0;
+	// while (i < data->mapx - 1)
+	// {
+	// 	j = 0;
+	// 	while (j < data->mapy - 1 && !data->map[i][j])
+	// 		j++;
+	// 	if (data->map[i][j] != '1')
+	// 		return (0);
+	// 	j = data->mapy - 1;
+	// 	while (j > 0 && !data->map[i][j])
+	// 		j--;
+	// 	if (data->map[i][j] != '1')
+	// 		return (0);
+	// 	i++;
+	// }
+	// return (1);
 
 int	check_line(t_cub *data)
 {
