@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/12 13:05:57 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 15:46:55 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct s_cub{
 	int			floor;
 	char		**map;
 	int			*intmap;
+	int			**mapnum;
 	int			mapsize;
 	int			mapstart;
 }	t_cub;
@@ -177,5 +178,6 @@ int check_map_last(t_cub *data, int i, int j);
 int check_first_line(t_cub *data);
 int	check_col(t_cub *data);
 int	check_line(t_cub *data);
+void	setmapnum(t_cub * data);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:07:45 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 13:00:00 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:01:38 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ void	init(t_cub *data, char *av)
 	data->map = openmap(av, data);
 	check_color(data);
 	setmap(data);
-	if (check_map(data))
-		printerror(data, "Map not good");
-	printf("map ok\n");
+	setmapnum(data);
+	if (!check_col(data) || !check_line(data))
+			printf("NOT OK\n");
+	else
+		printf("YES OK\n");
 	startpos(data);
 	data->player.pdx = cos(data->player.pa) * 5;
 	data->player.pdy = sin(data->player.pa) * 5;
