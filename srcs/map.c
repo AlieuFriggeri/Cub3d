@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:31:11 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 17:37:18 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:42:50 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,16 @@ void	setmap(t_cub *data)
 
 	i = 0;
 	k = 0;
-	mapsizeint(data);
-	alloc_intmap(data);
-	while (data->map[i])
+	while (i < data->mapy)
 	{
 		j = 0;
-		while (data->map[i][j])
+		while (j < data->mapx)
 		{
-			if (data->map[i][j] == '0' || data->map[i][j] == 'S'
-					|| data->map[i][j] == 'N' || data->map[i][j] == 'W'
-					|| data->map[i][j] == 'S')
-				data->intmap[k] = 0;
-			else if (data->map[i][j] == '1')
+			if (data->mapnum[i][j] == 3)
 				data->intmap[k] = 1;
 			else
-				data->intmap[k] = 2;
+				data->intmap[k] = data->mapnum[i][j];
 			j++;
-			k++;
-		}
-		while (k % data->mapx != 0)
-		{
-			data->intmap[k] = 2;
 			k++;
 		}
 		i++;
@@ -93,8 +82,7 @@ void	alloc_intmap(t_cub *data)
 			size = ft_strlen(data->map[i]);
 		i++;
 	}
-	data->mapx = size - 1;
-	data->intmap = malloc(sizeof(int) * ((size - 1) * data->mapy) + 1);
+	data->intmap = malloc(sizeof(int) * (size * data->mapy) + 1);
 }
 
 int	countmapsize(int fd, t_cub *data)
