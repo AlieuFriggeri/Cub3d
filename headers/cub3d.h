@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/12 12:58:20 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 13:05:57 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_player{
 	int			dwall_s;
 	int			dwall_e;
 	int			dwall_w;
+	int			flag;
 }	t_player;
 
 typedef struct s_img
@@ -139,7 +140,7 @@ float	check_horizontal_lines(t_cub *data, int flag);
 void	get_intersection(t_cub *data, int dof, float xo, float yo, float *rx, float *ry);
 float	check_vertical_lines(t_cub *data, int flag);
 float	dist_wallhit(t_cub *data, float rx, float ry);
-void	draw_line3d(t_cub *data, float rx, float ry, int vert);
+void	draw_line3d(t_cub *data, float rx, float ry);
 void	check_angle(t_cub *data);
 void	setmap(t_cub *data);
 void	alloc_intmap(t_cub *data);
@@ -164,7 +165,7 @@ void	check_color(t_cub *data);
 int		get_texture(t_cub *data, char *path, int wall);
 int		get_color_from_texture(t_cub *data, int x, int y, int wall);
 void	print_texture(t_cub *data, double ratiox, int x, int y, int wall);
-void	select_texture(t_cub *data, float rx, float ry, int x, int y, int vert);
+void	select_texture(t_cub *data, float rx, float ry, int x, int y);
 void	texture(t_cub *data, char *av);
 void	get_color(t_cub *data, int *p, char *str);
 

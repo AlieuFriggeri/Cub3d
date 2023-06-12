@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 17:36:01 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/07 17:50:08 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 13:05:33 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ float	check_horizontal_lines(t_cub *data, int flag)
 	if (flag == 0)
 		return (dist_wallhit(data, rx, ry));
 	else
-		draw_line3d(data, rx, ry, 0);
+	{
+		data->player.flag = 0;
+		draw_line3d(data, rx, ry);
+	}
 	return (0);
 }
 
@@ -90,7 +93,10 @@ float	check_vertical_lines(t_cub *data, int flag)
 	if (flag == 0)
 		return (dist_wallhit(data, rx, ry));
 	else
-		draw_line3d(data, rx, ry, 1);
+	{
+		data->player.flag = 1;
+		draw_line3d(data, rx, ry);
+	}
 	return (0);
 }
 

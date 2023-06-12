@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/08 15:09:45 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 13:04:57 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	setplayer(t_cub *data)
 	}
 }
 
-void	draw_line3d(t_cub *data, float rx, float ry, int vert)
+void	draw_line3d(t_cub *data, float rx, float ry)
 {
 	int	y;
 	int	x;
@@ -54,16 +54,16 @@ void	draw_line3d(t_cub *data, float rx, float ry, int vert)
 		y = 0;
 		while (y < data->player.lineH)
 		{
-			select_texture(data, rx, ry, x, y, vert);
+			select_texture(data, rx, ry, x, y);
 			y++;
 		}
 		x++;
 	}
 }
 
-void	select_texture(t_cub *data, float rx, float ry, int x, int y, int vert)
+void	select_texture(t_cub *data, float rx, float ry, int x, int y)
 {
-	if (vert == 1)
+	if (data->player.flag == 1)
 	{
 		if (data->player.px < rx)
 			print_texture(data, ry, x, y, WEST);
