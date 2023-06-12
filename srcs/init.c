@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:07:45 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 18:31:42 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:32:47 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ void	init(t_cub *data, char *av)
 	setmapnum(data);
 	setmap(data);
 	check_color(data);
-	if (!check_col(data) || !check_line(data))
-		printerror(data, "Map not ok");
+	if (!check_col(data) || !check_line(data) || !extra_map_check(data))
+	{
+		perror("map not ok\n");
+		exit(123);
+	}
 	startpos(data);
 	data->player.pdx = cos(data->player.pa) * 5;
 	data->player.pdy = sin(data->player.pa) * 5;

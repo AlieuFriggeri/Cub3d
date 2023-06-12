@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/12 18:31:16 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:32:59 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,8 +187,14 @@ int		encode_rgb(int r, int g, int b);
 void	texture_scandal(t_cub *data, char **arg);
 
 /*------ PARSER -------*/
-int		check_col(t_cub *data);
-int		check_line(t_cub *data);
-void	setmapnum(t_cub *data);
+int	check_map(t_cub *data);
+int	check_map_space(t_cub *data, int i, int j);
+int	check_map_first(t_cub *data, int i, int j);
+int check_map_last(t_cub *data, int i, int j);
+int check_first_line(t_cub *data);
+int	check_col(t_cub *data);
+int	check_line(t_cub *data);
+void	setmapnum(t_cub * data);
+int	extra_map_check(t_cub *data);
 
 #endif

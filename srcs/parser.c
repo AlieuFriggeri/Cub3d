@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:43:18 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 17:59:21 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:04:51 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,27 @@ void	setmapnum(t_cub *data)
 		j = 0;
 		i++;
 	}
+}
+
+int	extra_map_check(t_cub *data)
+{
+	int	h;
+	int	w;
+
+	h = 1;
+	w = 1;
+	while (h < data->mapy - 1)
+	{
+		w = 1;
+		while (w < data->mapx - 1)
+		{
+			if (data->mapnum[h][w] == 0 && (data->mapnum[h - 1][w] == 3
+				|| data->mapnum[h + 1][w] == 3 ||data->mapnum[h]
+					[w - 1] == 3 || data->mapnum[h][w + 1] == 3))
+				return (0);
+			w++;
+		}
+		h++;
+	}
+	return (1);
 }
