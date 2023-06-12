@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/09 13:28:50 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 12:24:27 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,7 @@ int	main(int ac, char **av)
 		data.player.px = -1;
 		data.player.py = -1;
 		data.player.wall_dist = 100000;
-		init(&data, av[1]);
-		draw_image(&data);
-		add_hook(&data);
-	}
-	else
-		printerror(&data, "Not the right amount of argument");
-	data.mlx = NULL;
-	data.window = NULL;
-	if (ac == 2)
-	{
-		data.player.px = -1;
-		data.player.py = -1;
-		data.player.wall_dist = 100000;
+		data.mapstart = 0;
 		init(&data, av[1]);
 		draw_image(&data);
 		add_hook(&data);

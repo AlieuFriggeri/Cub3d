@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:31:11 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/09 14:03:22 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 12:29:47 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	setmap(t_cub *data)
 
 	i = 0;
 	k = 0;
+	mapsizeint(data);
 	alloc_intmap(data);
 	while (data->map[i])
 	{
@@ -68,9 +69,13 @@ void	setmap(t_cub *data)
 			j++;
 			k++;
 		}
+		while (k < data->mapx)
+		{
+			data->intmap[k] = 1;
+			k++;
+		}
 		i++;
 	}
-	mapsizeint(data);
 }
 
 void	alloc_intmap(t_cub *data)
@@ -82,28 +87,28 @@ void	alloc_intmap(t_cub *data)
 	size = 0;
 	while (data->map[i])
 	{
-		size += ft_strlen(data->map[i]);
+		if ((int)ft_strlen(data->map[i]) > size)
+			size = ft_strlen(data->map[i]);
 		i++;
 	}
-	data->intmap = malloc(sizeof(int) * (size - i) + 1);
+	data->intmap = malloc(sizeof(int) * (size * data->mapy) + 1);
 }
 
 int	countmapsize(int fd, t_cub *data)
 {
-	int	i;
-	char *res;
+	int		i;
+	char	*res;
 
 	i = 0;
 	res = get_next_line(fd);
 	while (res)
 	{
-		while(ft_isspace(res[i]) == 1 && res[i])
+		while (ft_isspace(res[i]) == 1 && res[i])
 			i++;
 		if (res[i] == '1' || res[i] == '0')
 		{
-			free(res);
 			i = 1;
-			break;
+			break ;
 		}
 		else
 		{
@@ -113,6 +118,7 @@ int	countmapsize(int fd, t_cub *data)
 			data->mapstart++;
 		}
 	}
+	free(res);
 	res = get_next_line(fd);
 	while (res)
 	{
