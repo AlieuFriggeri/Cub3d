@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:43:18 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 12:32:53 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 12:48:13 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,96 +87,30 @@ int	check_first_line(t_cub *data)
 	return (0);
 }
 
-int	check_map_longline(t_cub *data)
+/* int	check_spawn(t_cub *data)
 {
 	int	i;
 	int	j;
-	int	k;
+	int	n;
 
-	i = 1;
-	j = 0;
-	while (data->map[i])
-	{
-		while (data->map[i][j])
+	i = 0;player
+		j = 0;
+		while (j < data->mapy)
 		{
-			if (ft_strlen(data->map[i - 1]) < ft_strlen(data->map[i]) && ft_strlen(data->map[i + 1]) < ft_strlen(data->map[i]))
+			if (player->worldmap[i][j] == 7)
 			{
-				if (data->map[i][j] == '0')
-					return (123);
-			}
-			else if (data->map[i][j] == '0' && ft_strlen(data->map[i - 1]) < ft_strlen(data->map[i]))
-			{
-				k = i;
-				j = ft_strlen(data->map[k]);
-				while (k != 0 && data->map[k][j] != '1')
-				{
-					j = ft_strlen(data->map[k]);
-					while (j != (int)ft_strlen(data->map[k - 1]))
-					{
-						if (data->map[k][j] == '0')
-							return (123);
-						j--;
-					}
-					k--;
-				}
+				player->pos.x = i;
+				player->pos.y = j;
+				player->worldmap[i][j] = 0;
+				n += 1;
 			}
 			j++;
 		}
 		i++;
-		j = 0;
 	}
-	return (0);
-}
-/*
-int	check_col(t_cub *data)
-	{
-	int	i;
-	int	j;
+	return (n);
+} */
 
-	i = 0;
-	j = 0;
-	while (i < data->mapx - 1)
-	{
-		j = 0;
-		while (j < data->mapy - 1 && !data->map[i][j])
-			j++;
-		if (!data->map[i][j] || data->map[i][j] != '1')
-			return (0);
-		j = data->mapy - 1;
-		while (j > 0 && !data->map[i][j])
-			j--;
-		if (!data->map[i][j] || data->map[i][j] != '1')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	check_line(t_cub *data)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (i < data->mapy)
-	{
-		j = 0;
-		while (j < data->mapx - 1 && !data->map[i][j])
-			j++;
-		if (data->map[i][j] != '1')
-			return (0);
-		j = data->mapx - 1;
-		while (j > 0 && !data->map[i][j])
-			j--;
-		if (data->map[i][j] != '1')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-*/
-/* ----------------------------------------- */
 int	check_col(t_cub *data)
 {
 	int	i;
