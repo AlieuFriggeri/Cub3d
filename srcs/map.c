@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:31:11 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 17:37:12 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:42:50 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,5 +136,5 @@ void	mapsizeint(t_cub *data)
 	}
 	data->mapx = max;
 	data->mapy = i;
-	data->mapsize = max * i;
+	data->mapsize = max * (i - 1);
 }

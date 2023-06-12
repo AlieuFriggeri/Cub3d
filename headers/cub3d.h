@@ -6,7 +6,7 @@
 /*   By: afrigger <afrigger@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/12 18:01:50 by afrigger         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:04:36 by afrigger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 /*	Personnal headers	*/
 # include "../mlx_macos/mlx.h"
 # include "../libft/libft.h"
-# include "map.h"
 
 /*	Official headers	*/
 # include <math.h>
