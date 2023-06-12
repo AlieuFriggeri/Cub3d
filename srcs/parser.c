@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:43:18 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 18:37:33 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:47:41 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,24 +59,6 @@ int	check_line(t_cub *data)
 	return (1);
 }
 
-void	setmapnum(t_cub *data)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	alloc_intmap(data);
-	mapsizeint(data);
-	data->mapnum = malloc(sizeof(int *) * data->mapy);
-	while (i < data->mapy)
-	{
-		data->mapnum[i] = malloc(sizeof(int) * data->mapx);
-		i++;
-	}
-	setmap_scandale(data, i, j);
-}
-
 int	extra_map_check(t_cub *data)
 {
 	int	h;
@@ -100,6 +82,24 @@ int	extra_map_check(t_cub *data)
 	return (1);
 }
 
+void	setmapnum(t_cub *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	alloc_intmap(data);
+	mapsizeint(data);
+	data->mapnum = malloc(sizeof(int *) * data->mapy);
+	while (i < data->mapy)
+	{
+		data->mapnum[i] = malloc(sizeof(int) * data->mapx);
+		i++;
+	}
+	setmap_scandale(data, i, j);
+}
+
 void	setmap_scandale(t_cub *data, int i, int j)
 {
 	while (data->map[i])
@@ -115,10 +115,7 @@ void	setmap_scandale(t_cub *data, int i, int j)
 			else if (data->map[i][j] >= 'A' && data->map[i][j] <= 'Z')
 				data->mapnum[i][j] = 0;
 			else
-			{
-				perror("pd\n");
-				exit(123);
-			}
+				printerror(data, "Map not ok");
 			j++;
 		}
 		setmap_scandale2(data, i, j);

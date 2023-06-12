@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/12 18:37:24 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:43:46 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ void	init(t_cub *data, char *av);
 void	init_null(t_cub *data);
 void	check_color(t_cub *data);
 int		countmap_scandale(int fd, char *res, int x);
+void	setmap_scandale(t_cub *data, int i, int j);
 void	setmap_scandale2(t_cub *data, int i, int j);
 
 /* ----- TEXTURE ----- */
