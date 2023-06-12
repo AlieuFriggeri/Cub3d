@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:43:18 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 12:48:13 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 15:44:11 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,26 @@ int	check_first_line(t_cub *data)
 	return (0);
 }
 
+void	printmap(t_cub *data)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	printf("mapx: %d\t\tmapy: %d\tmapsize: %d\n\n", data->mapx, data->mapy, data->mapsize);
+	while (y < data->mapy)
+	{
+		x = 0;
+		while (x < data->mapx)
+		{
+			printf("%d", data->intmap[y * data->mapy + x]);
+			x++;
+		}
+		printf("\n");
+		y++;		
+	}
+}
 /* int	check_spawn(t_cub *data)
 {
 	int	i;
@@ -113,48 +133,72 @@ int	check_first_line(t_cub *data)
 
 int	check_col(t_cub *data)
 {
-	int	i;
-	int	j;
+	int	x;
+	int	y;
 
-	i = 0;
-	j = 0;
-	while (i < data->mapx - 1)
+	y = 0;
+	printmap(data);
+	while (y < data->mapy)
 	{
-		j = 0;
-		while (j < data->mapy - 1 && !data->map[i][j])
-			j++;
-		if (data->map[i][j] != '1')
-			return (0);
-		j = data->mapy - 1;
-		while (j > 0 && !data->map[i][j])
-			j--;
-		if (data->map[i][j] != '1')
-			return (0);
-		i++;
+		x = 0;
+		while (x < data->mapx)
+		{
+			if (data->intmap[y * data->mapx + x] == 2)
+			{
+				if (data->intmap[(y - 1) * data->mapx + x] == 0 || data->intmap[(y + 1) * data->mapx + x] == 0)
+					printf("not good\n");
+				else if (data->intmap[y * data->mapx + x - 1] == 0 || data->intmap[y * data->mapx  + x + 1] == 0)
+					printf("good not\n");
+			}
+			x++;
+		}
+		y++;
 	}
-	return (1);
+	return (0);
+	// int	i;
+	// int	j;
+
+	// i = 0;
+	// j = 0;
+	// while (i < data->mapx - 1)
+	// {
+	// 	j = 0;
+	// 	while (j < data->mapy - 1 && !data->map[i][j])
+	// 		j++;
+	// 	if (data->map[i][j] != '1')
+	// 		return (0);
+	// 	j = data->mapy - 1;
+	// 	while (j > 0 && !data->map[i][j])
+	// 		j--;
+	// 	if (data->map[i][j] != '1')
+	// 		return (0);
+	// 	i++;
+	// }
+	// return (1);
 }
 
 int	check_line(t_cub *data)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (i < data->mapy)
-	{
-		j = 0;
-		while (j < data->mapx - 1 && !data->map[i][j])
-			j++;
-		if (data->map[i][j] != '1')
-			return (0);
-		j = data->mapx - 1;
-		while (j > 0 && !data->map[i][j])
-			j--;
-		if (data->map[i][j] != '1')
-			return (0);
-		i++;
-	}
+	(void)data;
 	return (1);
+	// int	i;
+	// int	j;
+
+	// i = 0;
+	// j = 0;
+	// while (i < data->mapy)
+	// {
+	// 	j = 0;
+	// 	while (j < data->mapx - 1 && !data->map[i][j])
+	// 		j++;
+	// 	if (data->map[i][j] != '1')
+	// 		return (0);
+	// 	j = data->mapx - 1;
+	// 	while (j > 0 && !data->map[i][j])
+	// 		j--;
+	// 	if (data->map[i][j] != '1')
+	// 		return (0);
+	// 	i++;
+	// }
+	// return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 17:36:01 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 14:54:35 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 15:58:04 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ void	get_intersection(t_cub *data, t_var *var)
 		mx = (int)var->rx >> 6;
 		my = (int)var->ry >> 6;
 		mp = my * data->mapx + mx;
-		if (mp > 0 && mp < data->mapx * data->mapy && data->intmap[mp] == 1)
+		if (mp > 0 && mp < data->mapx * data->mapy && (data->intmap[mp] == 1
+			|| data->intmap[mp] == 2))
 			var->dof = data->mapx;
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:31:11 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 12:29:47 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 15:55:33 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,16 @@ void	setmap(t_cub *data)
 					|| data->map[i][j] == 'N' || data->map[i][j] == 'W'
 					|| data->map[i][j] == 'S')
 				data->intmap[k] = 0;
-			else
+			else if (data->map[i][j] == '1')
 				data->intmap[k] = 1;
+			else
+				data->intmap[k] = 2;
 			j++;
 			k++;
 		}
-		while (k < data->mapx)
+		while (k % data->mapx != 0)
 		{
-			data->intmap[k] = 1;
+			data->intmap[k] = 2;
 			k++;
 		}
 		i++;
@@ -91,7 +93,8 @@ void	alloc_intmap(t_cub *data)
 			size = ft_strlen(data->map[i]);
 		i++;
 	}
-	data->intmap = malloc(sizeof(int) * (size * data->mapy) + 1);
+	data->mapx = size - 1;
+	data->intmap = malloc(sizeof(int) * ((size - 1) * data->mapy) + 1);
 }
 
 int	countmapsize(int fd, t_cub *data)
@@ -145,5 +148,5 @@ void	mapsizeint(t_cub *data)
 	}
 	data->mapx = max;
 	data->mapy = i;
-	data->mapsize = max * i;
+	data->mapsize = max * (i - 1);
 }
