@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/12 13:05:57 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 13:30:34 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_cub{
 	int			*intmap;
 	int			mapsize;
 	int			mapstart;
+	int			ax;
 }	t_cub;
 
 /* ----- MAIN ----- */
@@ -164,10 +165,12 @@ void	check_color(t_cub *data);
 /* ----- TEXTURE ----- */
 int		get_texture(t_cub *data, char *path, int wall);
 int		get_color_from_texture(t_cub *data, int x, int y, int wall);
-void	print_texture(t_cub *data, double ratiox, int x, int y, int wall);
-void	select_texture(t_cub *data, float rx, float ry, int x, int y);
+void	print_texture(t_cub *data, double ratiox, int y, int wall);
+void	select_texture(t_cub *data, float rx, float ry, int y);
 void	texture(t_cub *data, char *av);
 void	get_color(t_cub *data, int *p, char *str);
+int		encode_rgb(int r, int g, int b);
+void	texture_scandal(t_cub *data, char **arg);
 
 /*------ PARSER -------*/
 int	check_map(t_cub *data);
