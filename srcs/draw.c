@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:25:35 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 17:37:24 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:55:05 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,27 @@ void	drawsquare(int x, int y, t_cub *data, int type)
 
 	x2 = x + 8;
 	y2 = y + 8;
-	while (x < x2)
+	if (type != -1)
 	{
-		while (y < y2)
+		while (x < x2)
 		{
-			if (y == y2 - 1)
-				my_mlx_pixel_put(data, x, y, 0x000000);
-			else if (x == x2 - 1)
-				my_mlx_pixel_put(data, x, y, 0x000000);
-			else if (type == 1)
-				my_mlx_pixel_put(data, x, y, 0x339900);
-			else if (type == 0)
-				my_mlx_pixel_put(data, x, y, 0xFF0000);
-			else
-				my_mlx_pixel_put(data, x, y, 0xFFFF00);
-			y++;
+			while (y < y2)
+			{
+				if (y == y2 - 1)
+					my_mlx_pixel_put(data, x, y, 0x000000);
+				else if (x == x2 - 1)
+					my_mlx_pixel_put(data, x, y, 0x000000);
+				else if (type == 1)
+					my_mlx_pixel_put(data, x, y, 0x339900);
+				else if (type == 0)
+					my_mlx_pixel_put(data, x, y, 0xFF0000);
+				else
+					my_mlx_pixel_put(data, x, y, 0xFFFF00);
+				y++;
+			}
+			y = y2 - 8;
+			x++;
 		}
-		y = y2 - 8;
-		x++;
 	}
 }
 
@@ -57,7 +60,6 @@ void	drawmap(t_cub *data)
 
 	i = 0;
 	y = 0;
-	//printf("%d\n", data->mapsize);
 	while (i < data->mapy)
 	{
 		x = 0;
@@ -79,10 +81,12 @@ void	drawmap(t_cub *data)
 
 void	render_square(t_cub *data, int x, int y, int i)
 {
-	if (i == 1 || i == 3)
+	if (i == 1)
 		drawsquare(x, y, data, 1);
 	else if (i == 0)
 		drawsquare(x, y, data, 0);
+	else if (i == 3)
+		drawsquare(x, y, data, -1);
 	else
 		drawsquare(x, y, data, 2);
 }

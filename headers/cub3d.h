@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/12 17:48:56 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:55:24 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 /*	Personnal headers	*/
 # include "../mlx_macos/mlx.h"
 # include "../libft/libft.h"
-# include "map.h"
 
 /*	Official headers	*/
 # include <math.h>
