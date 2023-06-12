@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:07:45 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 18:53:51 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:59:27 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	init(t_cub *data, char *av)
 	setmapnum(data);
 	setmap(data);
 	check_color(data);
-	printf("%d\t%d\t%d\n", !check_col(data), !check_line(data), !extra_map_check(data));
 	if (!check_col(data) || !check_line(data) || !extra_map_check(data))
 		printerror(data, "test");
 	startpos(data);
