@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 12:52:12 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/09 14:03:30 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 13:23:36 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	get_texture(t_cub *data, char *path, int wall)
 			&data->wall[wall].width, &data->wall[wall].height);
 	ft_free_arr(tmp);
 	if (data->wall[wall].img == NULL)
-		printerror(data, "Texture not good (maybe the file doesn't exist or it isn't a .xpm file)");
+		printerror(data, "Texture not good (maybe the file \
+			doesn't exist or it isn't a .xpm file)");
 	data->wall[wall].addr = mlx_get_data_addr(data->wall[wall].img,
 			&data->wall[wall].bpp, &data->wall[wall].sl, &data->wall[wall].ed);
 	return (0);
@@ -71,55 +72,4 @@ int	encode_rgb(int r, int g, int b)
 	color += g << 8;
 	color += b;
 	return (color);
-}
-
-void	texture(t_cub *data, char *av)
-{
-	char	**arg;
-
-	if (av && av[0] != '\n')
-	{
-		arg = ft_split(av, ' ');
-		if (!arg)
-			printerror(data, "malloc error");
-		if (ft_strncmp(arg[0], "NO", 2) == 0)
-			get_texture(data, arg[1], NORTH);
-		else if (ft_strncmp(arg[0], "SO", 2) == 0)
-			get_texture(data, arg[1], SOUTH);
-		else if (ft_strncmp(arg[0], "WE", 2) == 0)
-			get_texture(data, arg[1], WEST);
-		else if (ft_strncmp(arg[0], "EA", 2) == 0)
-			get_texture(data, arg[1], EAST);
-		else if (ft_strncmp(arg[0], "F", 1))
-			get_color(data, &data->floor, arg[1]);
-		else if (ft_strncmp(arg[0], "C", 1))
-			get_color(data, &data->sky, arg[1]);
-		else
-			printerror(data, "Config issue");
-		ft_free_arr(arg);
-		free(av);
-	}
-	else if (av[0] == '\n')
-		free(av);
-}
-
-void	get_color(t_cub *data, int *p, char *str)
-{
-	char	**arg;
-	int		r;
-	int		g;
-	int		b;
-
-	arg = ft_split(str, ',');
-	if (!arg)
-		printerror(data, "malloc error");
-	r = ft_atoi(arg[0]);
-	g = ft_atoi(arg[1]);
-	b = ft_atoi(arg[2]);
-	if (r > 255 || g > 255 || b > 255)
-		printerror(data, "config error: color can't me higher than 255");
-	else if (r < 0 || g < 0 || b < 0)
-		printerror(data, "config error: color can't be negative");
-	*p = encode_rgb(r, g, b);
-	ft_free_arr(arg);
 }
