@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/12 12:52:43 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:25:19 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,31 @@ void	printerror(t_cub *data, char *str)
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd("\n", 2);
 	cub_exit(data);
+}
+
+void	openmap_scandale(t_cub *data, char ***map, int size, char *path)
+{
+	int		i;
+	int		fd;
+	char	**map1;
+
+	map1 = *map;
+	i = 0;
+	fd = open(path, O_RDONLY);
+	while (i <= size)
+	{
+		if (data->mapstart > 0)
+		{
+			texture(data, get_next_line(fd));
+			data->mapstart--;
+		}
+		else
+		{
+			map1[i] = get_next_line(fd);
+			if (map1[i] == NULL)
+				break ;
+			i++;
+		}
+	}
+	close(fd);
 }

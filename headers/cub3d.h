@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/12 17:55:24 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:31:16 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ void	mapsizeint(t_cub *data);
 int		countmapsize(int fd, t_cub *data);
 char	**openmap(char *path, t_cub *data);
 void	printerror(t_cub *data, char *str);
+void	openmap_scandale(t_cub *data, char ***map, int size, char *path);
 
 /* ----- DRAW ----- */
 void	my_mlx_pixel_put(t_cub *data, int x, int y, int color);
@@ -173,6 +174,7 @@ void	add_hook(t_cub *data);
 void	init(t_cub *data, char *av);
 void	init_null(t_cub *data);
 void	check_color(t_cub *data);
+int		countmap_scandale(int fd, char *res, int x);
 
 /* ----- TEXTURE ----- */
 int		get_texture(t_cub *data, char *path, int wall);

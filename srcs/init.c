@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:07:45 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 17:46:39 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:31:42 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,21 @@ void	check_color(t_cub *data)
 		printerror(data, "East texture not found");
 	else if (data->wall[WEST].img == NULL)
 		printerror(data, "West texture not found");
+}
+
+int	countmap_scandale(int fd, char *res, int x)
+{
+	int	i;
+
+	i = x;
+	free(res);
+	res = get_next_line(fd);
+	while (res)
+	{
+		free(res);
+		res = get_next_line(fd);
+		i++;
+	}
+	close(fd);
+	return (i);
 }

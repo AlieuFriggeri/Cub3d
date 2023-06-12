@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:31:11 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 17:42:50 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:30:49 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char	**openmap(char *path, t_cub *data)
 {
 	int		fd;
-	int		i;
 	char	**map1;
 	int		size;
 
@@ -24,24 +23,7 @@ char	**openmap(char *path, t_cub *data)
 		exit(1);
 	size = countmapsize(fd, data);
 	map1 = malloc(sizeof(char *) * size + 1);
-	i = 0;
-	fd = open(path, O_RDONLY);
-	while (i <= size)
-	{
-		if (data->mapstart > 0)
-		{
-			texture(data, get_next_line(fd));
-			data->mapstart--;
-		}
-		else
-		{
-			map1[i] = get_next_line(fd);
-			if (map1[i] == NULL)
-				break ;
-			i++;
-		}
-	}
-	close(fd);
+	openmap_scandale(data, &map1, size, path);
 	return (map1);
 }
 
@@ -109,15 +91,7 @@ int	countmapsize(int fd, t_cub *data)
 			data->mapstart++;
 		}
 	}
-	free(res);
-	res = get_next_line(fd);
-	while (res)
-	{
-		free(res);
-		res = get_next_line(fd);
-		i++;
-	}
-	close(fd);
+	i = countmap_scandale(fd, res, i);
 	return (i);
 }
 
