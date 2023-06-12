@@ -6,16 +6,16 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:43:18 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 18:47:41 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:58:19 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_col(t_cub *data)
+int    check_col(t_cub *data)
 {
-	int	i;
-	int	j;
+	int    i;
+	int    j;
 
 	i = 0;
 	while (i < data->mapy)
@@ -97,6 +97,7 @@ void	setmapnum(t_cub *data)
 		data->mapnum[i] = malloc(sizeof(int) * data->mapx);
 		i++;
 	}
+	i = 0;
 	setmap_scandale(data, i, j);
 }
 
