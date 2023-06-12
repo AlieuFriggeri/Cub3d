@@ -91,3 +91,75 @@ int check_first_line(t_cub *data)
 	}
 	return (0);
 }
+
+/* int	check_spawn(t_cub *data)
+{
+	int	i;
+	int	j;
+	int	n;
+
+	i = 0;player
+		j = 0;
+		while (j < data->mapy)
+		{
+			if (player->worldmap[i][j] == 7)
+			{
+				player->pos.x = i;
+				player->pos.y = j;
+				player->worldmap[i][j] = 0;
+				n += 1;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (n);
+} */
+
+int	check_col(t_cub *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < data->mapx - 1)
+	{
+		j = 0;
+		while (j < data->mapy - 1 && !data->map[i][j])
+			j++;
+		if (data->map[i][j] != '1')
+			return (0);
+		j = data->mapy - 1;
+		while (j > 0 && !data->map[i][j])
+			j--;
+		if (data->map[i][j] != '1')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	check_line(t_cub *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < data->mapy)
+	{
+		j = 0;
+		while (j < data->mapx - 1 && !data->map[i][j])
+			j++;
+		if (data->map[i][j] != '1')
+			return (0);
+		j = data->mapx - 1;
+		while (j > 0 && !data->map[i][j])
+			j--;
+		if (data->map[i][j] != '1')
+			return (0);
+		i++;
+	}
+	return (1);
+}

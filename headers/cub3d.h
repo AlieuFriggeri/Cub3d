@@ -161,5 +161,7 @@ int	check_map_space(t_cub *data, int i, int j);
 int	check_map_first(t_cub *data, int i, int j);
 int check_map_last(t_cub *data, int i, int j);
 int check_first_line(t_cub *data);
+int	check_col(t_cub *data);
+int	check_line(t_cub *data);
 
 #endif

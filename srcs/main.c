@@ -22,16 +22,23 @@ int	main(int ac, char **av)
 	data.player.wall_dist = 100000;
 	data.mapstart = 0;
 	data.map = openmap(av[1], &data);
-	if (check_map(&data) != 0)
-		exit(123);
-	printf("d'autre soucis\n");
-	init(&data, 0, NULL, NULL);
+	int i = 0;
+	while (data.map[i])
+	{
+		printf("%s\n", data.map[i]);
+		i++;
+	}
+	if (check_col(&data) == 0 || check_line(&data) == 0)
+		printf("NON\n");
+/* 	if (check_map(&data) != 0)
+		printf("d'autre soucis\n"); */
+/* 	init(&data, 0, NULL, NULL);
 	get_texture(&data, "xpm/test.xpm", 0);
 	get_texture(&data, "xpm/door.xpm", 1);
 	get_texture(&data, "xpm/stone.xpm", 2);
 	get_texture(&data, "xpm/corona.xpm", 3);
 	draw_image(&data);
-	add_hook(&data);
+	add_hook(&data); */
 	return (0);
 }
 
