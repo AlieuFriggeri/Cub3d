@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/12 19:00:25 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/07/04 15:47:39 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # define NBRAY 512
 
 # define NBCARRE 8
-# define CUBSIZE (HEIGHT / NBCARRE)
+# define CUBSIZE 64
 
 typedef struct s_var
 {

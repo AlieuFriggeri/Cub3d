@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:08:49 by afrigger          #+#    #+#             */
-/*   Updated: 2023/07/04 15:37:36 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/07/04 15:46:23 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ void	openmap_scandale(t_cub *data, char ***map, int size, char *path)
 		else
 		{
 			map1[i] = get_next_line(fd);
-			// printf("%s", map1[i]);
 			if (map1[i] == NULL)
 				break ;
 			else if (map1[i][0] == '\n')
