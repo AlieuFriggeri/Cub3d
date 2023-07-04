@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 12:23:28 by afrigger          #+#    #+#             */
-/*   Updated: 2023/06/09 14:05:34 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/07/04 15:34:54 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,22 @@ void	rotate_player(int keycode, t_cub *data)
 void	move_player(int keycode, t_cub *data)
 {
 	check_collision(data);
-	if (keycode == KEY_W && data->player.dwall_n > 15)
+	if (keycode == KEY_W && data->player.dwall_n > 30)
 	{	
 		data->player.px += data->player.pdx;
 		data->player.py += data->player.pdy;
 	}
-	if (keycode == KEY_S && data->player.dwall_s > 15)
+	if (keycode == KEY_S && data->player.dwall_s > 30)
 	{
 		data->player.px -= data->player.pdx;
 		data->player.py -= data->player.pdy;
 	}
-	if (keycode == KEY_A && data->player.dwall_w > 15)
+	if (keycode == KEY_A && data->player.dwall_w > 30)
 	{
 		data->player.px += data->player.pdy;
 		data->player.py -= data->player.pdx;
 	}
-	if (keycode == KEY_D && data->player.dwall_e > 15)
+	if (keycode == KEY_D && data->player.dwall_e > 30)
 	{
 		data->player.px -= data->player.pdy;
 		data->player.py += data->player.pdx;

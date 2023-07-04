@@ -1,11 +1,11 @@
-NO xpm/stone.xpm
 SO     xpm/door.xpm
 WE xpm/pipewall.xpm
 EA  xpm/soil.xpm
 
 F 255,0,255
-C 0,255,0
 
+C 0,255,10
+NO xpm/stone.xpm
 
 11111111111111111111111111
 10000000000000000000000001
