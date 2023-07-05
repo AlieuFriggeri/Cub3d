@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 12:52:12 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 14:55:29 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/07/05 12:15:13 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@ int	get_texture(t_cub *data, char *path, int wall)
 
 	tmp = ft_split(path, '\n');
 	if (!tmp)
-		printerror(data, "malloc error");
+		printerror(data, "Malloc error");
 	data->wall[wall].img = mlx_xpm_file_to_image(data->mlx, tmp[0],
 			&data->wall[wall].width, &data->wall[wall].height);
 	ft_free_arr(tmp);
 	if (data->wall[wall].img == NULL)
-		printerror(data, "Texture not good (maybe the file \
-			doesn't exist or it isn't a .xpm file)");
+		printerror(data, "Texture not good");
 	data->wall[wall].addr = mlx_get_data_addr(data->wall[wall].img,
 			&data->wall[wall].bpp, &data->wall[wall].sl, &data->wall[wall].ed);
 	return (0);

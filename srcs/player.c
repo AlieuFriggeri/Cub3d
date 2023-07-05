@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:03:41 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 14:55:12 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/07/05 12:20:45 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	select_texture(t_cub *data, float rx, float ry, int y)
 	}
 }
 
-float	dist_wallhit(t_cub *data, float rx, float ry)
+float	dist_wallhit(t_cub *data, double rx, double ry)
 {
 	float	len;
 	double	startx;

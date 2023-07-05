@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:31:11 by vgroux            #+#    #+#             */
-/*   Updated: 2023/06/12 18:30:49 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/07/05 12:13:06 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**openmap(char *path, t_cub *data)
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		exit(1);
+		printerror(data, "File does not exist");
 	size = countmapsize(fd, data);
 	map1 = malloc(sizeof(char *) * size + 1);
 	openmap_scandale(data, &map1, size, path);

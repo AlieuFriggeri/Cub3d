@@ -6,7 +6,7 @@
 /*   By: vgroux <vgroux@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:13:12 by afrigger          #+#    #+#             */
-/*   Updated: 2023/07/04 15:47:39 by vgroux           ###   ########.fr       */
+/*   Updated: 2023/07/05 12:46:58 by vgroux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void	draw_raycasting(t_cub *data);
 float	check_horizontal_lines(t_cub *data, int flag);
 void	get_intersection(t_cub *data, t_var *var);
 float	check_vertical_lines(t_cub *data, int flag);
-float	dist_wallhit(t_cub *data, float rx, float ry);
+float	dist_wallhit(t_cub *data, double rx, double ry);
 void	draw_line3d(t_cub *data, float rx, float ry);
 void	check_angle(t_cub *data);
 void	setmap(t_cub *data);
@@ -187,6 +187,7 @@ void	texture(t_cub *data, char *av);
 void	get_color(t_cub *data, int *p, char *str);
 int		encode_rgb(int r, int g, int b);
 void	texture_scandal(t_cub *data, char **arg);
+int		check_colorlen(char **arg);
 
 /*------ PARSER -------*/
 int		check_col(t_cub *data);
